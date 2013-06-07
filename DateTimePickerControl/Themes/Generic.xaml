@@ -1,0 +1,17 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:local="clr-namespace:AC.AvalonControlsLibrary.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/AvalonControlsLibrary;component/Themes/Brushes.xaml"/>
+        <ResourceDictionary Source="/AvalonControlsLibrary;component/Themes/DatePicker.xaml"/>
+        <ResourceDictionary Source="/AvalonControlsLibrary;component/Themes/RangeSlider.xaml"/>
+        <ResourceDictionary Source="/AvalonControlsLibrary;component/Themes/TreeListBox.xaml"/>
+        <ResourceDictionary Source="/AvalonControlsLibrary;component/Themes/RatingSelector.xaml"/>
+        <ResourceDictionary Source="/AvalonControlsLibrary;component/Themes/TimePicker.xaml"/>
+        <ResourceDictionary Source="/AvalonControlsLibrary;component/Themes/DockableControl.xaml"/>
+        <ResourceDictionary Source="/AvalonControlsLibrary;component/Themes/DateTimePicker.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

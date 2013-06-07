@@ -1,0 +1,25 @@
+﻿<Window x:Class="emanual.Wpf.Controls.WpfColorDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:emanual.Wpf.Controls"
+    Name="this" Title="カラーの選択" Height="510" Width="270" WindowStyle="ToolWindow" Loaded="control_Loaded">
+
+  <StackPanel Orientation="Vertical">
+    <ctrl:WpfColorPicker x:Name="colorPicker" SelectedColor="{Binding ElementName=this, Path=SelectedColor}" />
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,10,0">
+      <Button Name="btnOK" Width="80" Height="30" Click="btnOK_Click">
+        <StackPanel Orientation="Horizontal">
+          <Image Source="images/accept.png" />
+          <Label Content="OK" />
+        </StackPanel>
+      </Button>
+      <Button Name="btnCancel" Width="80" Height="30" Margin="4,0,0,0" Click="btnCancel_Click">
+        <StackPanel Orientation="Horizontal">
+          <Image Source="images/arrow_undo.png" />
+          <Label Content="Cancel" />
+        </StackPanel>
+      </Button>
+    </StackPanel>
+  </StackPanel>
+</Window>

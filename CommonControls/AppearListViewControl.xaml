@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="CommonControls.AppearListViewControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:localConverter="clr-namespace:CommonControls.Converter"
+        Background="Transparent">
+    <Grid>
+        <ListView Grid.Column="1" ItemsSource="{Binding Path=DataList}">
+            <ListView.Resources>
+                <localConverter:BoolReverseConverter x:Key="ReverseConverter"/>
+                <DataTemplate x:Key="Appear_Or_NotTemplate">
+                    <StackPanel Orientation="Horizontal">
+                        <ToggleButton Content="{Binding Path=DisplayHeader, Mode=OneWay}" IsChecked="{Binding Path=IsAppeared, Mode=TwoWay}"/>
+                        <ToggleButton Content="{Binding Path=NoDisplayHeader, Mode=OneWay}" IsChecked="{Binding Path=IsAppeared, Mode=TwoWay, Converter={StaticResource ReverseConverter}}"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate x:Key="Name_Template">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Name, Mode=OneWay}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="{Binding Path=DisplayOrNoDisplayHeader, Mode=OneWay}" CellTemplate="{StaticResource Appear_Or_NotTemplate}"/>
+                    <GridViewColumn Header="名前" CellTemplate="{StaticResource Name_Template}"/>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+    </Grid>
+</UserControl>

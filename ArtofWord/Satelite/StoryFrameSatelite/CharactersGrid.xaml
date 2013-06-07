@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="ArtOfWords.Satelite.StoryFrameSatelite.CharactersGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="White"
+             TextOptions.TextFormattingMode="Display"
+             TextOptions.TextRenderingMode="ClearType"
+             UseLayoutRounding="true">
+    <UserControl.Resources>
+        <DataTemplate x:Key="NameCellTemplate">
+            <Label Content="{Binding Path=Name}" Width="180"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <ListView ItemsSource="{Binding Path=CharacterList, Mode=OneWay}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="名前" CellTemplate="{StaticResource NameCellTemplate}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</UserControl>

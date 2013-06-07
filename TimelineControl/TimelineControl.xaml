@@ -1,0 +1,228 @@
+﻿<UserControl x:Class="TimelineControl.Timeline"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:localConverter="clr-namespace:TimelineControl.Converter"
+            xmlns:CommonControls="clr-namespace:CommonControls;assembly=CommonControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="600"
+             Background="White"
+             Loaded="UserControl_Loaded_1">
+
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+            <StackPanel Orientation="Horizontal" Background="Black">
+                <StackPanel.Resources>
+                    <Style x:Key="ControlBorderStyle" TargetType="Border">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Margin" Value="2"/>
+                        <Setter Property="Padding" Value="0.5"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Border Style="{StaticResource ControlBorderStyle}">
+                    <GroupBox Header="表示開始位置" Margin="5,5,5,5" Width="300">
+                        <StackPanel Orientation="Horizontal" >
+                            <DatePicker SelectedDate="{Binding Path=StartDate, Mode=TwoWay}" VerticalAlignment="Center" Width="150"/>
+                            <CommonControls:TimePicker CurrentTime="{Binding Path=StartTime, Mode=TwoWay}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </GroupBox>
+                </Border>
+                <Border Style="{StaticResource ControlBorderStyle}">
+                    <GroupBox Header="縦の列表示">
+                        <Button Content="表示する列を選ぶ" Background="AliceBlue" Click="Button_Click_1"/>
+                    </GroupBox>
+                </Border>
+                <Border Style="{StaticResource ControlBorderStyle}">
+                    <GroupBox Header="表示幅">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.Resources>
+                                <Style TargetType="ToggleButton">
+                                    <Setter Property="Margin" Value="5,5,5,5"/>
+                                    <Setter Property="Background" Value="Black"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter Property="Background" Value="Black"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Resources>
+                            <ToggleButton Content="15分" IsChecked="{Binding Path=IsSpanSelectMin15,Mode=TwoWay}"/>
+                            <ToggleButton Content="1時間" IsChecked="{Binding Path=IsSpanSelectHour1,Mode=TwoWay}"/>
+                            <ToggleButton Content="3時間" IsChecked="{Binding Path=IsSpanSelectHour3,Mode=TwoWay}"/>
+                            <ToggleButton Content="6時間" IsChecked="{Binding Path=IsSpanSelectHour6,Mode=TwoWay}"/>
+                            <ToggleButton Content="12時間" IsChecked="{Binding Path=IsSpanSelectHour12,Mode=TwoWay}"/>
+                            <ToggleButton Content="1日" IsChecked="{Binding Path=IsSpanSelectDay1,Mode=TwoWay}"/>
+                            <ToggleButton Content="2日" IsChecked="{Binding Path=IsSpanSelectDay2,Mode=TwoWay}"/>
+                            <ToggleButton Content="4日" IsChecked="{Binding Path=IsSpanSelectDay4,Mode=TwoWay}"/>
+                            <ToggleButton Content="1週間" IsChecked="{Binding Path=IsSpanSelectWeek1,Mode=TwoWay}"/>
+                            <ToggleButton Content="2週間" IsChecked="{Binding Path=IsSpanSelectWeek2,Mode=TwoWay}"/>
+                            <ToggleButton Content="1ヶ月" IsChecked="{Binding Path=IsSpanSelectMonth1,Mode=TwoWay}"/>
+                            <ToggleButton Content="2ヶ月" IsChecked="{Binding Path=IsSpanSelectMonth2,Mode=TwoWay}"/>
+                            <ToggleButton Content="4ヶ月" IsChecked="{Binding Path=IsSpanSelectMonth4,Mode=TwoWay}"/>
+                            <ToggleButton Content="6ヶ月" IsChecked="{Binding Path=IsSpanSelectMonth6,Mode=TwoWay}"/>
+                            <ToggleButton Content="1年" IsChecked="{Binding Path=IsSpanSelectYear1,Mode=TwoWay}"/>
+                        </StackPanel>
+                    </GroupBox>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Margin="0" Padding="0" Name="UpperButton" Background="Black" Foreground="White" Content="{Binding UpperButtonText}" Grid.Row="0" Grid.Column="0" Click="UpperButton_Click"/>
+
+            <ScrollViewer Name="TimelineHeaderPanelScroller" Grid.Column="1" VerticalScrollBarVisibility="Hidden" Grid.Row="0" HorizontalScrollBarVisibility="Hidden" ScrollChanged="ScrollViewer_ScrollChanged_2" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Canvas Name="TimelineHeaderPanel" Height="25" Width="{Binding Path=DataCanvasWidth, Mode=OneWay}" ClipToBounds="True">
+                    <Canvas.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="{Binding LittleLightColorBrush}"/>
+                            <Setter Property="BorderBrush" Value="{Binding LittleLightColorBrush}"/>
+                            <Setter Property="BorderThickness" Value="2,1"/>
+                            <Setter Property="Height" Value="22"/>
+                            <EventSetter Event="MouseLeftButtonDown" Handler="OnHeaderBorderLeftClicked"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF6210A6"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Canvas.Resources>
+                </Canvas>
+            </ScrollViewer>
+            <ScrollViewer Name="TimescalePanelScroller" Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollChanged="TimescalePanelScroller_ScrollChanged">
+                <Canvas Name="TimescalePanel" Width="{Binding Path=ScaleWidth, Mode=OneWay}" Height="{Binding Path=CanvasHeight, Mode=OneWay}" ClipToBounds="True">
+                    <Canvas.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="Black"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0.5"/>
+                            <Setter Property="Padding" Value="3,0.5,3,3"/>
+                            <EventSetter Event="MouseLeftButtonDown" Handler="OnScaleBorderLeftClicked"/>
+                            <EventSetter Event="MouseRightButtonDown" Handler="OnScaleBorderRightClicked"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF6210A6"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Canvas.Resources>
+                </Canvas>
+            </ScrollViewer>
+            <ScrollViewer Name="TimelinePanelScroller" Grid.Column="1" VerticalScrollBarVisibility="Auto" Grid.Row="1" HorizontalScrollBarVisibility="Hidden" ScrollChanged="ScrollViewer_ScrollChanged_1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Canvas Name="TimelinePanel" Width="{Binding Path=DataCanvasWidth, Mode=OneWay}" Height="{Binding Path=CanvasHeight, Mode=OneWay}" ClipToBounds="True">
+                    <Canvas.Resources>
+                        <ContextMenu x:Key="EventContextMenu">
+                            <MenuItem Header="イベントを削除する" Click="DeleteEventItem_MenuEvent"/>
+                        </ContextMenu>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="TextAlignment" Value="Center"/>
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                            <Setter Property="Margin" Value="2,5,5,2"/>
+                        </Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="{Binding LittleLightColorBrush}"/>
+                            <Setter Property="BorderThickness" Value="2,1"/>
+                            <EventSetter Event="MouseLeftButtonDown" Handler="OnDataBorderLeftClicked"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#CCF0F8FF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style x:Key="UnboundBorder" TargetType="Border">
+                            <Setter Property="Background" Value="Gray"/>
+                            <Setter Property="BorderBrush" Value="{Binding LittleLightColorBrush}"/>
+                            <Setter Property="BorderThickness" Value="2,1"/>
+                            <EventSetter Event="MouseLeftButtonDown" Handler="OnUnboundDataBorderLeftClicked"/>
+                            <Style.Triggers>
+                            </Style.Triggers>
+                        </Style>
+
+                        <Style x:Key="DeletableTextBlock" TargetType="TextBlock">
+                            <Setter Property="Text" Value="×"/>
+                            <Setter Property="FontSize" Value="13"/>
+                            <Setter Property="TextAlignment" Value="Right"/>
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <EventSetter Event="MouseDown" Handler="OnButtonDeletePushed"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="BlueViolet"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        
+                        <Style x:Key="UnboundEventItemBorder" TargetType="Border">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="{Binding Path=LightColor, Mode=OneWay}" Offset="1" />
+                                        <GradientStop Color="White" Offset="0" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="BorderBrush" Value="#FFB4CCFF"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                        </Style>
+                        <Style x:Key="EventItemShadowBorder" TargetType="Border">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="3" Opacity="5" Direction="295" Color="#FFDBDBDB" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style x:Key="EventItemBorder" TargetType="Border">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="{Binding Path=LightColor, Mode=OneWay}" Offset="1" />
+                                        <GradientStop Color="White" Offset="0" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="BorderBrush" Value="#FFB4CCFF"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="ContextMenu" Value="{StaticResource EventContextMenu}"/>
+                            <EventSetter Event="MouseLeftButtonDown" Handler="OnDataBorderLeftClicked"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#CCF0F8FF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Canvas.Resources>
+                </Canvas>
+            </ScrollViewer>
+            <ScrollViewer Grid.Row="2" Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" ScrollChanged="ScrollViewer_ScrollChanged_2" HorizontalAlignment="Left">
+                <Grid Width="{Binding Path=DataCanvasWidth, Mode=OneWay}"/>
+            </ScrollViewer>
+            <Button Margin="0" Padding="0" Name="LowerButton" Grid.Row="2" Grid.Column="0"  Background="Black" Foreground="White" Content="{Binding LowerButtonText}" Click="LowerButton_Click" />
+        </Grid>
+    </Grid>
+</UserControl>

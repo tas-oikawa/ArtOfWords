@@ -1,0 +1,64 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:local="clr-namespace:AC.AvalonControlsLibrary.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style x:Key="{x:Type local:RatingSelectorItem}" TargetType="{x:Type local:RatingSelectorItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:RatingSelectorItem}">
+                    <Button Command="local:RatingSelector.SelectRating" 
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:RatingSelectorItem}}, Path=RateValue}"
+                            Cursor="Hand">
+                        <Button.Template>
+                            <!--Control template to show the star-->
+                            <ControlTemplate TargetType="Button">
+                                <Path Name="path" Fill="Gray" Data="M 5,0 L 4,4 L 0,4 L 3,7 L 2,11 L 5,9 L 6,9 L 9,11 L 8,7 L 11,4 L 7,4 L 6,0"/>
+                                <ControlTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:RatingSelectorItem}}, Path=IsSelected}"
+                                                 Value="True">
+                                        <Setter TargetName="path" Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:RatingSelector}}, Path=RateItemColor}"/>
+                                    </DataTrigger>
+                                    
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:RatingSelectorItem}}, Path=IsHigherRateMouseOver}"
+                                                 Value="True"/>
+                                            <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:RatingSelectorItem}}, Path=IsSelected}"
+                                                 Value="False"/>
+                                            <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:RatingSelector}}, Path=IsReadOnly}"
+                                                 Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter TargetName="path" Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:RatingSelector}}, Path=RateItemHoverColor}"/>
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="{x:Type local:RatingSelector}" TargetType="{x:Type local:RatingSelector}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:RatingSelector}">
+                    <Border CornerRadius="5" BorderBrush="Silver" Background="Transparent" BorderThickness="1" Padding="5"
+                            VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <ItemsPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

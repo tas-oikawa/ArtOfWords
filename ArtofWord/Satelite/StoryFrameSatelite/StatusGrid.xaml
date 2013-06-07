@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="ArtOfWords.Satelite.StoryFrameSatelite.StatusGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="White"
+             TextOptions.TextFormattingMode="Display"
+             TextOptions.TextRenderingMode="ClearType"
+             UseLayoutRounding="true">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../SateliteResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical">
+        <Label Content="名前"/>
+        <TextBox Text="{Binding Path=Name, Mode=OneWay}" Style="{StaticResource ReadonlyTextBoxStyle}"/>
+        <Label Content="場所"/>
+        <TextBox Text="{Binding Path=Place, Mode=OneWay}" Style="{StaticResource ReadonlyTextBoxStyle}"/>
+        <Label Content="開始時刻"/>
+        <TextBox Text="{Binding Path=StartDateTime, Mode=OneWay}" Style="{StaticResource ReadonlyTextBoxStyle}"/>
+        <Label Content="終了時刻"/>
+        <TextBox Text="{Binding Path=EndDateTime, Mode=OneWay}" Style="{StaticResource ReadonlyTextBoxStyle}"/>
+    </StackPanel>
+</UserControl>
