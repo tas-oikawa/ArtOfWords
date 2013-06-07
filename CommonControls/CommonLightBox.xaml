@@ -1,0 +1,97 @@
+﻿<Window x:Class="CommonControls.CommonLightBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             WindowStyle="None" AllowsTransparency="True" Loaded="Window_Loaded" ResizeMode="NoResize" VerticalAlignment="Center" HorizontalAlignment="Center" Initialized="Window_Initialized_1">
+    <Grid Name="BaseGrid" Opacity="0.1">
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Grid.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="BaseGrid" 
+                            Storyboard.TargetProperty="Opacity"
+                            From="0.1" To="1.0" Duration="0:0:0.300"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+        <Grid.Resources>
+            <Style x:Key="SaveBlackoutBorder" TargetType="Border">
+                <EventSetter Event="MouseDown" Handler="OnMouseDownAtSaveBlackoutBorder"/>
+                <Setter Property="BorderBrush" Value="Blue"/>
+                <Setter Property="BorderThickness" Value="2,0"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#DD101020"/>
+                        <Setter Property="ToolTip" Value="青い領域をクリックすると保存して閉じます"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="False">
+                        <Setter Property="Background" Value="#88000020"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="CancelBlackoutBorder" TargetType="Border">
+                <EventSetter Event="MouseDown" Handler="OnMouseDownCancelAtBlackoutBorder"/>
+                <Setter Property="BorderBrush" Value="Red"/>
+                <Setter Property="BorderThickness" Value="2,0"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#DD201010"/>
+                        <Setter Property="ToolTip" Value="赤い領域をクリックするとキャンセルします"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="False">
+                        <Setter Property="Background" Value="#88200000"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="TextBlockBlackoutStyle" TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Border},
+                                               Path=IsMouseOver}" Value="True">
+                        <Setter Property="Foreground" Value="White"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Border},
+                                               Path=IsMouseOver}" Value="False">
+                            <Setter Property="Foreground" Value="Transparent"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="CancelTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBlackoutStyle}">
+                <Setter Property="Text" Value="赤い領域をクリックするとキャンセルして閉じます"/>
+            </Style>
+            <Style x:Key="SaveTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBlackoutStyle}">
+                <Setter Property="Text" Value="青い領域をクリックすると保存して閉じます"/>
+            </Style>
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" MinHeight="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" MinWidth="20"/>
+        </Grid.ColumnDefinitions>
+        <Border Name="UpperBorder" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3"  Style="{StaticResource CancelBlackoutBorder}">
+            <TextBlock Name="UpperBorderTextBlock" Style="{StaticResource CancelTextBlockStyle}" VerticalAlignment="Top"/>
+        </Border>
+        <Border Name="LowerBorder" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="1"  Style="{StaticResource SaveBlackoutBorder}">
+            <TextBlock Name="LowerBorderTextBlock" Style="{StaticResource SaveTextBlockStyle}" VerticalAlignment="Bottom"/>
+        </Border>
+        <Grid Grid.Row="1" Grid.Column="1" Name="TargetGrid">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel Name="TargetPanel"  Background="White"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+    <Window.Background>
+        <SolidColorBrush />
+    </Window.Background>
+</Window>

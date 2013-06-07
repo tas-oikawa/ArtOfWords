@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="emanual.Wpf.Controls.WpfColorPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:emanual.Wpf.Controls"
+    Name="this" Width="250" Loaded="userControl_Loaded" IsHitTestVisible="True">
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="SimpleSlider.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+
+      <Style x:Key="STYLE_AlphaSlider" TargetType="Slider" BasedOn="{StaticResource STYLE_SimpleSlider}">
+        <Setter Property="LargeChange" Value="16" />
+        <Setter Property="SmallChange" Value="1" />
+        <Setter Property="Maximum" Value="255" />
+        <Setter Property="Minimum" Value="0" />
+      </Style>
+
+      <Style x:Key="STYLE_RgbUpDown" TargetType="{x:Type ctrl:NumericUpDown}">
+        <Setter Property="Width" Value="60" />
+        <Setter Property="Maximum" Value="255" />
+        <Setter Property="Minimum" Value="0" />
+        <Setter Property="Increment" Value="1" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="IsHitTestVisible" Value="True" />
+        <EventSetter Event="ValueChanged" Handler="PART_RgbUpDown_ValueChanged" />
+      </Style>
+
+      <Style x:Key="STYLE_BrightnessUpDown" TargetType="{x:Type ctrl:NumericUpDownFloat}">
+        <Setter Property="Width" Value="60" />
+        <Setter Property="Maximum" Value="1.0" />
+        <Setter Property="Minimum" Value="0.0" />
+        <Setter Property="Increment" Value="0.01" />
+        <Setter Property="TextAlignment" Value="Center" />
+      </Style>
+
+      <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="New Times Roman" />
+        <Setter Property="FontWeight" Value="Bold" />
+      </Style>
+
+      <ctrl:HexadecimalValueConverter x:Key="CONVERTER_HexadecimalValue" />
+      <ctrl:AlphaValueConverter x:Key="CONVERTER_AlphaValue" />
+
+      <!-- プレビュの背景色用ブラシ -->
+      <DrawingBrush x:Key="BRUSH_Checker" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 9 9">
+        <DrawingBrush.Drawing>
+          <DrawingGroup>
+            <GeometryDrawing Brush="White">
+              <GeometryDrawing.Geometry>
+                <RectangleGeometry Rect="0 0 2 2" />
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="Gray">
+              <GeometryDrawing.Geometry>
+                <GeometryGroup>
+                  <RectangleGeometry Rect="0 0 1 1" />
+                  <RectangleGeometry Rect="1 1 1 1" />
+                </GeometryGroup>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+  <!-- ***************** コントロールの配置 ********************* -->
+  <StackPanel Orientation="Vertical">
+    <StackPanel Orientation="Horizontal" Margin="8,0,8,8">
+      <Border Width="200" Height="200" BorderBrush="MediumBlue" BorderThickness="1"
+			  		  VerticalAlignment="Top" Margin="0,8,0,0" Background="White">
+        <UniformGrid Name="PART_UniformGrid" Columns="17" Rows="17" Margin="0">
+          <UniformGrid.ToolTip>
+            <TextBlock TextWrapping="Wrap">左端の列はグレースケール<LineBreak/>完全な透明色は #00FFFFFF<LineBreak/>左上隅のセルを選択し、Alpha 値を 0 に設定
+            </TextBlock>
+          </UniformGrid.ToolTip>
+        </UniformGrid>
+      </Border>
+
+      <!-- 色調の指定 -->
+      <Border Width="20" Margin="8,8,0,0">
+        <ctrl:HueGrid x:Name="PART_HueGrid" Height="200">
+          <Grid Name="PART_IndicatorGrid" IsHitTestVisible="False" VerticalAlignment="Top" Margin="-5">
+            <Grid.RenderTransform>
+              <TranslateTransform X="0" Y="{Binding ElementName=PART_HueGrid, Path=IndicatorOffset}" />
+            </Grid.RenderTransform>
+
+            <Path HorizontalAlignment="Left" Data="M 0 0 L 5 5 L 0 10 Z" Fill="Black" />
+            <Path HorizontalAlignment="Right" Data="M 0 0 L -5 5 L 0 10 Z" Fill="Black" />
+          </Grid>
+
+          <ctrl:HueGrid.ToolTip>
+            <TextBlock TextWrapping="Wrap">Hue（色調）<LineBreak />マウスクリックまたはマウスドラッグで選択可能
+            </TextBlock>
+          </ctrl:HueGrid.ToolTip>
+        </ctrl:HueGrid>
+      </Border>
+    </StackPanel>
+
+    <!-- Alpha 用スライダコントロール -->
+    <StackPanel Orientation="Horizontal" Height="26" Margin="4" ToolTip="Alpha（アルファ値）">
+      <Label Content="Alpha: " />
+      <Slider Name="PART_AlphaSlider" Width="120" VerticalAlignment="Center" Style="{StaticResource STYLE_AlphaSlider}"
+              SmallChange="1" LargeChange="16" Value="255" ValueChanged="PART_AlphaSlider_ValueChanged" />
+      <Label Content="{Binding ElementName=PART_AlphaSlider, Path=Value, Converter={StaticResource CONVERTER_AlphaValue}}"
+             Width="30" Margin="4,0,0,0" />
+    </StackPanel>
+
+    <!-- SelectedColor プロパティのプレビュ -->
+    <Grid Margin="10,4,10,0">
+      <TextBlock Text="Preview" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontFamily="Times New Roman" FontSize="20" FontWeight="Bold" FontStyle="Italic"/>
+
+      <Rectangle Name="PART_PreviewRect" Height="40" Stroke="Gray" ToolTip="色のプレビュ">
+        <Rectangle.Fill>
+          <SolidColorBrush Color="{Binding ElementName=this, Path=SelectedColor}" />
+          </Rectangle.Fill>
+      </Rectangle>
+    </Grid>
+    <!-- アップダウンコントロールによる色成分の調整 -->
+    <GroupBox Height="90" Margin="4,8,4,4" Padding="4">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition />
+          <RowDefinition />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="20" />
+          <ColumnDefinition />
+          <ColumnDefinition Width="20" />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="R" />
+        <Label Grid.Row="1" Grid.Column="0" Content="G" />
+        <Label Grid.Row="2" Grid.Column="0" Content="B" />
+        <Label Grid.Row="0" Grid.Column="2" Content="H" />
+        <Label Grid.Row="1" Grid.Column="2" Content="S" />
+        <Label Grid.Row="2" Grid.Column="2" Content="B" />
+
+        <ctrl:NumericUpDown x:Name="PART_RedUpDown" Grid.Row="0" Grid.Column="1" Style="{StaticResource STYLE_RgbUpDown}"
+                            ToolTip="色の赤成分の微調整" Value="{Binding ElementName=this, Path=Red}" />
+        <ctrl:NumericUpDown x:Name="PART_GreenUpDown" Grid.Row="1" Grid.Column="1" Style="{StaticResource STYLE_RgbUpDown}"
+                            ToolTip="色の緑成分の微調整" Value="{Binding ElementName=this, Path=Green}" />
+        <ctrl:NumericUpDown x:Name="PART_BlueUpDown" Grid.Row="2" Grid.Column="1" Style="{StaticResource STYLE_RgbUpDown}"
+                            ToolTip="色の青成分の微調整" Value="{Binding ElementName=this, Path=Blue}" />
+
+        <ctrl:NumericUpDown x:Name="PART_HueUpDown" Grid.Row="0" Grid.Column="3" Width="60" Maximum="359" Minimum="0"
+                            Increment="1" ToolTip="Hue の変更は色調バーを操作してください。" Value="{Binding ElementName=this, Path=Hue}"
+                            IsEnabled="False" ToolTipService.ShowOnDisabled="True" />
+        <ctrl:NumericUpDownFloat x:Name="PART_SaturationUpDown" Grid.Row="1" Grid.Column="3" ToolTip="Saturation（彩度）"
+                                 IsEnabled="False" ToolTipService.ShowOnDisabled="True"
+                                 Style="{StaticResource STYLE_BrightnessUpDown}"
+                                 Value="{Binding ElementName=this, Path=Saturation}" />
+        <ctrl:NumericUpDownFloat x:Name="PART_BrightnessUpDown" Grid.Row="2" Grid.Column="3" ToolTip="Brightness（明度）"
+                                 Style="{StaticResource STYLE_BrightnessUpDown}" IsEnabled="False" ToolTipService.ShowOnDisabled="True"
+                                 Value="{Binding ElementName=this, Path=Brightness}" />
+      </Grid>
+    </GroupBox>
+
+    <!-- 16 進表示 -->
+    <StackPanel Orientation="Horizontal">
+      <Label Content="16 進表示 : " />
+      <TextBox Name="PART_Hexadecimal" KeyDown="PART_Hexadecimal_KeyDown" Width="80"
+               Text="{Binding ElementName=this, Path=SelectedColor, Converter={StaticResource CONVERTER_HexadecimalValue}}">
+        <TextBox.ToolTip>
+          <TextBlock TextWrapping="Wrap">カラー値を手入力可能（入力後、[Return]）<LineBreak />入力可能な書式：#AARRGGBB, #RRGGBB, #ARGB, #RGB
+          </TextBlock>
+        </TextBox.ToolTip>
+      </TextBox>
+    </StackPanel>
+  </StackPanel>
+</UserControl>

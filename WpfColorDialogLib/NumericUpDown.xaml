@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="emanual.Wpf.Controls.NumericUpDown"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:emanual.Wpf.Controls"
+    Loaded="control_Loaded" Name="this">
+
+  <UserControl.Resources>
+    <Brush x:Key="BRUSH_Normal">LightBlue</Brush>
+    <Brush x:Key="BRUSH_Hover">LightSalmon</Brush>
+    <Brush x:Key="BRUSH_Pressed">SteelBlue</Brush>
+    <Brush x:Key="BRUSH_Disabled">GhostWhite</Brush>
+    <Brush x:Key="BRUSH_Border">SkyBlue</Brush>
+    <Brush x:Key="BRUSH_Arrow">MediumBlue</Brush>
+    <Brush x:Key="BRUSH_ArrowBorder">LightBlue</Brush>
+
+    <Style x:Key="STYLE_UpButton" TargetType="RepeatButton">
+      <Setter Property="Focusable" Value="False" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type RepeatButton}">
+            <Border Name="PART_Border" Background="{StaticResource BRUSH_Normal}" CornerRadius="2 2 0 0"
+                    BorderBrush="{StaticResource BRUSH_Border}" BorderThickness="1">
+              <Path Fill="{StaticResource BRUSH_Arrow}" Data="M 0 3 L 3.5 0 L 7 3"
+						        HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource BRUSH_Hover}" />
+              </Trigger>
+              <Trigger Property="IsMouseCaptured" Value="True">
+                <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource BRUSH_Pressed}" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource BRUSH_Pressed}" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource BRUSH_Disabled}" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="STYLE_DownButton" TargetType="RepeatButton">
+      <Setter Property="Focusable" Value="False" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type RepeatButton}">
+            <Border Name="PART_Border" Background="{StaticResource BRUSH_Normal}" CornerRadius="0 0 2 2"
+                    BorderBrush="{StaticResource BRUSH_Border}" BorderThickness="1">
+              <Path Fill="{StaticResource BRUSH_Arrow}" Data="M 0 0 L 3.5 3 L 7 0"
+						        HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource BRUSH_Hover}" />
+              </Trigger>
+              <Trigger Property="IsMouseCaptured" Value="True">
+                <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource BRUSH_Pressed}" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource BRUSH_Pressed}" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource BRUSH_Disabled}" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </UserControl.Resources>
+
+  <Border Background="{Binding Background}" BorderBrush="{StaticResource BRUSH_Border}" BorderThickness="1" Padding="1">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="15" />
+      </Grid.ColumnDefinitions>
+
+      <TextBox Name="PART_TextBox" BorderThickness="0" Grid.RowSpan="2" Margin="0,0,4,0"
+               VerticalContentAlignment="Center" IsReadOnly="True"
+               Text="{Binding ElementName=this, Path=Value}" />
+      <RepeatButton Name="PART_UpButton" Style="{StaticResource STYLE_UpButton}" Grid.Column="1" Click="PART_UpButton_Click" />
+      <RepeatButton Name="PART_DownButton" Style="{StaticResource STYLE_DownButton}" Grid.Column="1" Grid.Row="1" Click="PART_DownButton_Click" />
+
+      <Border Grid.Column="1" Grid.RowSpan="2" BorderBrush="{StaticResource BRUSH_ArrowBorder}"
+			        BorderThickness="1" CornerRadius="2" HorizontalAlignment="Right" />
+    </Grid>
+  </Border>
+</UserControl>

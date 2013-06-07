@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F6E53B1B-C86B-460D-8353-0303ECAED766}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ModernizedAlice.ArtOfWords.BizCommon</RootNamespace>
+    <AssemblyName>ModernizedAlice.ArtOfWords.BizCommon</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\Dll\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\ArtofWord\Properties\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ControlUtil\MainTabKind.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="DragAdner.cs" />
+    <Compile Include="Model\Character\CharacterUtil.cs" />
+    <Compile Include="Model\Converter\BoolVisibilityConverter.cs" />
+    <Compile Include="Model\Converter\SelectingIndexVisibilityConverter.cs" />
+    <Compile Include="Model\Event\AddIMarkableModelEventArgs.cs" />
+    <Compile Include="Model\Event\AdsLoadedEventArgs.cs" />
+    <Compile Include="Model\Event\ChangeTabEventArg.cs" />
+    <Compile Include="Model\Event\DataReloadedEventArgs.cs" />
+    <Compile Include="Model\Event\DeleteIMarkableModelEventArgs.cs" />
+    <Compile Include="Model\Event\EventAggregator.cs" />
+    <Compile Include="Model\Event\MarkChangedEventArgs.cs" />
+    <Compile Include="Model\Event\ModelValueChangedEventArgs.cs" />
+    <Compile Include="Model\Event\MoveDocumentIndexEventArgs.cs" />
+    <Compile Include="Model\Event\ReplaceWordEventArgs.cs" />
+    <Compile Include="Model\Event\SaveEventArgs.cs" />
+    <Compile Include="Model\Event\SaveKind.cs" />
+    <Compile Include="Model\Event\SelectObjectForceEventArgs.cs" />
+    <Compile Include="Model\Event\ShowWindowEventArgs.cs" />
+    <Compile Include="ModelsComposite.cs" />
+    <Compile Include="Model\Character\CharacterModel.cs" />
+    <Compile Include="Model\Character\CharacterManager.cs" />
+    <Compile Include="Model\Character\Enumurators.cs" />
+    <Compile Include="Model\DocumentModel.cs" />
+    <Compile Include="Model\Event\TryCloseEventArgs.cs" />
+    <Compile Include="Model\Event\TryCreateEventArgs.cs" />
+    <Compile Include="Model\Event\TryOpenEventArgs.cs" />
+    <Compile Include="Model\Event\TrySaveOccuredEventArgs.cs" />
+    <Compile Include="Model\ISearchable.cs" />
+    <Compile Include="Model\Item\Enumerators.cs" />
+    <Compile Include="Model\Item\ItemModel.cs" />
+    <Compile Include="Model\Item\ItemModelManager.cs" />
+    <Compile Include="Model\Item\ItemUtil.cs" />
+    <Compile Include="Model\MarkableObject.cs" />
+    <Compile Include="Model\Marks\CharacterMark.cs" />
+    <Compile Include="Model\Marks\Enumurators.cs" />
+    <Compile Include="Model\Marks\KeywordMark.cs" />
+    <Compile Include="Model\Marks\Mark.cs" />
+    <Compile Include="Model\Marks\MarkCache.cs" />
+    <Compile Include="Model\Marks\MarkFactory.cs" />
+    <Compile Include="Model\Marks\MarkManagementStrategy\CharacterMarkManagementStrategy.cs" />
+    <Compile Include="Model\Marks\MarkManagementStrategy\StoryFrameMarkManagementStrategy.cs" />
+    <Compile Include="Model\Marks\MarkManager.cs" />
+    <Compile Include="Model\Marks\MarkUpdater.cs" />
+    <Compile Include="Model\Marks\StoryFrameMark.cs" />
+    <Compile Include="Model\ModelManager.cs" />
+    <Compile Include="Model\Relation\CharacterStoryRelationModel.cs" />
+    <Compile Include="Model\Relation\CharacterStoryRelationModelManager.cs" />
+    <Compile Include="Model\Relation\ItemStoryRelationModel.cs" />
+    <Compile Include="Model\Relation\ItemStoryRelationModelManager.cs" />
+    <Compile Include="Model\SaveAndLoad\FileExpanderInterface.cs" />
+    <Compile Include="Model\SaveAndLoad\FileExpanderFactory.cs" />
+    <Compile Include="Model\SaveAndLoad\FileExpanderVer1_0_0.cs" />
+    <Compile Include="Model\SaveAndLoad\FileExpanderVer2_0_0.cs" />
+    <Compile Include="Model\SaveAndLoad\FileVersion.cs" />
+    <Compile Include="Model\SaveAndLoad\LoadFileInfo.cs" />
+    <Compile Include="Model\SaveAndLoad\LoadManager.cs" />
+    <Compile Include="Model\SaveAndLoad\SaveManager.cs" />
+    <Compile Include="Model\SaveAndLoad\SaveUtil.cs" />
+    <Compile Include="Model\SaveAndLoad\XmlSaveObjectVer1_0_0.cs" />
+    <Compile Include="Model\SaveAndLoad\XmlSaveObjectVer2_0_0.cs" />
+    <Compile Include="Model\SearchWordUtil.cs" />
+    <Compile Include="Model\StoryFrame\PlaceModel.cs" />
+    <Compile Include="Model\StoryFrame\PlaceModelManager.cs" />
+    <Compile Include="Model\StoryFrame\StoryFrameModel.cs" />
+    <Compile Include="Model\StoryFrame\StoryFrameModelManager.cs" />
+    <Compile Include="Model\TimelineEvent\TimelineEventModel.cs" />
+    <Compile Include="Model\TimelineEvent\TimelineEventModelManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TestModel\TestBizModel.cs" />
+    <Compile Include="Util\WpfUtil.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BaseUIStyle\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModernizedAlice.IPlugin\ModernizedAlice.IPlugin.csproj">
+      <Project>{e5df0ef3-7d43-479a-9f59-99a9ca2181cc}</Project>
+      <Name>ModernizedAlice.IPlugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

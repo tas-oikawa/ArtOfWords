@@ -1,0 +1,16 @@
+﻿<ResourceDictionary 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+
+    <Style x:Key="AccordionButtonStyle" TargetType="ToggleButton">
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Content" Value="細かく設定する ▼"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Content" Value="閉じる △"/>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Background" Value="AliceBlue"/>
+    </Style>
+</ResourceDictionary>

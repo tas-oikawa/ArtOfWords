@@ -1,0 +1,65 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Converter="clr-namespace:ModernizedAlice.ArtOfWords.BizCommon.Model.Converter;assembly=ModernizedAlice.ArtOfWords.BizCommon"
+             x:Class="RelationDetailControlls.CharacterRelationDetailControl" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="CommonDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Converter:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Vertical">
+        <ToggleButton x:Name="toggleButton" Style="{StaticResource AccordionButtonStyle}"/>
+            <ListView Name="CharacterRelationListView" Height="0">
+                <ListView.Resources>
+                    <DataTemplate x:Key="NameCellTemplate">
+                        <Label Content="{Binding Path=Name}" Width="60"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="PositionCellTemplate">
+                        <ComboBox ItemsSource="{Binding Path=PositionItems}" SelectedItem="{Binding Path=Position, Mode=TwoWay}" Width="160"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="BehaviorCellTemplate">
+                        <TextBox Text="{Binding Path=Behavior}" Width="300"/>
+                    </DataTemplate>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="名前" CellTemplate="{StaticResource NameCellTemplate}" />
+                        <GridViewColumn Header="このシーンでのポジション" CellTemplate="{StaticResource PositionCellTemplate}"/>
+                        <GridViewColumn Header="このシーンでやること" CellTemplate="{StaticResource BehaviorCellTemplate}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        <StackPanel.Triggers>
+            <EventTrigger SourceName="toggleButton" RoutedEvent="ToggleButton.Checked">
+                
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation 
+                            Storyboard.TargetName="CharacterRelationListView" 
+                            Storyboard.TargetProperty="Height" 
+                            From="0" To="160" Duration="0:0:0.200" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger SourceName="toggleButton" RoutedEvent="ToggleButton.Unchecked">
+
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation 
+                            Storyboard.TargetName="CharacterRelationListView" 
+                            Storyboard.TargetProperty="Height" 
+                            From="160" To="0" Duration="0:0:0.200" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </StackPanel.Triggers>
+    </StackPanel>
+</UserControl>

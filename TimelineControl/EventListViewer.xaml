@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="TimelineControl.EventListViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="540"
+                Background="Transparent">
+    <Grid>
+        <ListView ItemsSource="{Binding Path=DataList}">
+            <ListView.Resources>
+                <DataTemplate x:Key="Name_Template">
+                    <TextBlock Text="{Binding Path=Name, Mode=OneWay}" ToolTip="{Binding Path=Name, Mode=OneWay}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="StartDateTime_Template">
+                    <TextBlock Text="{Binding Path=StartDateTimeString, Mode=OneWay}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="EndDateTime_Template">
+                    <TextBlock Text="{Binding Path=EndDateTimeString, Mode=OneWay}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="Jump_Template">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="開始時刻へ" Margin="5,0" Click="Button_StartClick_1"/>
+                        <Button Content="終了時刻へ" Margin="5,0" Click="Button_EndClick_1"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="イベント名" Width="160" CellTemplate="{StaticResource Name_Template}"/>
+                    <GridViewColumn Header="開始時刻" Width="160" CellTemplate="{StaticResource StartDateTime_Template}"/>
+                    <GridViewColumn Header="終了時刻" Width="160" CellTemplate="{StaticResource EndDateTime_Template}"/>
+                    <GridViewColumn Header="移動" Width="180" CellTemplate="{StaticResource Jump_Template}"/>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+    </Grid>
+</UserControl>

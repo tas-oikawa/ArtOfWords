@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ArtOfWords.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SavedFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
+    <Setting Name="LastSavedFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Novels\マニュアル.kieAow</Value>
+    </Setting>
+    <Setting Name="TextBoxFontSize" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
+    <Setting Name="TextBoxFontFamily" Type="System.Windows.Media.FontFamily" Scope="User">
+      <Value Profile="(Default)">メイリオ</Value>
+    </Setting>
+    <Setting Name="IsUpgraded" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="TextBoxFontColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FF000000</Value>
+    </Setting>
+    <Setting Name="TextBoxBackgroundColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FFFFFAF0</Value>
+    </Setting>
+    <Setting Name="WindowPos" Type="System.Windows.Rect" Scope="User">
+      <Value Profile="(Default)">0,0,1000,800</Value>
+    </Setting>
+    <Setting Name="IsMaximized" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
