@@ -27,14 +27,14 @@ namespace TagsGrooveControls
 
         private void _addChildButton_Click(object sender, RoutedEventArgs e)
         {
-            var model = (sender as Control).DataContext as Tag;
+            var model = (sender as Control).DataContext as TagTreeViewItemModel;
 
             GetModel().AddChild(model);
         }
 
         private void _deleteChildButton_Click(object sender, RoutedEventArgs e)
         {
-            var model = (sender as Control).DataContext as Tag;
+            var model = (sender as Control).DataContext as TagTreeViewItemModel;
 
             if (MessageBox.Show(model.Name + "を削除してもいいですか？", "確認", MessageBoxButton.YesNo) == MessageBoxResult.No)
             {

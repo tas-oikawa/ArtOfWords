@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ModernizedAlice.ArtOfWords.BizCommon.Model.StoryFrame.Tag
+namespace TagsGrooveControls.Model
 {
-    public class BaseTag : Tag
+    class BaseTagTreeViewItemModel : TagTreeViewItemModel    
     {
-        public BaseTag() : base(0)
+        public BaseTagTreeViewItemModel(int id)
+            : base(id)
         {
-            Name = "タグ";
+        }
+
+        public override bool IsBase()
+        {
+            return true;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,10 +10,10 @@ namespace TagsGrooveControls.Model
 {
     public class TagsGrooveTreeViewModel : INotifyPropertyChanged
     {
-        private TagManager _manager;
-        private ObservableCollection<Tag> _tags;
+        private TagTreeViewItemModelManager _manager;
+        private ObservableCollection<TagTreeViewItemModel> _tags;
 
-        public ObservableCollection<Tag> Tags
+        public ObservableCollection<TagTreeViewItemModel> Tags
         {
             get { return _tags; }
             set { _tags = value; }
@@ -28,17 +29,17 @@ namespace TagsGrooveControls.Model
 
         public void Init(TagManager tagManager)
         {
-            _manager = tagManager;
+            _manager = TagManagerConverter.Convert(tagManager);
             var baseTag = _manager.GetBaseTag();
 
-            _tags = new ObservableCollection<Tag>();
+            _tags = new ObservableCollection<TagTreeViewItemModel>();
 
-            _tags.Add(baseTag);
+            _tags.Add(_manager.GetBaseTag() as TagTreeViewItemModel);
         }
 
-        public void AddChild(Tag addTarget)
+        public void AddChild(TagTreeViewItemModel addTarget)
         {
-            var newTag = _manager.GenerateNewTag();
+            var newTag = _manager.GenerateNewTag() as TagTreeViewItemModel;
 
             _manager.ConnectTags(addTarget, newTag);
             _manager.Add(newTag);

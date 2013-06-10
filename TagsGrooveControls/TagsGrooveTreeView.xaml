@@ -42,8 +42,8 @@
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-                
-                <HierarchicalDataTemplate DataType="{x:Type local:Tag}" ItemsSource="{Binding Children}">
+
+                <HierarchicalDataTemplate DataType="{x:Type local:TagTreeViewItemModel}" ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal" Margin="2" Height="20">
                         <TextBox Text="{Binding Path=Name, Mode=TwoWay}" ToolTip="{Binding Path=Name}"  Style="{StaticResource textBoxStyle}"/>
                         <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" ToolTip="{Binding Path=Name}" Style="{StaticResource textBlockStyle}"/>

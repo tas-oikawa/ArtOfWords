@@ -51,10 +51,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Model\BaseTag.cs" />
-    <Compile Include="Model\Tag.cs" />
-    <Compile Include="Model\TagManager.cs" />
+    <Compile Include="Model\BaseTagTreeViewItemModel.cs" />
+    <Compile Include="Model\TagManagerConverter.cs" />
+    <Compile Include="Model\TagTreeViewItemModel.cs" />
     <Compile Include="Model\TagsGrooveTreeViewModel.cs" />
+    <Compile Include="Model\TagTreeViewItemModelManager.cs" />
     <Compile Include="TagsGrooveTreeView.xaml.cs">
       <DependentUpon>TagsGrooveTreeView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -84,10 +85,11 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Images\MakeBrother.png" />
-    <Resource Include="Images\MakeChild.png" />
+    <ProjectReference Include="..\ModernizedAlice.ArtOfWords.BizCommon\ModernizedAlice.ArtOfWords.BizCommon.csproj">
+      <Project>{f6e53b1b-c86b-460d-8353-0303ecaed766}</Project>
+      <Name>ModernizedAlice.ArtOfWords.BizCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
