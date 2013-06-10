@@ -1,0 +1,59 @@
+﻿using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+
+namespace TagsGrooveControls.Model
+{
+    public class TagTreeViewItemModel : Tag
+    {
+        private bool _isSelected;
+
+        public bool IsSelected
+        {
+            get 
+            {
+                return _isSelected; 
+            }
+            set 
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged("IsSelected");
+                }
+            }
+        }
+
+        private bool _isExpanded;
+
+        public bool IsExpanded
+        {
+            get
+            {
+                return _isExpanded;
+            }
+            set
+            {
+                if (_isExpanded != value)
+                {
+                    _isExpanded = value;
+                    OnPropertyChanged("IsExpanded");
+                }
+            }
+        }
+
+        public TagTreeViewItemModel(int orgId)
+            : base(orgId)
+        {
+        }
+
+        public override bool IsBase()
+        {
+            return false;
+        }
+    }
+}
