@@ -18,6 +18,8 @@ using ModernizedAlice.ArtOfWords.BizCommon.Model;
 using System.Collections.ObjectModel;
 using CommonControls.Util;
 using CommonControls;
+using TagsGrooveControls.View;
+using TagsGrooveControls.Model;
 
 namespace CharacterBuildControll
 {
@@ -182,7 +184,17 @@ namespace CharacterBuildControll
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            TagsSelectorView selectorView = new TagsSelectorView();
+            selectorView.SetModel(new TagSelectorViewModel());
 
+            CommonLightBox lightBox = new CommonLightBox();
+            lightBox.LightBoxKind = CommonLightBox.CommonLightBoxKind.SaveCancel;
+            lightBox.BindUIElement(selectorView);
+            lightBox.Owner = Application.Current.MainWindow;
+
+            if (ShowDialogManager.ShowDialog(lightBox) == true)
+            {
+            }
         }
     }
 }

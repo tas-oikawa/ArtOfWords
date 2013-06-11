@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Relation;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.TimelineEvent;
 using ModernizedAlice.IPlugin.ModuleInterface;
+using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon
 {
@@ -174,6 +175,23 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
             set { ModelsComposite._timelineEventModelManager = value; }
         }
 
+        private static TagManager _tagManager;
+
+        public static TagManager TagManager
+        {
+            get
+            {
+                if (_tagManager == null)
+                {
+                    _tagManager = new TagManager();
+                    _tagManager.Add(new BaseTag());
+                }
+
+                return _tagManager;
+            }
+            set { ModelsComposite._tagManager = value; }
+        }
+
 
         static public void CreateNew(IEditor iEditor)
         {
@@ -189,6 +207,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
             ModelsComposite.CharacterStoryModelManager = new CharacterStoryRelationModelManager();
             ModelsComposite.ItemStoryModelManager = new ItemStoryRelationModelManager();
             ModelsComposite.TimelineEventModelManager = new TimelineEventModelManager();
+            ModelsComposite.TagManager = null;
         }
 
     }

@@ -47,7 +47,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="TagsGrooveTreeView.xaml">
+    <Compile Include="Model\TagSelectorViewModel.cs" />
+    <Compile Include="View\TagsSelectorView.xaml.cs">
+      <DependentUpon>TagsSelectorView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\TagsGrooveTreeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -56,10 +60,14 @@
     <Compile Include="Model\TagTreeViewItemModel.cs" />
     <Compile Include="Model\TagsGrooveTreeViewModel.cs" />
     <Compile Include="Model\TagTreeViewItemModelManager.cs" />
-    <Compile Include="TagsGrooveTreeView.xaml.cs">
+    <Compile Include="View\TagsGrooveTreeView.xaml.cs">
       <DependentUpon>TagsGrooveTreeView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\TagsSelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

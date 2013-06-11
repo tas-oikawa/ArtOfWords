@@ -23,6 +23,12 @@ namespace TagsGrooveControls.Model
                 if (_isSelected != value)
                 {
                     _isSelected = value;
+
+                    if (!value)
+                    {
+                        IsNameMode = false;
+                    }
+
                     OnPropertyChanged("IsSelected");
                 }
             }
@@ -42,6 +48,24 @@ namespace TagsGrooveControls.Model
                 {
                     _isExpanded = value;
                     OnPropertyChanged("IsExpanded");
+                }
+            }
+        }
+
+        private bool _isNameMode;
+
+        public bool IsNameMode
+        {
+            get
+            {
+                return _isNameMode;
+            }
+            set
+            {
+                if (_isNameMode != value)
+                {
+                    _isNameMode = value;
+                    OnPropertyChanged("IsNameMode");
                 }
             }
         }

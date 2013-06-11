@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using TagsGrooveControls.View;
 
 namespace TagsGrooveControls.Model
 {
@@ -34,7 +35,7 @@ namespace TagsGrooveControls.Model
 
             _tags = new ObservableCollection<TagTreeViewItemModel>();
 
-            _tags.Add(_manager.GetBaseTag() as TagTreeViewItemModel);
+            _tags.Add(baseTag as TagTreeViewItemModel);
         }
 
         public void AddChild(TagTreeViewItemModel addTarget)

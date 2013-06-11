@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TagsGrooveControls.Model;
 
-namespace TagsGrooveControls
+namespace TagsGrooveControls.View
 {
     /// <summary>
     /// UserControl1.xaml の相互作用ロジック
@@ -27,14 +27,14 @@ namespace TagsGrooveControls
 
         private void _addChildButton_Click(object sender, RoutedEventArgs e)
         {
-            var model = (sender as Control).DataContext as TagTreeViewItemModel;
+            var model = (sender as FrameworkElement).DataContext as TagTreeViewItemModel;
 
             GetModel().AddChild(model);
         }
 
         private void _deleteChildButton_Click(object sender, RoutedEventArgs e)
         {
-            var model = (sender as Control).DataContext as TagTreeViewItemModel;
+            var model = (sender as FrameworkElement).DataContext as TagTreeViewItemModel;
 
             if (MessageBox.Show(model.Name + "を削除してもいいですか？", "確認", MessageBoxButton.YesNo) == MessageBoxResult.No)
             {
@@ -47,6 +47,16 @@ namespace TagsGrooveControls
         private TagsGrooveTreeViewModel GetModel()
         {
             return this.DataContext as TagsGrooveTreeViewModel;
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var model = (sender as FrameworkElement).DataContext as TagTreeViewItemModel;
+
+            if (model.IsSelected)
+            {
+                model.IsNameMode = true;
+            }
         }
 
     }
