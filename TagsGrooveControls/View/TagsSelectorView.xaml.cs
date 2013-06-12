@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,19 @@ namespace TagsGrooveControls.View
             _model = model;
 
             _model.SetView(this._treeView);
+            this.DataContext = _model;
+        }
+
+        private void addSelectButton_Click(object sender, RoutedEventArgs e)
+        {
+            _model.AddSelection();
+        }
+
+        private void _deleteChildButton_Click(object sender, RoutedEventArgs e)
+        {
+            var model = (sender as FrameworkElement).DataContext as Tag;
+
+            _model.RemoveSelection(model);
         }
     }
 }

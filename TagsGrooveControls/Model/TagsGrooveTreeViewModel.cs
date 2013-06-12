@@ -60,6 +60,18 @@ namespace TagsGrooveControls.Model
             OnTagRemoved(deleteTarget);
         }
 
+        public Tag GetSelectingTag()
+        {
+            var selected = _view.TagTreeView.SelectedItem;
+
+            if (selected == null)
+            {
+                return null;
+            }
+
+            return selected as Tag;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string name)

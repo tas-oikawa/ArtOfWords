@@ -5,7 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:TagsGrooveControls="clr-namespace:TagsGrooveControls.View" 
              mc:Ignorable="d" 
+             MinHeight="300"
+             MinWidth="500"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CommonControls;component/Util/ButtonStyleResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style x:Key="deleteButtonStyle" TargetType="Button">
+                <Setter Property="Visibility" Value="Collapsed"/>
+                <Setter Property="Template" Value="{StaticResource DeleteCircleButton}"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
+                        <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <DataTemplate x:Key="selectedItemListBoxDataTemplate">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=Name}" TextTrimming="CharacterEllipsis"/>
+                    <Button Grid.Column="1" Padding="0" Name="_deleteChildButton" Click="_deleteChildButton_Click" Style="{StaticResource deleteButtonStyle}"/>
+                </Grid>
+            </DataTemplate>
+            <Style x:Key="checkListItemContainerStyle" TargetType="ListBoxItem">
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="true">
+                        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,12 +56,10 @@
 
         <Label Grid.Row="0" Grid.Column="0" Content="タグツリー"/>
         <TagsGrooveControls:TagsGrooveTreeView x:Name="_treeView" Grid.Column="0" Grid.Row="1"/>
-        <Button Grid.Column="1"  Grid.Row="1" Content="→"/>
+        <Button x:Name="addSelectButton" Grid.Column="1"  Grid.Row="1" Content="→" Click="addSelectButton_Click"/>
         <Label Grid.Row="0" Grid.Column="2" Content="選択中のタグ"/>
         <Border Grid.Column="2" Grid.Row="1">
-            <ListBox Grid.Row="1">
-                    
-            </ListBox>
+            <ListBox Grid.Row="1" ItemTemplate="{StaticResource selectedItemListBoxDataTemplate}" ItemContainerStyle="{StaticResource checkListItemContainerStyle}" ItemsSource="{Binding Path=SelectingTags}"/>
         </Border>
 
     </Grid>
