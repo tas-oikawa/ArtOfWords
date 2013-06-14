@@ -50,7 +50,7 @@ namespace TagsGrooveControls.Model
 
             var addBaseTag = ConvertBaseTag(baseTag);
 
-            result.Add(ConvertBaseTag(baseTag));
+            result.Add(addBaseTag);
             ExpandChild(addBaseTag, baseTag, ref result);
 
             return result;

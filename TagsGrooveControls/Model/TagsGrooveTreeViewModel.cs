@@ -12,6 +12,12 @@ namespace TagsGrooveControls.Model
     public class TagsGrooveTreeViewModel : INotifyPropertyChanged
     {
         private TagTreeViewItemModelManager _manager;
+
+        public TagTreeViewItemModelManager Manager
+        {
+            get { return _manager; }
+            set { _manager = value; }
+        }
         private ObservableCollection<TagTreeViewItemModel> _tags;
 
         public ObservableCollection<TagTreeViewItemModel> Tags
@@ -54,7 +60,7 @@ namespace TagsGrooveControls.Model
 
         public void Remove(Tag deleteTarget)
         {
-            _manager.Remove(deleteTarget, RemoveType.RemoveRelatedChildren);
+            _manager.Remove(deleteTarget);
 
             OnPropertyChanged("Tags");
             OnTagRemoved(deleteTarget);

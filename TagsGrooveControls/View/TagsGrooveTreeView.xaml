@@ -65,6 +65,17 @@
                         <Button Template="{StaticResource DeleteCircleButton}" Padding="0" Name="_deleteChildButton" Click="_deleteChildButton_Click" Style="{StaticResource treeChildButtonStyle}"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type local:BaseTagTreeViewItemModel}" ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal" Margin="2" Height="20">
+                        <StackPanel.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}"/>
+                            </EventTrigger>
+                        </StackPanel.Triggers>
+                        <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" ToolTip="{Binding Path=Name}" Style="{StaticResource textBlockStyle}"/>
+                        <Button Template="{StaticResource AddCircleButton}" Padding="0"  Name="_addChildButton" Click="_addChildButton_Click" Style="{StaticResource treeChildButtonStyle}"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
             </TreeView.Resources>
         </TreeView>
     </Grid>

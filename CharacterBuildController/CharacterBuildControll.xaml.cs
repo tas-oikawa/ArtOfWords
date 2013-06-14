@@ -185,7 +185,8 @@ namespace CharacterBuildControll
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             TagsSelectorView selectorView = new TagsSelectorView();
-            selectorView.SetModel(new TagSelectorViewModel());
+            var tagSelectorViewModel = new TagSelectorViewModel();
+            selectorView.SetModel(tagSelectorViewModel);
 
             CommonLightBox lightBox = new CommonLightBox();
             lightBox.LightBoxKind = CommonLightBox.CommonLightBoxKind.SaveCancel;
@@ -194,6 +195,7 @@ namespace CharacterBuildControll
 
             if (ShowDialogManager.ShowDialog(lightBox) == true)
             {
+                tagSelectorViewModel.UpdateModelsComposite();
             }
         }
     }

@@ -7,6 +7,15 @@ namespace TagsGrooveControls.Model
 {
     class BaseTagTreeViewItemModel : TagTreeViewItemModel    
     {
+
+        public override bool IsNameMode
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         public BaseTagTreeViewItemModel(int id)
             : base(id)
         {

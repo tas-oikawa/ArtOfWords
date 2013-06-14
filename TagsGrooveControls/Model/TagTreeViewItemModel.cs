@@ -54,7 +54,7 @@ namespace TagsGrooveControls.Model
 
         private bool _isNameMode;
 
-        public bool IsNameMode
+        public virtual bool IsNameMode
         {
             get
             {

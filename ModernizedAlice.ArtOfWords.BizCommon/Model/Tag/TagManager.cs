@@ -5,18 +5,18 @@ using System.Text;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
 {
-    public enum RemoveType
-    {
-        RemoveRelatedChildren,
-        ConnectRelatedChildrenToParent,
-    }
-
     public class TagManager
     {
         /// <summary>
         /// タグの一覧。ID:0は特別な番号
         /// </summary>
         private Dictionary<int, Tag> _tagDictionary;
+
+        public Dictionary<int, Tag> TagDictionary
+        {
+            get { return _tagDictionary; }
+            set { _tagDictionary = value; }
+        }
 
         public TagManager()
         {
@@ -48,7 +48,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             _tagDictionary.Add(tag.Id, tag);
         }
 
-        private void RemoveFromDictonary(Tag tag)
+        protected virtual void RemoveFromDictonary(Tag tag)
         {
             _tagDictionary.Remove(tag.Id);
         }
@@ -57,20 +57,12 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
         {
             foreach(var child in tag.Children)
             {
-                RemoveFromDictonary(tag);
+                RemoveFromDictonary(child);
                 RemoveChildren(child);
-                OnTagRemoved(tag);
+                OnTagRemoved(child);
             }
 
             tag.Children.Clear();
-        }
-
-        public void ConnectChildrenToParent(Tag tag)
-        {
-            foreach (var child in tag.Children)
-            {
-                ConnectTags(tag, child);
-            }
         }
 
         public void DisconnectFromParent(Tag tag)
@@ -79,27 +71,42 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             tag.Parent = null;
         }
 
-        public virtual void Remove(Tag tag, RemoveType type)
+        public virtual void Remove(int tagId)
+        {
+            if (_tagDictionary.ContainsKey(tagId))
+            {
+                Remove(_tagDictionary[tagId]);
+            }
+        }
+
+        public virtual void Remove(Tag tag)
         {
             if (tag.Parent == null)
             {
                 return;
             }
 
-            if (type == RemoveType.ConnectRelatedChildrenToParent)
-            {
-                ConnectChildrenToParent(tag);
-            }
-            else
-            {
-                RemoveChildren(tag);
-            }
+            RemoveChildren(tag);
+
 
             RemoveFromDictonary(tag);
             OnTagRemoved(tag);
             DisconnectFromParent(tag);
         }
 
+        public void ReconnectAllToBaseTag()
+        {
+            foreach (var tag in _tagDictionary.Values)
+            {
+                if (tag.IsBase())
+                {
+                    continue;
+                }
+
+                DisconnectFromParent(tag);
+                ConnectTags(GetBaseTag(), tag);
+            }
+        }
 
         public virtual Tag GenerateNewTag()
         {
