@@ -1,4 +1,5 @@
 ﻿using CommonControls.Model;
+using CommonControls.Strategy;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,6 +47,22 @@ namespace CommonControls
             }
         }
 
+        private IDeletableLabelAddButtonStrategy _addButtonStrategy = new ListViewStyleAddButtonStrategy();
+
+        public IDeletableLabelAddButtonStrategy AddButtonStrategy
+        {
+            get { return _addButtonStrategy; }
+            set
+            {
+                _addButtonStrategy = value;
+                if (_model != null)
+                {
+                    _model.AddButtonStrategy = value;
+                }
+            }
+        }
+
+
         private string _noItemMessage;
 
         public string NoItemMessage
@@ -61,6 +78,40 @@ namespace CommonControls
                 }
             }
         }
+
+
+        private bool _doShowNoItemErrorMessageIfCountZero = true;
+
+        public bool DoShowNoItemErrorMessageIfCountZero
+        {
+            get { return _doShowNoItemErrorMessageIfCountZero; }
+            set
+            {
+                _doShowNoItemErrorMessageIfCountZero = value;
+
+                if (_model != null)
+                {
+                    _model.DoShowNoItemErrorMessageIfCountZero = value;
+                }
+            }
+        }
+
+        public bool _doNotShowAddButtonIfCountZero = true;
+
+        public bool DoNotShowAddButtonIfCountZero
+        {
+            get { return _doNotShowAddButtonIfCountZero; }
+            set
+            {
+                _doNotShowAddButtonIfCountZero = value;
+
+                if (_model != null)
+                {
+                    _model.DoNotShowAddButtonIfCountZero = value;
+                }
+            }
+        }
+
 
         public delegate void OnModelIsAppearedChangedEventHandler(object sender, OnModelIsAppearedChangedEventArgs e);
         public event OnModelIsAppearedChangedEventHandler OnModelIsAppearedChangedEvent;
@@ -83,8 +134,11 @@ namespace CommonControls
         {
             _model = new DeletableLabelStackPanelViewModel(this)
             {
+                AddButtonStrategy = this.AddButtonStrategy,
                 DataList = this.DataList,
                 NoItemErrorMessage = this.NoItemMessage,
+                DoNotShowAddButtonIfCountZero = this.DoNotShowAddButtonIfCountZero,
+                DoShowNoItemErrorMessageIfCountZero = this.DoShowNoItemErrorMessageIfCountZero,
             };
 
             _model.Initialize();

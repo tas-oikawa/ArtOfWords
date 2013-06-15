@@ -49,6 +49,9 @@
   <ItemGroup>
     <Compile Include="Model\TagManagerReverseConverter.cs" />
     <Compile Include="Model\TagSelectorViewModel.cs" />
+    <Compile Include="Util\ConvertTagToTagTreeViewItemModel.cs" />
+    <Compile Include="Util\TagToAppearListViewModelConverter.cs" />
+    <Compile Include="Strategy\TagStickerAddButtonStrategy.cs" />
     <Compile Include="View\TagsSelectorView.xaml.cs">
       <DependentUpon>TagsSelectorView.xaml</DependentUpon>
     </Compile>

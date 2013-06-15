@@ -177,7 +177,7 @@ namespace TagsGrooveControls.Model
                 return false;
             }
 
-            return _selectingTags.Contains(_treeViewModel.GetSelectingTag());
+            return _selectingTags.Any((e) => (e.Id ==  _treeViewModel.GetSelectingTag().Id));
         }
 
 

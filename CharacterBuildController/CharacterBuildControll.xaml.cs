@@ -181,22 +181,5 @@ namespace CharacterBuildControll
 
             _model.MoveCollection(_model.SelectingIndex, _model.SelectingIndex + 1);
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            TagsSelectorView selectorView = new TagsSelectorView();
-            var tagSelectorViewModel = new TagSelectorViewModel();
-            selectorView.SetModel(tagSelectorViewModel);
-
-            CommonLightBox lightBox = new CommonLightBox();
-            lightBox.LightBoxKind = CommonLightBox.CommonLightBoxKind.SaveCancel;
-            lightBox.BindUIElement(selectorView);
-            lightBox.Owner = Application.Current.MainWindow;
-
-            if (ShowDialogManager.ShowDialog(lightBox) == true)
-            {
-                tagSelectorViewModel.UpdateModelsComposite();
-            }
-        }
     }
 }

@@ -6,10 +6,12 @@ using System.Windows.Media;
 using System.ComponentModel;
 using ModernizedAlice.ArtOfWords.BizCommon.Event;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Event;
+using System.Collections.ObjectModel;
+using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
 {
-    public class CharacterModel : IMarkable , INotifyPropertyChanged, ISearchable
+    public class CharacterModel : IMarkable, INotifyPropertyChanged, ISearchable, ITagStickable
     {
         private int _id;
         public int Id
@@ -440,6 +442,25 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
             }
         }
 
+        private ObservableCollection<int> _tags = new ObservableCollection<int>();
+
+        public ObservableCollection<int> Tags
+        {
+            set
+            {
+                if (_tags != value)
+                {
+                    _tags = value;
+                    OnPropertyChanged("Tags");
+                }
+            }
+            get
+            {
+                return _tags;
+            }
+        }
+        
+
         #region GenderProperties
 
         private GenderEnum _gender;
@@ -572,7 +593,13 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
             this.Remarks = src.Remarks;
             this.Species = src.Species;
             this.Symbol = src.Symbol;
-        }
+            this.Tags.Clear();
+
+            foreach (var tagId in src.Tags)
+            {
+                this.Tags.Add(tagId);
+            }
+        }        
 
         public string ToSearchString()
         {
@@ -584,7 +611,18 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
                 + CharacterUtil.GetGender(this.Gender) + ","
                 + this.RelationWithHero + ","
                 + this.Remarks + ","
-                + this.Species;
+                + this.Species + ","
+                + TagsToString.ToString(_tags, ModelsComposite.TagManager);
+        }
+
+        public void SetTagIds(List<int> stickTagList)
+        {
+            _tags.Clear();
+
+            foreach (var tagId in stickTagList)
+            {
+                _tags.Add(tagId);
+            }
         }
 
         #region INotifyPropertyChanged
@@ -601,5 +639,11 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
         }
 
         #endregion
+
+
+        public List<int> GetTagIds()
+        {
+            return Tags.ToList();
+        }
     }
 }

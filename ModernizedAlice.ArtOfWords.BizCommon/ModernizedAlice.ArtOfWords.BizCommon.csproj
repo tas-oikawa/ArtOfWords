@@ -60,9 +60,11 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ControlUtil\MainTabKind.cs" />
+    <Compile Include="Model\ITagStickable.cs" />
     <Compile Include="Model\Tag\BaseTag.cs" />
     <Compile Include="Model\Tag\Tag.cs" />
     <Compile Include="Model\Tag\TagManager.cs" />
+    <Compile Include="Model\Tag\TagsToString.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="DragAdner.cs" />
     <Compile Include="Model\Character\CharacterUtil.cs" />

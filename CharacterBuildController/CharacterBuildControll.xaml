@@ -7,6 +7,7 @@
              xmlns:localviewmodel="clr-namespace:CharacterBuildControll.Model"
              xmlns:searchBox="clr-namespace:SearchControl;assembly=SearchControl"
              xmlns:commonConverter="clr-namespace:ModernizedAlice.ArtOfWords.BizCommon.Model.Converter;assembly=ModernizedAlice.ArtOfWords.BizCommon"
+            xmlns:CommonControls="clr-namespace:CommonControls;assembly=CommonControls"
              d:DesignHeight="800" d:DesignWidth="579">
     <UserControl.CommandBindings>
         <CommandBinding Command="Delete" Executed="ExecuteDelete" />
@@ -239,7 +240,9 @@
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" Background="White">
-                    <Button Content="タグ" Click="Button_Click"/>
+                    <GroupBox Header="タグ">
+                        <CommonControls:DeletableLabelStackPanel Name="TagDeletableStackPanel"/>
+                    </GroupBox>
                 </Border>
                 <Border Grid.Row="3" Background="White">
                     <Grid>

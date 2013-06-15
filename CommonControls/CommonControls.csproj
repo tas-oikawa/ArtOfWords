@@ -61,6 +61,8 @@
     <Compile Include="Model\GeneralColorPickerViewModel.cs" />
     <Compile Include="OnModelIsAppearedChangedEventArgs.cs" />
     <Compile Include="SaveAndQuitEventArgs.cs" />
+    <Compile Include="Strategy\DeletableLabelAddButtonStrategy.cs" />
+    <Compile Include="Strategy\ListViewStyleAddButtonStrategy.cs" />
     <Compile Include="TextBoxColorPicker.xaml.cs">
       <DependentUpon>TextBoxColorPicker.xaml</DependentUpon>
     </Compile>

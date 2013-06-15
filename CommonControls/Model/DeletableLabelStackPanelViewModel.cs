@@ -1,4 +1,5 @@
 ﻿using CommonControls;
+using CommonControls.Strategy;
 using CommonControls.Util;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,14 @@ namespace CommonControls.Model
 {
     public class DeletableLabelStackPanelViewModel
     {
+        private IDeletableLabelAddButtonStrategy _addButtonStrategy;
+
+        internal IDeletableLabelAddButtonStrategy AddButtonStrategy
+        {
+            get { return _addButtonStrategy; }
+            set { _addButtonStrategy = value; }
+        }
+
         private DeletableLabelStackPanel _view;
 
         private ObservableCollection<AppearListViewItemModel> _dataList;
@@ -21,6 +30,9 @@ namespace CommonControls.Model
             get { return _dataList; }
             set { _dataList = value; }
         }
+
+        public bool DoShowNoItemErrorMessageIfCountZero = true;
+        public bool DoNotShowAddButtonIfCountZero = false;
 
         public string NoItemErrorMessage;
 
@@ -34,14 +46,8 @@ namespace CommonControls.Model
         {
             _view.LabelStackPabel.Children.Clear();
 
-            if (_dataList.Count == 0)
-            {
-                PutNoItemTextBlock();
-            }
-            else
-            {
-                PutAddItemNewButton();
-            }
+            PutNoItemTextBlock();
+            PutAddItemNewButton();
 
             foreach (var item in _dataList)
             {
@@ -54,6 +60,11 @@ namespace CommonControls.Model
 
         private void PutNoItemTextBlock()
         {
+            if ((_dataList.Count != 0) || (DoShowNoItemErrorMessageIfCountZero == false))
+            {
+                return;
+            }
+
             TextBlock textBlock = new TextBlock();
             textBlock.Text = NoItemErrorMessage;
             textBlock.Foreground = Brushes.OrangeRed;
@@ -62,6 +73,11 @@ namespace CommonControls.Model
 
         private void PutAddItemNewButton()
         {
+            if ((DoNotShowAddButtonIfCountZero) && (_dataList.Count == 0))
+            {
+                return;
+            }
+
             Button button = new Button();
 
             button.Content = " + ";
@@ -83,21 +99,7 @@ namespace CommonControls.Model
 
         private void addItembutton_Click(object sender, RoutedEventArgs e)
         {
-            CommonLightBox dialog = new CommonLightBox();
-
-            AppearListViewControl chWindow = new AppearListViewControl();
-
-            dialog.Owner = Application.Current.MainWindow;
-            dialog.BindUIElement(chWindow);
-
-            var listViewModel = new AppearListViewModel()
-            {
-                DataList = _dataList,
-                DisplayOrNoDisplayHeader = "登場する/しない"
-            };
-
-            chWindow.DataContext = listViewModel;
-            ShowDialogManager.ShowDialog(dialog);
+            _addButtonStrategy.ExecuteOnAdd(_dataList);
 
             foreach (var item in DataList)
             {

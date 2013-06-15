@@ -9,6 +9,11 @@ using System.Collections.ObjectModel;
 using ModernizedAlice.ArtOfWords.BizCommon.Model;
 using ModernizedAlice.ArtOfWords.BizCommon.Event;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Event;
+using CommonControls.Model;
+using System.Windows.Media;
+using TagsGrooveControls.Strategy;
+using TagsGrooveControls.Util;
+using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
 
 namespace CharacterBuildControll.Model
 {
@@ -33,6 +38,9 @@ namespace CharacterBuildControll.Model
                 if (value != _selectingIndex)
                 {
                     _selectingIndex = value;
+
+                    GenerateTagPanel();
+
                     OnPropertyChanged("SelectingIndex");
 
                     OnPropertyChanged("SelectingModel");
@@ -197,6 +205,52 @@ namespace CharacterBuildControll.Model
 
             CharacterModelCollection.Move(idx1, idx2);
         }
+
+        #region Tagコントロール
+
+        private void GenerateTagPanel()
+        {
+            if (SelectingModel == null)
+            {
+                return;
+            }
+
+            _view.TagDeletableStackPanel.NoItemMessage = "ここには貼り付けたタグが表示されます";
+            _view.TagDeletableStackPanel.DoNotShowAddButtonIfCountZero = false;
+            _view.TagDeletableStackPanel.DoShowNoItemErrorMessageIfCountZero = false;
+            _view.TagDeletableStackPanel.DataList = 
+                TagToAppearListViewModelConverter.ToAppearListViewItemModel(SelectingModel.Tags,ModelsComposite.TagManager);
+            _view.TagDeletableStackPanel.AddButtonStrategy = new TagStickerAddButtonStrategy(SelectingModel, ModelsComposite.TagManager);
+            _view.TagDeletableStackPanel.OnModelIsAppearedChangedEvent += TagDeletableStackPanel_OnModelIsAppearedChangedEvent;
+            _view.TagDeletableStackPanel.Initialize();
+        }
+
+        void TagDeletableStackPanel_OnModelIsAppearedChangedEvent(object sender, CommonControls.OnModelIsAppearedChangedEventArgs e)
+        {
+            if (SelectingModel == null)
+            {
+                return;
+            }
+
+            var lvItem = sender as AppearListViewItemModel;
+
+            var chara = lvItem.ParentObject as Tag;
+            if (chara != null)
+            {
+                ChangeIsAppearedTag(chara, e.IsAppeared);
+                return;
+            }
+        }
+
+        private void ChangeIsAppearedTag(Tag tag, bool isAppeared)
+        {
+            if (isAppeared == false)
+            {
+                SelectingModel.Tags.Remove(tag.Id);
+            }
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TagsGrooveControls.Model
 {
-    class BaseTagTreeViewItemModel : TagTreeViewItemModel    
+    public class BaseTagTreeViewItemModel : TagTreeViewItemModel    
     {
 
         public override bool IsNameMode

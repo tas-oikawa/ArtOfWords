@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Windows.Media;
 using ModernizedAlice.ArtOfWords.BizCommon.Event;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Event;
+using System.Collections.ObjectModel;
+using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model.StoryFrame
 {
@@ -143,12 +145,32 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.StoryFrame
             }
         }
 
+        private ObservableCollection<int> _tags = new ObservableCollection<int>();
+
+        public ObservableCollection<int> Tags
+        {
+            set
+            {
+                if (_tags != value)
+                {
+                    _tags = value;
+                    OnPropertyChanged("Tags");
+                }
+            }
+            get
+            {
+                return _tags;
+            }
+        }
+        
+
         public string ToSearchString()
         {
             return this.Name + ","
                 + this.StartDateTime.ToString("yyyy/MM/dd HH:mm:ss") + ","
                 + this.EndDateTime.ToString("yyyy/MM/dd HH:mm:ss") + ","
-                + ToSearchStringByRelations();
+                + ToSearchStringByRelations() + ","
+                + TagsToString.ToString(_tags, ModelsComposite.TagManager);
         }
 
         private string ToSearchStringByRelations()

@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Windows.Media;
 using ModernizedAlice.ArtOfWords.BizCommon.Event;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Event;
+using System.Collections.ObjectModel;
+using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Item
 {
@@ -378,6 +380,26 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Item
                 return (Kind == ItemKindEnum.Etc);
             }
         }
+
+        private ObservableCollection<int> _tags = new ObservableCollection<int>();
+
+        public ObservableCollection<int> Tags
+        {
+            set
+            {
+                if (_tags != value)
+                {
+                    _tags = value;
+                    OnPropertyChanged("Tags");
+                }
+            }
+            get
+            {
+                return _tags;
+            }
+        }
+        
+
         /// <summary>
         /// このモデルが現在も有効かどうかを返す。有効でない場合、このモデルを使ってはいけない
         /// </summary>
@@ -387,7 +409,8 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Item
         {
             return this.Name + ","
                 + ItemUtil.GetItem(this.Kind) + ","
-                + this.Remarks + ",";
+                + this.Remarks + ","
+                + TagsToString.ToString(_tags, ModelsComposite.TagManager);
         }
 
         public void CopyWithoutId(ItemModel src)
@@ -397,6 +420,12 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Item
             this.Name = src.Name;
             this.Remarks = src.Remarks;
             this.Symbol = src.Symbol;
+            this.Tags.Clear();
+
+            foreach (var tagId in src.Tags)
+            {
+                this.Tags.Add(tagId);
+            }
         }
 
         #region INotifyPropertyChanged
