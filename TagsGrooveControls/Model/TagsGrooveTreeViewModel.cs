@@ -78,6 +78,15 @@ namespace TagsGrooveControls.Model
             return selected as Tag;
         }
 
+        public void ChangeParent(Tag target, Tag draggedItem)
+        {
+            _manager.DisconnectFromParent(draggedItem);
+            _manager.ConnectTags(target, draggedItem);
+
+            var modelItem = target as TagTreeViewItemModel;
+            modelItem.IsExpanded = true;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string name)

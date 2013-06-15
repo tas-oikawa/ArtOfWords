@@ -68,6 +68,23 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             _id = id;
         }
 
+        public bool HasInDescendent(Tag search)
+        {
+            foreach (var tag in _children)
+            {
+                if (tag.Id == search.Id)
+                {
+                    return true;
+                }
+
+                if (tag.HasInDescendent(search))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

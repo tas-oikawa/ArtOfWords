@@ -12,17 +12,18 @@
                 <ResourceDictionary Source="/CommonControls;component/Util/AnimationResourceDictionary.xaml"/>
                 <ResourceDictionary Source="/CommonControls;component/Util/ButtonStyleResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
+            <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
+                <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}"/>
+                <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}"/>
+                <EventSetter Event="TreeViewItem.DragOver"  Handler="treeView_DragOver"/>
+                <EventSetter Event="TreeViewItem.Drop" Handler="treeView_Drop"/>
+                <EventSetter Event="TreeViewItem.MouseMove" Handler="treeView_MouseMove"/>
+                <EventSetter Event="TreeViewItem.MouseDown" Handler="treeView_MouseDown"/>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <TreeView Name="TagTreeView" ItemsSource="{Binding Path=Tags}">
-            <TreeView.ItemContainerStyle>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}"/>
-                    <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}"/>
-                </Style>
-            </TreeView.ItemContainerStyle>
+        <TreeView Name="TagTreeView" ItemsSource="{Binding Path=Tags}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" AllowDrop="True" >
             <TreeView.Resources>
                 <Style x:Key="treeChildButtonStyle" TargetType="{x:Type Button}">
                     <Setter Property="Visibility" Value="Collapsed"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,178 @@ namespace TagsGrooveControls.View
                 model.IsNameMode = true;
             }
         }
+
+        #region Drag And Drop
+    
+        Point _lastMouseDown;
+        Tag draggedItem, _target;
+
+        private void treeView_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                _lastMouseDown = e.GetPosition(TagTreeView);
+            }
+        }
+
+        private bool IsMouseMovedSignificantly(Point position)
+        {
+            if ((Math.Abs(position.X - _lastMouseDown.X) <= 10.0) &&
+                (Math.Abs(position.Y - _lastMouseDown.Y) <= 10.0))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void treeView_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.LeftButton != MouseButtonState.Pressed)
+                {
+                    return;
+                }
+
+
+                Point currentPosition = e.GetPosition(TagTreeView);
+
+                if (!IsMouseMovedSignificantly(currentPosition))
+                {
+                    return;
+                }
+                
+                draggedItem =  GetModel().GetSelectingTag();
+
+                if (draggedItem == null)
+                {
+                    return;
+                }
+
+                DragDropEffects finalDropEffect = DragDrop.DoDragDrop(TagTreeView, TagTreeView.SelectedValue,
+                    DragDropEffects.Move);
+                //Checking target is not null and item is dragging(moving)
+                if ((finalDropEffect == DragDropEffects.Move) && (_target != null))
+                {
+                    // A Move drop was accepted
+                    if (CheckDropTarget(draggedItem, _target))
+                    {
+                        GetModel().ChangeParent(_target, draggedItem);
+                        _target = null;
+                        draggedItem = null;
+                    }       
+
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void treeView_DragOver(object sender, DragEventArgs e)
+        {
+            try
+            {
+                Point currentPosition = e.GetPosition(TagTreeView);
+
+                if (IsMouseMovedSignificantly(currentPosition))
+                {
+                    // Verify that this is a valid drop and then store the drop target
+                    Tag item = GetNearestContainer(e.OriginalSource as UIElement);
+                    if (CheckDropTarget(draggedItem, item))
+                    {
+                        e.Effects = DragDropEffects.Move;
+                    }
+                    else
+                    {
+                        e.Effects = DragDropEffects.None;
+                    }
+                }
+                e.Handled = true;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void treeView_Drop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                e.Effects = DragDropEffects.None;
+                e.Handled = true;
+
+                // Verify that this is a valid drop and then store the drop target
+                var TargetItem = GetNearestContainer(e.OriginalSource as UIElement);
+                if (TargetItem != null && draggedItem != null )
+                {
+                    _target = TargetItem as Tag;
+                    e.Effects = DragDropEffects.Move;
+
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+
+
+        }
+        private bool CheckDropTarget(Tag sourceItem, Tag targetItem)
+        {
+            if (sourceItem.Id == targetItem.Id)
+            {
+                return false;
+            }
+
+            if(sourceItem.HasInDescendent(targetItem))
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
+
+        static TObject FindVisualParent<TObject>(UIElement child) where TObject : UIElement
+        {
+            if (child == null)
+            {
+                return null;
+            }
+
+            UIElement parent = VisualTreeHelper.GetParent(child) as UIElement;
+
+            while (parent != null)
+            {
+                TObject found = parent as TObject;
+                if (found != null)
+                {
+                    return found;
+                }
+                else
+                {
+                    parent = VisualTreeHelper.GetParent(parent) as UIElement;
+                }
+            }
+
+            return null;
+        }
+        private Tag GetNearestContainer(UIElement element)
+        {
+            // Walk up the element tree to the nearest tree view item.
+            TreeViewItem container = element as TreeViewItem;
+            while ((container == null) && (element != null))
+            {
+                element = VisualTreeHelper.GetParent(element) as UIElement;
+                container = element as TreeViewItem;
+            }
+            return container.DataContext as Tag;
+        }
+
+        #endregion
 
     }
 }
