@@ -19,51 +19,56 @@
     </UserControl.InputBindings>
     <UserControl.Resources>
 
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CommonControls;component/Util/TagControlResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="FontSize" Value="10"/>
-        </Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="FontSize" Value="10"/>
+            </Style>
 
-        <Style TargetType="{x:Type Grid}">
-            <Setter Property="Margin" Value="2,0,2,2"/>
-        </Style>
-        <Style TargetType="{x:Type Border}">
-            <Setter Property="Margin" Value="5,5,1,5"/>
-            <Setter Property="CornerRadius" Value="3"/>
-            <Setter Property="Background" Value="White"/>
-        </Style>
+            <Style TargetType="{x:Type Grid}">
+                <Setter Property="Margin" Value="2,0,2,2"/>
+            </Style>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="Margin" Value="5,5,1,5"/>
+                <Setter Property="CornerRadius" Value="3"/>
+                <Setter Property="Background" Value="White"/>
+            </Style>
 
-        <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="0.500" />
-            <GradientStop Color="White" Offset="1" />
-        </LinearGradientBrush>
+            <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0.500" />
+                <GradientStop Color="White" Offset="1" />
+            </LinearGradientBrush>
 
-        <Style TargetType="{x:Type TabItem}">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Border Name="Border" Background="Black">
-                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectingTabBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="Black" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <localviewmodel:ViewModeIntConverter x:Key="ViewModeIntConverter" />
-        <commonConverter:SelectingIndexVisibilityConverter x:Key="SelectingIndexVisibilityConverter" />
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Grid>
+                                <Border Name="Border" Background="Black">
+                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectingTabBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="False">
+                                    <Setter TargetName="Border" Property="Background" Value="Black" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <localviewmodel:ViewModeIntConverter x:Key="ViewModeIntConverter" />
+            <commonConverter:SelectingIndexVisibilityConverter x:Key="SelectingIndexVisibilityConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
@@ -84,8 +89,8 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" MinWidth="120" />
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Border Background="White" Grid.Row="1" Grid.Column="0">
                 <Grid Name="BaseGrid">
@@ -95,7 +100,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <searchBox:SearchTextBox Name="SearchWordBox" Grid.Row="0" Search="SearchTextBox_Search_1"/>
-                    <ListBox Grid.Row="1" Name="StoryFrameList" ItemsSource="{Binding Path=StoryFrameModelCollection, Mode=OneWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectedIndex="{Binding SelectingIndex}" Drop="listBox_Drop">
+                    <ListBox Grid.Row="1" Name="StoryFrameList" Style="{StaticResource DataViewerListBoxStyle}" ItemsSource="{Binding Path=StoryFrameModelCollection, Mode=OneWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectedIndex="{Binding SelectingIndex}" Drop="listBox_Drop">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <EventSetter Event="PreviewMouseLeftButtonDown" Handler="listBoxItem_PreviewMouseLeftButtonDown"/>
@@ -117,6 +122,7 @@
                     </StackPanel>
                 </Grid>
             </Border>
+            <GridSplitter Grid.Column="0" VerticalAlignment="Stretch" Width="2"/>
             <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <Grid Name="StoryFrameDetail" Visibility="{Binding Path=SelectingIndex,Mode=OneWay, Converter={StaticResource SelectingIndexVisibilityConverter}}">
 
