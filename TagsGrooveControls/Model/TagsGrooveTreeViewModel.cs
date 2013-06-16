@@ -58,7 +58,7 @@ namespace TagsGrooveControls.Model
             OnPropertyChanged("Tags");
         }
 
-        public void Remove(Tag deleteTarget)
+        public void Remove(TagModel deleteTarget)
         {
             _manager.Remove(deleteTarget);
 
@@ -66,7 +66,7 @@ namespace TagsGrooveControls.Model
             OnTagRemoved(deleteTarget);
         }
 
-        public Tag GetSelectingTag()
+        public TagModel GetSelectingTag()
         {
             var selected = _view.TagTreeView.SelectedItem;
 
@@ -75,10 +75,10 @@ namespace TagsGrooveControls.Model
                 return null;
             }
 
-            return selected as Tag;
+            return selected as TagModel;
         }
 
-        public void ChangeParent(Tag target, Tag draggedItem)
+        public void ChangeParent(TagModel target, TagModel draggedItem)
         {
             _manager.DisconnectFromParent(draggedItem);
             _manager.ConnectTags(target, draggedItem);
@@ -97,9 +97,9 @@ namespace TagsGrooveControls.Model
             }
         }
 
-        public delegate void RemoveTagEventHandler(object sender ,Tag deleteTag);
+        public delegate void RemoveTagEventHandler(object sender ,TagModel deleteTag);
         public event RemoveTagEventHandler TagRemoved;
-        public void OnTagRemoved(Tag tag)
+        public void OnTagRemoved(TagModel tag)
         {
             if (TagRemoved != null)
             {

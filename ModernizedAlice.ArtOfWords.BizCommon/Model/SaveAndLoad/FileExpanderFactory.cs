@@ -17,6 +17,10 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
             {
                 return new FileExpanderVer2_0_0();
             }
+            if (loadFileInfo.version == FileVersion.Ver3_0_0)
+            {
+                return new FileExpanderVer3_0_0();
+            }
             return null;
         }
     }

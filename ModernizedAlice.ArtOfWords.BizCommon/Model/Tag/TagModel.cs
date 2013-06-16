@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
 {
-    public class Tag : INotifyPropertyChanged
+    public class TagModel : INotifyPropertyChanged
     {
         public virtual bool IsBase()
         {
@@ -44,31 +44,31 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             }
         }
 
-        private ObservableCollection<Tag> _children;
+        private ObservableCollection<TagModel> _children;
 
-        public ObservableCollection<Tag> Children
+        public ObservableCollection<TagModel> Children
         {
             get { return _children; }
         }
 
 
-        private Tag _parent;
+        private TagModel _parent;
 
-        public Tag Parent
+        public TagModel Parent
         {
             get { return _parent; }
             set { _parent = value; }
         }
 
 
-        public Tag(int id)
+        public TagModel(int id)
         {
-            _children = new ObservableCollection<Tag>();
+            _children = new ObservableCollection<TagModel>();
 
             _id = id;
         }
 
-        public bool HasInDescendent(Tag search)
+        public bool HasInDescendent(TagModel search)
         {
             foreach (var tag in _children)
             {

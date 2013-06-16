@@ -15,9 +15,9 @@ namespace TagsGrooveControls.Model
         private TagsGrooveTreeViewModel _treeViewModel;
         private TagsGrooveTreeView _treeView;
 
-        private ObservableCollection<Tag> _selectingTags;
+        private ObservableCollection<TagModel> _selectingTags;
 
-        public ObservableCollection<Tag> SelectingTags
+        public ObservableCollection<TagModel> SelectingTags
         {
             get { return _selectingTags; }
             set { _selectingTags = value; }
@@ -71,7 +71,7 @@ namespace TagsGrooveControls.Model
 
         public TagSelectorViewModel()
         {
-            _selectingTags = new ObservableCollection<Tag>();
+            _selectingTags = new ObservableCollection<TagModel>();
         }
 
         public void SetView(TagsGrooveTreeView treeView)
@@ -81,9 +81,26 @@ namespace TagsGrooveControls.Model
             _treeViewModel = new TagsGrooveTreeViewModel(_treeView);
 
             _treeViewModel.Init(ModelsComposite.TagManager);
+            InitSelectingTag();
 
             _treeView.TagTreeView.SelectedItemChanged += TagTreeView_SelectedItemChanged;
             _treeViewModel.TagRemoved += _treeViewModel_TagRemoved;
+        }
+
+        public void InitSelectingTag()
+        {
+            var tagIdList = new List<int>();
+
+            foreach (var selectedTag in _selectingTags)
+            {
+                tagIdList.Add(selectedTag.Id);
+            }
+            _selectingTags.Clear();
+
+            foreach (var selectId in tagIdList)
+            {
+                SelectingTags.Add(_treeViewModel.Manager.TagDictionary[selectId]);
+            }
         }
 
         public void UpdateModelsComposite()
@@ -91,7 +108,7 @@ namespace TagsGrooveControls.Model
             TagManagerReverseConverter.Reflect(ModelsComposite.TagManager, _treeViewModel.Manager);
         }
 
-        void _treeViewModel_TagRemoved(object sender, Tag deleteTag)
+        void _treeViewModel_TagRemoved(object sender, TagModel deleteTag)
         {
             if (_selectingTags.Contains(deleteTag))
             {
@@ -134,7 +151,7 @@ namespace TagsGrooveControls.Model
             OnSelectingButtonChanged();
         }
 
-        public void RemoveSelection(Tag selectingTag)
+        public void RemoveSelection(TagModel selectingTag)
         {
             if (selectingTag == null)
             {

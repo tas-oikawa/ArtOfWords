@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
 {
-    public class BaseTag : Tag
+    public class BaseTag : TagModel
     {
         public override bool IsBase()
         {

@@ -206,6 +206,16 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Event
                 FontSettingChangedHandler(sender, dummy);
             }
         }
-    
+
+        public delegate void TagModelModified(object sender, TagModelModifiedEventArgs arg);
+        public static event TagModelModified TagModelModifiedHandler;
+
+        public static void OnTagModelModified(object sender, TagModelModifiedEventArgs arg)
+        {
+            if (TagModelModifiedHandler != null)
+            {
+                TagModelModifiedHandler(sender, arg);
+            }
+        }
     }
 }

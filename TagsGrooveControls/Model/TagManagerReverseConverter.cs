@@ -19,7 +19,7 @@ namespace TagsGrooveControls.Model
 
             foreach (var tag in source.AddedTags)
             {
-                var addNewTag = new Tag(tag.Id) { Name = tag.Name };
+                var addNewTag = new TagModel(tag.Id) { Name = tag.Name };
                 dest.Add(addNewTag);
                 dest.ConnectTags(dest.GetBaseTag(), addNewTag);
             }

@@ -9,7 +9,7 @@ namespace TagsGrooveControls.Model
 {
     public static class TagManagerConverter
     {
-        public static void ExpandChild(TagTreeViewItemModel parentTag, Tag baseTag, ref TagTreeViewItemModelManager manager)
+        public static void ExpandChild(TagTreeViewItemModel parentTag, TagModel baseTag, ref TagTreeViewItemModelManager manager)
         {
             foreach (var child in baseTag.Children)
             {

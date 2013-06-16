@@ -52,7 +52,6 @@
     <Compile Include="..\ArtofWord\Properties\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="ItemBuildControl.xaml.cs">
       <DependentUpon>ItemBuildControl.xaml</DependentUpon>
     </Compile>
@@ -75,6 +74,10 @@
     <ProjectReference Include="..\ModernizedAlice.ArtOfWords.BizCommon\ModernizedAlice.ArtOfWords.BizCommon.csproj">
       <Project>{F6E53B1B-C86B-460D-8353-0303ECAED766}</Project>
       <Name>ModernizedAlice.ArtOfWords.BizCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TagsGrooveControls\TagsGrooveControls.csproj">
+      <Project>{e04fa12a-2b1b-4ae4-894c-d47a4c2a35d2}</Project>
+      <Name>TagsGrooveControls</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

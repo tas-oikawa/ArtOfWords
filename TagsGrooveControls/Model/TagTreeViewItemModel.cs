@@ -8,7 +8,7 @@ using System.Text;
 
 namespace TagsGrooveControls.Model
 {
-    public class TagTreeViewItemModel : Tag
+    public class TagTreeViewItemModel : TagModel
     {
         private bool _isSelected;
 
@@ -34,7 +34,7 @@ namespace TagsGrooveControls.Model
             }
         }
 
-        private bool _isExpanded;
+        private bool _isExpanded = true;
 
         public bool IsExpanded
         {

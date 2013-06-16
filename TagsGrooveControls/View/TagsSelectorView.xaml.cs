@@ -43,7 +43,7 @@ namespace TagsGrooveControls.View
 
         private void _deleteChildButton_Click(object sender, RoutedEventArgs e)
         {
-            var model = (sender as FrameworkElement).DataContext as Tag;
+            var model = (sender as FrameworkElement).DataContext as TagModel;
 
             _model.RemoveSelection(model);
         }

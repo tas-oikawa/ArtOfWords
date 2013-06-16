@@ -9,7 +9,7 @@ namespace TagsGrooveControls.Util
 {
     public static class ConvertTagToTagTreeViewItemModel
     {
-        public static TagTreeViewItemModel ConvertTag(Tag tag)
+        public static TagTreeViewItemModel ConvertTag(TagModel tag)
         {
             if (tag.IsBase())
             {
@@ -22,7 +22,7 @@ namespace TagsGrooveControls.Util
             return model;
         }
 
-        public static BaseTagTreeViewItemModel ConvertBaseTag(Tag tag)
+        public static BaseTagTreeViewItemModel ConvertBaseTag(TagModel tag)
         {
             var model = new BaseTagTreeViewItemModel(tag.Id);
             model.Name = tag.Name;

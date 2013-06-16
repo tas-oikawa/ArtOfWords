@@ -59,7 +59,7 @@ namespace TagsGrooveControls.Strategy
 
         }
 
-        private void SetSelectingTags(ObservableCollection<Tag> selectingTag)
+        private void SetSelectingTags(ObservableCollection<TagModel> selectingTag)
         {
             var ids = _stickable.GetTagIds();
 
@@ -71,7 +71,7 @@ namespace TagsGrooveControls.Strategy
             }
         }
 
-        private List<int> GetSelectingTagIds(IEnumerable<Tag> selectingTags)
+        private List<int> GetSelectingTagIds(IEnumerable<TagModel> selectingTags)
         {
             var resultIds = new List<int>();
 

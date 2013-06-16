@@ -234,7 +234,7 @@ namespace CharacterBuildControll.Model
 
             var lvItem = sender as AppearListViewItemModel;
 
-            var chara = lvItem.ParentObject as Tag;
+            var chara = lvItem.ParentObject as TagModel;
             if (chara != null)
             {
                 ChangeIsAppearedTag(chara, e.IsAppeared);
@@ -242,7 +242,7 @@ namespace CharacterBuildControll.Model
             }
         }
 
-        private void ChangeIsAppearedTag(Tag tag, bool isAppeared)
+        private void ChangeIsAppearedTag(TagModel tag, bool isAppeared)
         {
             if (isAppeared == false)
             {

@@ -5,14 +5,44 @@ using System.Text;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
+using ModernizedAlice.ArtOfWords.BizCommon.Event;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Item
 {
     public class ItemModelManager : ModelManager, INotifyPropertyChanged
     {
-
         public ItemModelManager()
         {
+            EventAggregator.TagModelModifiedHandler += EventAggregator_TagModelModifiedHandler;
+        }
+
+        /// <summary>
+        /// タグが削除されたときの処理
+        /// </summary>
+        /// <param name="arg">タグ変更イベントの引数</param>
+        private void OnTagRemoved(Event.TagModelModifiedEventArgs arg)
+        {
+            foreach (var model in ModelCollection)
+            {
+                var charaModel = model as ItemModel;
+                if (charaModel.Tags.Contains(arg.ModifiedTag.Id))
+                {
+                    charaModel.Tags.Remove(arg.ModifiedTag.Id);
+                }
+            }
+        }
+
+        /// <summary>
+        /// タグが変更されたときにイベントハンドラー
+        /// </summary>
+        /// <param name="sender">イベント送り元</param>
+        /// <param name="arg">タグ変更イベントの引数</param>
+        private void EventAggregator_TagModelModifiedHandler(object sender, Event.TagModelModifiedEventArgs arg)
+        {
+            if (arg.Kind == Event.TagModelModifiedKind.Deleted)
+            {
+                OnTagRemoved(arg);
+            }
         }
 
         public ItemModel GetNewModel()

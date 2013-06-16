@@ -16,46 +16,51 @@
         <KeyBinding Gesture="Delete" Command="Delete" />
     </UserControl.InputBindings>
     <UserControl.Resources>
-        <commonConverter:SelectingIndexVisibilityConverter x:Key="SelectingIndexVisibilityConverter" />
-        <Style TargetType="{x:Type Grid}">
-            <Setter Property="Margin" Value="2,0,2,2"/>
-        </Style>
-        <Style TargetType="{x:Type Border}">
-            <Setter Property="Margin" Value="5,5,1,5"/>
-            <Setter Property="CornerRadius" Value="3"/>
-            <Setter Property="Background" Value="White"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CommonControls;component/Util/TagControlResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <commonConverter:SelectingIndexVisibilityConverter x:Key="SelectingIndexVisibilityConverter" />
+            <Style TargetType="{x:Type Grid}">
+                <Setter Property="Margin" Value="2,0,2,2"/>
+            </Style>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="Margin" Value="5,5,1,5"/>
+                <Setter Property="CornerRadius" Value="3"/>
+                <Setter Property="Background" Value="White"/>
+            </Style>
 
-        <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="0.500" />
-            <GradientStop Color="White" Offset="1" />
-        </LinearGradientBrush>
+            <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0.500" />
+                <GradientStop Color="White" Offset="1" />
+            </LinearGradientBrush>
 
-        <Style TargetType="{x:Type TabItem}">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Border Name="Border" Background="Black">
-                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectingTabBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="Black" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Grid>
+                                <Border Name="Border" Background="Black">
+                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectingTabBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="False">
+                                    <Setter TargetName="Border" Property="Background" Value="Black" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-        <localviewmodel:ViewModeIntConverter x:Key="ViewModeIntConverter" />
-        <localviewmodel:SelectingCharacterVisibleConverter x:Key="CharaVisibilityConverter" />
+            <localviewmodel:ViewModeIntConverter x:Key="ViewModeIntConverter" />
+            <localviewmodel:SelectingCharacterVisibleConverter x:Key="CharaVisibilityConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -75,8 +80,8 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="120" />
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Border Background="White" Grid.Row="1" Grid.Column="0">
                 <Grid Name="BaseGrid">
@@ -86,7 +91,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <searchBox:SearchTextBox Name="SearchWordBox" Grid.Row="0" Search="SearchTextBox_Search_1"/>
-                    <ListBox Grid.Row="1" Name="charaListBox" ItemsSource="{Binding Path=CharacterModelCollection, Mode=OneWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectedIndex="{Binding SelectingIndex}" Drop="listBox_Drop" Margin="0,3,0,-3">
+                    <ListBox Grid.Row="1" Style="{StaticResource DataViewerListBoxStyle}" Name="charaListBox" ItemsSource="{Binding Path=CharacterModelCollection, Mode=OneWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectedIndex="{Binding SelectingIndex}" Drop="listBox_Drop" Margin="0,3,0,-3">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <EventSetter Event="PreviewMouseLeftButtonDown" Handler="listBoxItem_PreviewMouseLeftButtonDown"/>
@@ -98,7 +103,14 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Path=Name,Mode=OneWay}" />
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Name,Mode=OneWay}" />
+                                    <ListBox Style="{StaticResource TagViewerListBoxStyle}" Margin="5,0" ItemsSource="{Binding Path=Tags}" ItemTemplate="{StaticResource TagDataTemplate}" IsHitTestVisible="False" BorderThickness="0">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                    </ListBox>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -109,6 +121,7 @@
                     </StackPanel>
                 </Grid>
             </Border>
+            <GridSplitter Grid.Column="0" VerticalAlignment="Stretch" Width="2"/>
             <Grid Grid.Column="1" Grid.Row="1" Name="CharacterDetail" Visibility="{Binding Path=SelectingIndex,Mode=OneWay, Converter={StaticResource SelectingIndexVisibilityConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

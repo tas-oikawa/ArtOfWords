@@ -54,6 +54,7 @@
     <Compile Include="..\ArtofWord\Properties\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Converter\TagIdToTagNameConverter.cs" />
     <Compile Include="GeneralColorPicker.xaml.cs">
       <DependentUpon>GeneralColorPicker.xaml</DependentUpon>
     </Compile>
@@ -113,6 +114,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Util\TagControlResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeletableLabelControl.xaml.cs">
@@ -156,6 +161,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ModernizedAlice.ArtOfWords.BizCommon\ModernizedAlice.ArtOfWords.BizCommon.csproj">
+      <Project>{f6e53b1b-c86b-460d-8353-0303ecaed766}</Project>
+      <Name>ModernizedAlice.ArtOfWords.BizCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModernizedAlice.ShosenColorPicker\ModernizedAlice.ShosenColorPicker.csproj">
       <Project>{82071fa1-068f-42a1-aa93-c5cda184cee3}</Project>
       <Name>ModernizedAlice.ShosenColorPicker</Name>

@@ -30,6 +30,11 @@ namespace TagsGrooveControls.Model
             _addedTags = new List<TagTreeViewItemModel>();
         }
 
+
+        protected override void DoPostAdd(TagModel tag)
+        {
+        }
+
         protected override int GetNewId()
         {
             int _maxId = base.GetNewId();
@@ -43,9 +48,9 @@ namespace TagsGrooveControls.Model
             return Math.Max(_maxId, _deletedMaxId) + 1;
         }
 
-        protected override void RemoveFromDictonary(Tag tag)
+        protected override void RemoveFromDictonary(TagModel tag)
         {
-            base.RemoveFromDictonary(tag as Tag);
+            base.RemoveFromDictonary(tag as TagModel);
 
             if (_addedTags.Contains(tag))
             {
@@ -58,7 +63,11 @@ namespace TagsGrooveControls.Model
 
         }
 
-        public override Tag GenerateNewTag()
+        protected override void DoPostRemove(TagModel tag)
+        {
+        }
+
+        public override TagModel GenerateNewTag()
         {
             var newTag = new TagTreeViewItemModel(GetNewId()) { Name = "名前の無いタグ" };
             _addedTags.Add(newTag);
@@ -66,7 +75,7 @@ namespace TagsGrooveControls.Model
             return newTag;
         }
 
-        public bool IsDeleted(Tag tag)
+        public bool IsDeleted(TagModel tag)
         {
             return _deletedTags.Find((e) => e.Id == tag.Id) != null;
         }

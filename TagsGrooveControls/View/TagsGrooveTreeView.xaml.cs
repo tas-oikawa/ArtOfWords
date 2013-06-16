@@ -57,13 +57,15 @@ namespace TagsGrooveControls.View
             if (model.IsSelected)
             {
                 model.IsNameMode = true;
+
+                _lastMouseDown = e.GetPosition(TagTreeView);
             }
         }
 
         #region Drag And Drop
     
         Point _lastMouseDown;
-        Tag draggedItem, _target;
+        TagModel draggedItem, _target;
 
         private void treeView_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -95,18 +97,30 @@ namespace TagsGrooveControls.View
 
 
                 Point currentPosition = e.GetPosition(TagTreeView);
+                
+                if (_lastMouseDown.X == 0.0 && _lastMouseDown.Y == 0.0)
+                {
+                    _lastMouseDown.X = currentPosition.X;
+                    _lastMouseDown.Y = currentPosition.Y;
+
+                    return;
+                }
 
                 if (!IsMouseMovedSignificantly(currentPosition))
                 {
                     return;
                 }
-                
+                _lastMouseDown = currentPosition;
+
                 draggedItem =  GetModel().GetSelectingTag();
 
                 if (draggedItem == null)
                 {
                     return;
                 }
+
+                (draggedItem as TagTreeViewItemModel).IsNameMode = false;
+                
 
                 DragDropEffects finalDropEffect = DragDrop.DoDragDrop(TagTreeView, TagTreeView.SelectedValue,
                     DragDropEffects.Move);
@@ -137,7 +151,7 @@ namespace TagsGrooveControls.View
                 if (IsMouseMovedSignificantly(currentPosition))
                 {
                     // Verify that this is a valid drop and then store the drop target
-                    Tag item = GetNearestContainer(e.OriginalSource as UIElement);
+                    TagModel item = GetNearestContainer(e.OriginalSource as UIElement);
                     if (CheckDropTarget(draggedItem, item))
                     {
                         e.Effects = DragDropEffects.Move;
@@ -165,7 +179,7 @@ namespace TagsGrooveControls.View
                 var TargetItem = GetNearestContainer(e.OriginalSource as UIElement);
                 if (TargetItem != null && draggedItem != null )
                 {
-                    _target = TargetItem as Tag;
+                    _target = TargetItem as TagModel;
                     e.Effects = DragDropEffects.Move;
 
                 }
@@ -177,7 +191,7 @@ namespace TagsGrooveControls.View
 
 
         }
-        private bool CheckDropTarget(Tag sourceItem, Tag targetItem)
+        private bool CheckDropTarget(TagModel sourceItem, TagModel targetItem)
         {
             if (sourceItem.Id == targetItem.Id)
             {
@@ -218,7 +232,7 @@ namespace TagsGrooveControls.View
 
             return null;
         }
-        private Tag GetNearestContainer(UIElement element)
+        private TagModel GetNearestContainer(UIElement element)
         {
             // Walk up the element tree to the nearest tree view item.
             TreeViewItem container = element as TreeViewItem;
@@ -227,7 +241,7 @@ namespace TagsGrooveControls.View
                 element = VisualTreeHelper.GetParent(element) as UIElement;
                 container = element as TreeViewItem;
             }
-            return container.DataContext as Tag;
+            return container.DataContext as TagModel;
         }
 
         #endregion

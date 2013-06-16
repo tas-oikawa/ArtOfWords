@@ -98,7 +98,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
             // ちゃんとしたファイルを書き出す。
             XmlSerializer serializer = new XmlSerializer(typeof(LoadFileInfo));
             var outstream = new System.IO.FileStream(folderPath + "\\" + "version.xml", System.IO.FileMode.Create);
-            var saveInfo = new LoadFileInfo() { version = FileVersion.Ver2_0_0 };
+            var saveInfo = new LoadFileInfo() { version = FileVersion.Ver3_0_0 };
 
             serializer.Serialize(outstream, saveInfo);
             outstream.Close();
@@ -110,11 +110,11 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
         {
 
             // ちゃんとしたファイルを書き出す。
-            XmlSerializer serializer = new XmlSerializer(typeof(XmlSaveObjectVer2_0_0));
+            XmlSerializer serializer = new XmlSerializer(typeof(XmlSaveObjectVer3_0_0));
             // Tempフォルダーに書き出し隔離
 
             FileStream outstream = new System.IO.FileStream(folderPath + "\\" + "document.xml", System.IO.FileMode.Create);
-            var saveObj = new XmlSaveObjectVer2_0_0();
+            var saveObj = new XmlSaveObjectVer3_0_0();
             saveObj.SetSavableObject();
 
             serializer.Serialize(outstream, saveObj);
@@ -153,9 +153,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
 
                 File.Copy(path, GetBackupFilePath(path), true);
 
-                Directory.Delete(tempFolder, true);
+                //Directory.Delete(tempFolder, true);
             }
-            catch (Exception )
+            catch (Exception e)
             {
                 return SaveResult.FailedButTextFile;
             }

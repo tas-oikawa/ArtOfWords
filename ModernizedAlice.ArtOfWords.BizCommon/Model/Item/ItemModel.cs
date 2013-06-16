@@ -11,7 +11,7 @@ using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Item
 {
-    public class ItemModel : IMarkable, INotifyPropertyChanged, ISearchable
+    public class ItemModel : IMarkable, INotifyPropertyChanged, ISearchable, ITagStickable
     {
         private int _id;
         public int Id
@@ -425,6 +425,21 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Item
             foreach (var tagId in src.Tags)
             {
                 this.Tags.Add(tagId);
+            }
+        }
+
+        public List<int> GetTagIds()
+        {
+            return Tags.ToList();
+        }
+
+        public void SetTagIds(List<int> stickTagList)
+        {
+            _tags.Clear();
+
+            foreach (var tagId in stickTagList)
+            {
+                _tags.Add(tagId);
             }
         }
 

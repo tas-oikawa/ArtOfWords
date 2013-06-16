@@ -456,10 +456,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
             }
             get
             {
-                return _tags;
+                return _tags;   
             }
         }
-        
 
         #region GenderProperties
 
@@ -615,6 +614,11 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
                 + TagsToString.ToString(_tags, ModelsComposite.TagManager);
         }
 
+        public List<int> GetTagIds()
+        {
+            return Tags.ToList();
+        }
+
         public void SetTagIds(List<int> stickTagList)
         {
             _tags.Clear();
@@ -641,9 +645,5 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
         #endregion
 
 
-        public List<int> GetTagIds()
-        {
-            return Tags.ToList();
-        }
     }
 }

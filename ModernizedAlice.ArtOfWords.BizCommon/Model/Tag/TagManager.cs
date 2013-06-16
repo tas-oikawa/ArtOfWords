@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernizedAlice.ArtOfWords.BizCommon.Event;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
         /// <summary>
         /// タグの一覧。ID:0は特別な番号
         /// </summary>
-        private Dictionary<int, Tag> _tagDictionary;
+        private Dictionary<int, TagModel> _tagDictionary;
 
-        public Dictionary<int, Tag> TagDictionary
+        public Dictionary<int, TagModel> TagDictionary
         {
             get { return _tagDictionary; }
             set { _tagDictionary = value; }
@@ -20,7 +21,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
 
         public TagManager()
         {
-            _tagDictionary = new Dictionary<int, Tag>();
+            _tagDictionary = new Dictionary<int, TagModel>();
         }
 
         protected virtual int GetNewId()
@@ -37,23 +38,34 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             return _maxId + 1;
         }
 
-        public void ConnectTags(Tag parent, Tag child)
+        public void ConnectTags(TagModel parent, TagModel child)
         {
             parent.Children.Add(child);
             child.Parent = parent;
         }
 
-        public void Add(Tag tag)
+        public void Add(TagModel tag)
         {
             _tagDictionary.Add(tag.Id, tag);
+            DoPostAdd(tag);
         }
 
-        protected virtual void RemoveFromDictonary(Tag tag)
+        protected virtual void DoPostAdd(TagModel tag)
+        {
+            EventAggregator.OnTagModelModified(this, new Event.TagModelModifiedEventArgs()
+            {
+                Kind = Event.TagModelModifiedKind.Add,
+                ModifiedTag = tag,
+            }
+            );
+        }
+
+        protected virtual void RemoveFromDictonary(TagModel tag)
         {
             _tagDictionary.Remove(tag.Id);
         }
 
-        public void RemoveChildren(Tag tag)
+        public void RemoveChildren(TagModel tag)
         {
             foreach(var child in tag.Children)
             {
@@ -65,7 +77,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             tag.Children.Clear();
         }
 
-        public void DisconnectFromParent(Tag tag)
+        public void DisconnectFromParent(TagModel tag)
         {
             tag.Parent.Children.Remove(tag);
             tag.Parent = null;
@@ -79,7 +91,17 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             }
         }
 
-        public virtual void Remove(Tag tag)
+        protected virtual void DoPostRemove(TagModel tag)
+        {
+            EventAggregator.OnTagModelModified(this, new Event.TagModelModifiedEventArgs()
+            {
+                Kind = Event.TagModelModifiedKind.Deleted,
+                ModifiedTag = tag,
+            }
+            );
+        }
+
+        public virtual void Remove(TagModel tag)
         {
             if (tag.Parent == null)
             {
@@ -92,6 +114,8 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             RemoveFromDictonary(tag);
             OnTagRemoved(tag);
             DisconnectFromParent(tag);
+
+            DoPostRemove(tag);
         }
 
         public void ReconnectAllToBaseTag()
@@ -108,20 +132,20 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             }
         }
 
-        public virtual Tag GenerateNewTag()
+        public virtual TagModel GenerateNewTag()
         {
-            return new Tag(GetNewId()){Name = "名前の無いタグ"};
+            return new TagModel(GetNewId()){Name = "名前の無いタグ"};
         }
 
-        public Tag GetBaseTag()
+        public TagModel GetBaseTag()
         {
             return _tagDictionary.First((e) => (e.Value.IsBase())).Value;
         }
 
-        public delegate void TagRemovedEventHandler(object sender, Tag tag);
+        public delegate void TagRemovedEventHandler(object sender, TagModel tag);
         public event TagRemovedEventHandler TagRemoved;
 
-        public void OnTagRemoved(Tag tag)
+        public void OnTagRemoved(TagModel tag)
         {
             if (TagRemoved != null)
             {
