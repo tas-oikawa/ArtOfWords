@@ -206,6 +206,11 @@ namespace WritersBattleField.View
             EventAggregator.OnTryOpen(this, new TryOpenEventArgs() { iEditor = _editor });
         }
 
+        private void _pageCalculation_Click(object sender, RoutedEventArgs e)
+        {
+            _model.CalculatePageNumber();
+        }
+
 
     }
 }

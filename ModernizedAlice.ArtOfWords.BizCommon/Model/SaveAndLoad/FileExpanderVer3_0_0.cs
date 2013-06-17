@@ -157,6 +157,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
             ExpandItemStoryRelationModel();
             ExpandTagModel();
             ExpandTimelineEventModel();
+            ModelsComposite.NovelSettingModel = LoadComposition.NovelSettingModel;
 
             return true;
         }

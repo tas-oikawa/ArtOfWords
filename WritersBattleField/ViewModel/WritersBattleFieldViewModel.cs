@@ -20,6 +20,8 @@ using Microsoft.Win32;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad;
 using System.Windows.Controls;
 using ModernizedAlice.IPlugin.ModuleInterface;
+using CommonControls;
+using CommonControls.Util;
 
 namespace WritersBattleField.ViewModel
 {
@@ -271,6 +273,23 @@ namespace WritersBattleField.ViewModel
                     _writersBFView.LineDown();
                 }
             }
+        }
+
+        public void CalculatePageNumber()
+        {
+            SetTextToModelsComposite();
+            CommonLightBox dialog = new CommonLightBox();
+
+            var pageLineCalcView = new PageLineCalculatorView();
+            var pageLineCalculatorViewModel = new PageLineCalculatorViewModel(ModelsComposite.NovelSettingModel, ModelsComposite.DocumentModel);
+
+            pageLineCalcView.BindModel(pageLineCalculatorViewModel);
+
+            dialog.Owner = Application.Current.MainWindow;
+            dialog.BindUIElement(pageLineCalcView);
+            dialog.LightBoxKind = CommonLightBox.CommonLightBoxKind.SaveOnly;
+
+            ShowDialogManager.ShowDialog(dialog);
         }
 
         private void OnMoveDocumentIndex(object obj, MoveDocumentIndexEventArgs args)

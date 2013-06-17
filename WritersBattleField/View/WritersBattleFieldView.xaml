@@ -10,6 +10,16 @@
              d:DesignHeight="300" Name="_markingLayer">
 
     <UserControl.Resources>
+        <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="Snow"/>
+            <Style.Triggers>
+                <DataTrigger  Binding="{Binding Path=DoShowMarkReviewer}" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#203764"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
         <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="0.500" />
             <GradientStop Color="White" Offset="1" />
@@ -49,7 +59,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="631*"/>
+            <ColumnDefinition Width="154*"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Grid.Row="1" Visibility="{Binding Path=DoShowMarkReviewer,Converter={StaticResource BoolVisibilityConverter}, Mode=OneWay}">
@@ -63,36 +74,38 @@
                 <my:MarkingSelector Name="MarkReviewer"/>
             </Border>
         </Grid>
-        <TabControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Height="110" HorizontalAlignment="Stretch" Name="tabControl2" VerticalAlignment="Stretch" TabStripPlacement="Bottom" Background="Black" SelectedIndex="{Binding Path=Mode,Mode=TwoWay, Converter={StaticResource ViewModeIntConverter}}">
-                <TabItem Header="執筆" Name="tabItem5">
+        <TabControl Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Height="110" HorizontalAlignment="Stretch" Name="tabControl2" VerticalAlignment="Stretch" TabStripPlacement="Bottom" Background="Black" SelectedIndex="{Binding Path=Mode,Mode=TwoWay, Converter={StaticResource ViewModeIntConverter}}">
+            <TabItem Header="執筆" Name="tabItem5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <ToggleButton Grid.Column="0" Margin="0,40,5,0" IsChecked="{Binding Path=DoShowMarkReviewer, Mode=TwoWay}" HorizontalAlignment="Left" Background="Black" >
-                        <Image Source="/WritersBattleField;component/Images/focus.png" OpacityMask="Black"/>
-                    </ToggleButton>
-                    <Button Name="createNewButton" Grid.Column="1" Margin="10" Content="新規作成" Background="#FFF5CCBC" Click="createNewButton_Click" />
-                    <Button Name="openButton" Grid.Column="2" Margin="10" Content="ファイルを開く" Background="#FFF8C8FF" Click="openButton_Click" />
-                    <Button Name="saveButton" Grid.Column="3" Margin="10" Content="保存する" Background="#FFC6DAE6" Click="saveButton_Click"/>
-                    <Button Name="saveWithNameButton" Grid.Column="4" Margin="10" Background="#FFCCD5FF" Click="saveWithNameButton_Click" >
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="名前を付けて"/>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="保存する"/>
-                        </Grid>
-                    </Button>
-                    <GroupBox Grid.Column="5" Header="コマンド">
-                        <Grid>
+                    <Grid Grid.Column="0" Margin="5,5,20,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0" Name="_pageCalculation" Margin="0,5,0,5" Padding="0" Content="ページ計算" VerticalAlignment="Stretch" Background="Snow" Click="_pageCalculation_Click"/>
+                        <ToggleButton Grid.Row="1" Margin="0,5,0,5" Padding="0" IsChecked="{Binding Path=DoShowMarkReviewer, Mode=TwoWay}" Content="調べる" VerticalAlignment="Stretch" Style="{StaticResource ToggleButtonStyle}"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button Name="createNewButton" Grid.Column="1" Margin="10" Content="新規作成" Background="#FFF5CCBC" Click="createNewButton_Click" />
+                        <Button Name="openButton" Grid.Column="2" Margin="10" Content="ファイルを開く" Background="#FFF8C8FF" Click="openButton_Click" />
+                        <Button Name="saveButton" Grid.Column="3" Margin="10" Content="保存する" Background="#FFC6DAE6" Click="saveButton_Click"/>
+                        <Button Name="saveWithNameButton" Grid.Column="4" Margin="10" Background="#FFCCD5FF" Click="saveWithNameButton_Click" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="名前を付けて"/>
+                                <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="保存する"/>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                    <Grid Grid.Column="2" Margin="20,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -103,13 +116,12 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Grid.Row="0" Content="切り取り：Ctrl + X" Foreground="White" HorizontalAlignment="Left"/>
-                            <Label Grid.Column="0" Grid.Row="1" Content="コピー：Ctrl + C" Foreground="White" HorizontalAlignment="Left"/>
-                            <Label Grid.Column="1" Grid.Row="0" Content="貼り付け：Ctrl + V" Foreground="White" HorizontalAlignment="Left"/>
-                            <Label Grid.Column="1" Grid.Row="1" Content="全て選択：Ctrl + A" Foreground="White" HorizontalAlignment="Left"/>
-                            <Label Grid.Column="2" Grid.Row="0"  Content="元に戻す：Ctrl + Z" Foreground="White" HorizontalAlignment="Left"/>
-                            <Label Grid.Column="2" Grid.Row="1"  Content="やり直し：Ctrl + Y" Foreground="White" HorizontalAlignment="Left"/>
-                            </Grid>
-                    </GroupBox>
+                        <Label Grid.Column="0" Grid.Row="1" Content="コピー：Ctrl + C" Foreground="White" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="1" Grid.Row="0" Content="貼り付け：Ctrl + V" Foreground="White" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="1" Grid.Row="1" Content="全て選択：Ctrl + A" Foreground="White" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="2" Grid.Row="0"  Content="元に戻す：Ctrl + Z" Foreground="White" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="2" Grid.Row="1"  Content="やり直し：Ctrl + Y" Foreground="White" HorizontalAlignment="Left"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="会話">
@@ -124,12 +136,12 @@
                         <Image Grid.Column="1" Source="/WritersBattleField;component/Images/TalkingSection.png" Stretch="None" />
                         <Button Grid.Column="2" Margin="10,0,0,0" Content="選択解除" Background="#FFB87DC6" Click="Button_Click" />
                         <Grid Grid.Column="3" Margin="10,0,0,0" Name="TalkPanel"/>
-                        
+
                     </Grid>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="a" Visibility="Collapsed">
-                
+
             </TabItem>
             <TabItem Header="シーン">
 
@@ -149,7 +161,7 @@
                 </ScrollViewer>
             </TabItem>
         </TabControl>
-        <Grid Name="TextRegion" Grid.Column="1" Grid.Row="1" Margin="10,0,10,0">
+        <Grid Name="TextRegion" Grid.Column="1" Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="2">
             <local:MarkingLayerView Margin="0,0,20,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="markingLayer" Visibility="{Binding Path=Mode,Mode=OneWay, Converter={StaticResource ViewModeVisibilityConverter}}"/>
         </Grid>
     </Grid>

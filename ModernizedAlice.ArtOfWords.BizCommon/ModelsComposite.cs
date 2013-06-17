@@ -192,6 +192,20 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
             set { ModelsComposite._tagManager = value; }
         }
 
+        private static NovelSettingModel _novelsSettingModel;
+        public static NovelSettingModel NovelSettingModel
+        {
+            get
+            {
+                if (_novelsSettingModel == null)
+                {
+                    _novelsSettingModel = new NovelSettingModel();
+                }
+
+                return _novelsSettingModel;
+            }
+            set { ModelsComposite._novelsSettingModel = value; }
+        }
 
         static public void CreateNew(IEditor iEditor)
         {
@@ -208,6 +222,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
             ModelsComposite.ItemStoryModelManager = new ItemStoryRelationModelManager();
             ModelsComposite.TimelineEventModelManager = new TimelineEventModelManager();
             ModelsComposite.TagManager = null;
+            ModelsComposite.NovelSettingModel = null;
         }
 
     }

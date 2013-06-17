@@ -27,6 +27,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
     [System.Xml.Serialization.XmlInclude(typeof(PlaceModel))]
     [System.Xml.Serialization.XmlInclude(typeof(DocumentModel))]
     [System.Xml.Serialization.XmlInclude(typeof(SaveTagModel))]
+    [System.Xml.Serialization.XmlInclude(typeof(NovelSettingModel))]
     [System.Xml.Serialization.XmlInclude(typeof(SolidColorBrush))]
     [System.Xml.Serialization.XmlInclude(typeof(MatrixTransform))]
     public class XmlSaveObjectVer3_0_0
@@ -46,6 +47,8 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
 
         public DocumentModel DocumentModel;
 
+        public NovelSettingModel NovelSettingModel;
+
         public XmlSaveObjectVer3_0_0()
         {
             CharacterModelCollection = new Collection<CharacterModel>();
@@ -62,6 +65,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
             TimelineEventModelCollection = new Collection<TimelineEventModel>();
 
             DocumentModel = new DocumentModel();
+            NovelSettingModel = new NovelSettingModel();
         }
 
         private void SetCharacterModel()
@@ -219,6 +223,10 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
             DocumentModel.Text = ModelsComposite.DocumentModel.Text;
         }
 
+        private void SetNovelSettingModel()
+        {
+            NovelSettingModel = ModelsComposite.NovelSettingModel;
+        }
 
         public void SetSavableObject()
         {
@@ -232,6 +240,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
             SetTimelineEvent();
             SetDocumentModel();
             SetTagModel();
+            SetNovelSettingModel();
 
             AdjustMarksCausedByTextBoxBug();
         }

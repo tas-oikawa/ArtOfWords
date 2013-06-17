@@ -66,6 +66,7 @@
     <Compile Include="ViewModel\MarkingLayer\NullMarkingLayerViewModel.cs" />
     <Compile Include="ViewModel\MarkingLayer\StoryFrameMarkingLayerViewModel.cs" />
     <Compile Include="ViewModel\MarkingLayer\TalkMarkingLayerViewModel.cs" />
+    <Compile Include="ViewModel\PageLineCalculatorViewModel.cs" />
     <Compile Include="ViewModel\SelectingMarkChangedEventArgs.cs" />
     <Compile Include="View\MarkingLayerView.xaml.cs">
       <DependentUpon>MarkingLayerView.xaml</DependentUpon>
@@ -87,6 +88,9 @@
     <Compile Include="ViewModel\ViewModeIntConverter.cs" />
     <Compile Include="ViewModel\ViewModeVisibilityConverter.cs" />
     <Compile Include="ViewModel\WritersBattleFieldViewModel.cs" />
+    <Compile Include="View\PageLineCalculatorView.xaml.cs">
+      <DependentUpon>PageLineCalculatorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WritersBattleFieldView.xaml.cs">
       <DependentUpon>WritersBattleFieldView.xaml</DependentUpon>
     </Compile>
@@ -106,6 +110,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PageLineCalculatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\WritersBattleFieldView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +123,10 @@
     <ProjectReference Include="..\CharacterBuildController\CharacterBuildControll.csproj">
       <Project>{9AB848EB-49C0-425B-AB57-438A28EFF758}</Project>
       <Name>CharacterBuildControll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonControls\CommonControls.csproj">
+      <Project>{eac44496-f19e-4440-861d-d8e0ac73c63e}</Project>
+      <Name>CommonControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\FileSelector\FileSelector.csproj">
       <Project>{952af270-d138-4eeb-96f4-9fad016a3ab9}</Project>

@@ -62,6 +62,7 @@
     <Compile Include="ControlUtil\MainTabKind.cs" />
     <Compile Include="Model\Event\TagModelModifiedEventArgs.cs" />
     <Compile Include="Model\ITagStickable.cs" />
+    <Compile Include="Model\NovelSettingModel.cs" />
     <Compile Include="Model\SaveAndLoad\SaveTagModel.cs" />
     <Compile Include="Model\SaveAndLoad\TagExpander.cs" />
     <Compile Include="Model\SaveAndLoad\XmlSaveObjectVer3_0_0.cs" />

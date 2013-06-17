@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ModernizedAlice.ArtOfWords.BizCommon.Event;
+using ModernizedAlice.ArtOfWords.BizCommon.Model.Event;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -94,6 +96,8 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
+
+            EventAggregator.OnModelDataChanged(this, new ModelValueChangedEventArgs());
         }
     }
 }
