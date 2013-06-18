@@ -195,9 +195,9 @@ namespace WritersBattleField.ViewModel.MarkingLayer
             _deleteButton.Padding = new Thickness(0);
 
             var height = 20;
-            if (rect[0].Top - height < 0)
+            if (rect[0].Top - height < height)
             {
-                Canvas.SetTop(_deleteButton, rect[0].Bottom);
+                Canvas.SetTop(_deleteButton, rect[rect.Count - 1].Bottom);
             }
             else
             {

@@ -119,6 +119,7 @@ namespace Editor4ArtOfWords.Model
             {
                 return -1;
             }
+
             return _view.Editor.Document.GetOffset(position.Value.Location);
         }
 

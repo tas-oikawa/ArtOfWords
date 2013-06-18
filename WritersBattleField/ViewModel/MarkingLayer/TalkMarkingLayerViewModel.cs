@@ -74,7 +74,7 @@ namespace WritersBattleField.ViewModel.MarkingLayer
             if (toLeft)
                 Canvas.SetLeft(button, rect[0].Left - 20);
             else
-                Canvas.SetLeft(button, rect[0].Left + rect[0].Width -3);
+                Canvas.SetLeft(button, rect[0].Left + rect[0].Width -10);
             Canvas.SetTop(button, rect[0].Top - 3);
 
             button.FontSize = 9;
