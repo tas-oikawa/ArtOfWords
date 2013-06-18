@@ -10,47 +10,33 @@
              d:DesignHeight="300" Name="_markingLayer">
 
     <UserControl.Resources>
-        <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
-            <Setter Property="Background" Value="Snow"/>
-            <Style.Triggers>
-                <DataTrigger  Binding="{Binding Path=DoShowMarkReviewer}" Value="True">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#203764"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        
-        <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="0.500" />
-            <GradientStop Color="White" Offset="1" />
-        </LinearGradientBrush>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CommonControls;component/Util/ButtonStyleResourceDictionary.xaml"/>
+                <ResourceDictionary Source="/CommonControls;component/Util/TabControlStyleResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="OperationButtonStyle" TargetType="Button" BasedOn="{StaticResource FlatButtonStyle}">
+                <Setter Property="Width" Value="75"/>
+            </Style>
+            <Style x:Key="OperationToggleButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource FlatToggleButtonStyle}">
+                <Setter Property="Width" Value="60"/>
+                <Setter Property="Background" Value="#95a5a6"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
+            <Style x:Key="InspectionButtonStyle" TargetType="Button" BasedOn="{StaticResource FlatButtonStyle}">
+                <Setter Property="Width" Value="60"/>
+                <Setter Property="Background" Value="#95a5a6"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
+            <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0.500" />
+                <GradientStop Color="White" Offset="1" />
+            </LinearGradientBrush>
 
-        <Style TargetType="{x:Type TabItem}">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Border Name="Border" Background="Black">
-                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectingTabBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="Black" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <localviewmodel:ViewModeVisibilityConverter x:Key="ViewModeVisibilityConverter" />
-        <localviewmodel:ViewModeIntConverter x:Key="ViewModeIntConverter" />
-        <localviewmodel:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+            <localviewmodel:ViewModeVisibilityConverter x:Key="ViewModeVisibilityConverter" />
+            <localviewmodel:ViewModeIntConverter x:Key="ViewModeIntConverter" />
+            <localviewmodel:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid Name="BaseGrid">
         <Grid.RowDefinitions>
@@ -74,8 +60,8 @@
                 <my:MarkingSelector Name="MarkReviewer"/>
             </Border>
         </Grid>
-        <TabControl Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Height="110" HorizontalAlignment="Stretch" Name="tabControl2" VerticalAlignment="Stretch" TabStripPlacement="Bottom" Background="Black" SelectedIndex="{Binding Path=Mode,Mode=TwoWay, Converter={StaticResource ViewModeIntConverter}}">
-            <TabItem Header="執筆" Name="tabItem5">
+        <TabControl Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Height="110" HorizontalAlignment="Stretch" BorderBrush="#c0392b" BorderThickness="0,0,0,0.5" Name="tabControl2" VerticalAlignment="Stretch" TabStripPlacement="Bottom" Background="Black" SelectedIndex="{Binding Path=Mode,Mode=TwoWay, Converter={StaticResource ViewModeIntConverter}}">
+            <TabItem Header="執筆" Name="tabItem5" Style="{StaticResource FlatTabItemStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -87,14 +73,14 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Name="_pageCalculation" Margin="0,5,0,5" Padding="0" Content="ページ計算" VerticalAlignment="Stretch" Background="Snow" Click="_pageCalculation_Click"/>
-                        <ToggleButton Grid.Row="1" Margin="0,5,0,5" Padding="0" IsChecked="{Binding Path=DoShowMarkReviewer, Mode=TwoWay}" Content="調べる" VerticalAlignment="Stretch" Style="{StaticResource ToggleButtonStyle}"/>
+                        <Button Grid.Row="0" Name="_pageCalculation" Margin="0,5,0,5" Padding="0" Content="ページ計算" VerticalAlignment="Stretch" Click="_pageCalculation_Click" Style="{StaticResource InspectionButtonStyle}"/>
+                        <ToggleButton Grid.Row="1" Margin="0,5,0,5" Padding="0" IsChecked="{Binding Path=DoShowMarkReviewer, Mode=TwoWay}" Content="調べる" VerticalAlignment="Stretch" Style="{StaticResource OperationToggleButtonStyle}"/>
                     </Grid>
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <Button Name="createNewButton" Grid.Column="1" Margin="10" Content="新規作成" Background="#FFF5CCBC" Click="createNewButton_Click" />
-                        <Button Name="openButton" Grid.Column="2" Margin="10" Content="ファイルを開く" Background="#FFF8C8FF" Click="openButton_Click" />
-                        <Button Name="saveButton" Grid.Column="3" Margin="10" Content="保存する" Background="#FFC6DAE6" Click="saveButton_Click"/>
-                        <Button Name="saveWithNameButton" Grid.Column="4" Margin="10" Background="#FFCCD5FF" Click="saveWithNameButton_Click" >
+                        <Button Name="createNewButton" Grid.Column="1" Margin="10" Content="新規作成" Style="{StaticResource OperationButtonStyle}" Background="#e67e22" Click="createNewButton_Click" />
+                        <Button Name="openButton" Grid.Column="2" Margin="10" Content="ファイルを開く" Style="{StaticResource OperationButtonStyle}" Background="#9b59b6" Click="openButton_Click" />
+                        <Button Name="saveButton" Grid.Column="3" Margin="10" Content="保存する" Style="{StaticResource OperationButtonStyle}" Background="#34495e" Click="saveButton_Click"/>
+                        <Button Name="saveWithNameButton" Grid.Column="4" Margin="10" Style="{StaticResource OperationButtonStyle}" Background="#2980b9" Click="saveWithNameButton_Click" >
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -124,7 +110,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="会話">
+            <TabItem Header="会話" Style="{StaticResource FlatTabItemStyle}">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -143,7 +129,7 @@
             <TabItem Header="a" Visibility="Collapsed">
 
             </TabItem>
-            <TabItem Header="シーン">
+            <TabItem Header="シーン" Style="{StaticResource FlatTabItemStyle}">
 
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <Grid>
