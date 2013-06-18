@@ -72,7 +72,14 @@ namespace Editor4ArtOfWords.Model
 
             var visualLine = _view.Editor.TextArea.TextView.GetVisualLine(line.LineNumber);
 
-            return index + visualLine.TextLines[0].Length - 1;
+            var lineBreak = visualLine.Document.Text.IndexOf('\n', index);
+
+            if (lineBreak < visualLine.StartOffset)
+            {
+                return visualLine.StartOffset + visualLine.TextLines[0].Length - 1;
+            }
+
+            return visualLine.StartOffset + Math.Min(visualLine.TextLines[0].Length - 1, lineBreak - index);
         }
 
         public int GetLineIndexFromCharacterIndex(int index)
