@@ -1,15 +1,17 @@
-﻿using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
+﻿using GongSolutions.Wpf.DragDrop;
+using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using TagsGrooveControls.View;
 
 namespace TagsGrooveControls.Model
 {
-    public class TagsGrooveTreeViewModel : INotifyPropertyChanged
+    public class TagsGrooveTreeViewModel : INotifyPropertyChanged,  IDropTarget
     {
         private TagTreeViewItemModelManager _manager;
 
@@ -105,6 +107,59 @@ namespace TagsGrooveControls.Model
             {
                 TagRemoved(this, tag);
             }
+        }
+
+        public void DragOver(IDropInfo dropInfo)
+        {
+            if (!(dropInfo.Data is TagTreeViewItemModel) || !(dropInfo.TargetItem is TagTreeViewItemModel))
+            {
+                return;
+            }
+
+            var dragData = dropInfo.Data as TagTreeViewItemModel;
+            var targetData = dropInfo.TargetItem as TagTreeViewItemModel;
+            
+            if (!CheckDropTarget(dragData, targetData))
+            {
+                return;
+            }
+
+            dropInfo.Effects = DragDropEffects.Move;
+            dropInfo.DropTargetAdorner = DropTargetAdorners.Highlight;
+        }
+
+        public void Drop(IDropInfo dropInfo)
+        {
+            if (!(dropInfo.Data is TagTreeViewItemModel) || !(dropInfo.TargetItem is TagTreeViewItemModel))
+            {
+                return;
+            }
+
+            var dragData = dropInfo.Data as TagTreeViewItemModel;
+            var targetData = dropInfo.TargetItem as TagTreeViewItemModel;
+
+            if (!CheckDropTarget(dragData, targetData))
+            {
+                return;
+            }
+
+            ChangeParent(targetData, dragData);
+        }
+
+        private bool CheckDropTarget(TagModel sourceItem, TagModel targetItem)
+        {
+            if (sourceItem.Id == targetItem.Id)
+            {
+                return false;
+            }
+
+            if (sourceItem.HasInDescendent(targetItem))
+            {
+                return false;
+            }
+
+            return true;
+
         }
     }
 }

@@ -17,11 +17,11 @@
         <KeyBinding Gesture="Delete" Command="Delete" />
     </UserControl.InputBindings>
     <UserControl.Resources>
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/CommonControls;component/Util/TagControlResourceDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/CommonControls;component/Util/TagControlResourceDictionary.xaml"/>
+                    <ResourceDictionary Source="/CommonControls;component/Util/TabControlStyleResourceDictionary.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
 
         <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="5"/>
@@ -180,11 +180,11 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Content="種別"/>
-                        <TabControl  Grid.Row="1">
-                            <TabItem Header="タグ">
+                        <TabControl  Grid.Row="1" BorderThickness="1" BorderBrush="#c0392b">
+                            <TabItem Header="タグ" Style="{StaticResource FlatTabItemStyle}">
                                 <CommonControls:DeletableLabelStackPanel Name="TagDeletableStackPanel"/>
                             </TabItem>
-                            <TabItem Header="択一式">
+                            <TabItem Header="択一式" Style="{StaticResource FlatTabItemStyle}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>

@@ -76,7 +76,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="0" Margin="10" CornerRadius="10" Background="White">
+            <Border Grid.Column="0" Margin="10" Background="White">
                 <GroupBox Header="最近開いた小説">
                     <ListView ItemsSource="{Binding Path=RecentlyUsedFiles}" SelectedItem="{Binding Path=SelectedRecentlyUsed,Mode=TwoWay}" util:GridViewSort.AutoSort="True" MouseDoubleClick="ListView_MouseDoubleClick_1">
                         <ListView.View>
@@ -93,7 +93,7 @@
                 </GroupBox>
             </Border>
 
-            <Border Grid.Column="1" Margin="10" CornerRadius="10" Background="White">
+            <Border Grid.Column="1" Margin="10" Background="White">
                 <GroupBox Header="セミオートバックアップ">
                     <ListView  ItemsSource="{Binding Path=SemiautoSavedFiles}" SelectedItem="{Binding Path=SelectedSemiAutoSaved,Mode=TwoWay}" util:GridViewSort.AutoSort="True" MouseDoubleClick="ListView_MouseDoubleClick_2">
                         <ListView.View>
@@ -111,7 +111,7 @@
 
             </Border>
         </Grid>
-        <Border Grid.Row="1" Margin="10" CornerRadius="10" Background="White">
+        <Border Grid.Row="1" Margin="10" Background="White">
             <GroupBox Header="ノベルズボックス" Name="NovelsBoxGroup">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <ListBox ItemsSource="{Binding Path=NovelsBoxFiles}" SelectedItem="{Binding Path=SelectedNovelsBox,Mode=TwoWay}" MaxWidth="Infinity" MouseDoubleClick="ListBox_MouseDoubleClick_1">
@@ -131,7 +131,7 @@
                 </ScrollViewer>
             </GroupBox>
         </Border>
-        <Border Grid.Row="2" Margin="10" CornerRadius="10" Background="White">
+        <Border Grid.Row="2" Margin="10" Background="White">
             <GroupBox  Header="ファイル名">
                 <Grid>
                     <Grid.ColumnDefinitions>

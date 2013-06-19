@@ -57,16 +57,14 @@ namespace TagsGrooveControls.View
             if (model.IsSelected)
             {
                 model.IsNameMode = true;
-
-                _lastMouseDown = e.GetPosition(TagTreeView);
             }
         }
 
         #region Drag And Drop
-    
+
+        /*
         Point _lastMouseDown;
         TagModel draggedItem, _target;
-
         private void treeView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -84,8 +82,8 @@ namespace TagsGrooveControls.View
             }
 
             return true;
-        }
-
+        }*/
+        /*
         private void treeView_MouseMove(object sender, MouseEventArgs e)
         {
             try
@@ -120,9 +118,9 @@ namespace TagsGrooveControls.View
                 }
 
                 (draggedItem as TagTreeViewItemModel).IsNameMode = false;
-                
 
-                DragDropEffects finalDropEffect = DragDrop.DoDragDrop(TagTreeView, TagTreeView.SelectedValue,
+
+                DragDropEffects finalDropEffect = DragDrop.DoDragDrop(TagTreeView, draggedItem,
                     DragDropEffects.Move);
                 //Checking target is not null and item is dragging(moving)
                 if ((finalDropEffect == DragDropEffects.Move) && (_target != null))
@@ -140,18 +138,28 @@ namespace TagsGrooveControls.View
             catch (Exception)
             {
             }
-        }
-
+        }*/
+        /*
         private void treeView_DragOver(object sender, DragEventArgs e)
         {
             try
             {
+                if (!e.Data.GetDataPresent(typeof(TagTreeViewItemModel)))
+                {
+                    return;
+                }
+
                 Point currentPosition = e.GetPosition(TagTreeView);
 
                 if (IsMouseMovedSignificantly(currentPosition))
                 {
-                    // Verify that this is a valid drop and then store the drop target
                     TagModel item = GetNearestContainer(e.OriginalSource as UIElement);
+
+                    if (item == null)
+                    {
+                        return;
+                    }
+
                     if (CheckDropTarget(draggedItem, item))
                     {
                         e.Effects = DragDropEffects.Move;
@@ -166,12 +174,17 @@ namespace TagsGrooveControls.View
             catch (Exception)
             {
             }
-        }
-
+        }*/
+        /*
         private void treeView_Drop(object sender, DragEventArgs e)
         {
             try
             {
+                if (!e.Data.GetDataPresent(typeof(TagTreeViewItemModel)))
+                {
+                    return;
+                }
+
                 e.Effects = DragDropEffects.None;
                 e.Handled = true;
 
@@ -181,7 +194,6 @@ namespace TagsGrooveControls.View
                 {
                     _target = TargetItem as TagModel;
                     e.Effects = DragDropEffects.Move;
-
                 }
             }
             catch (Exception)
@@ -190,7 +202,7 @@ namespace TagsGrooveControls.View
 
 
 
-        }
+        }*//*
         private bool CheckDropTarget(TagModel sourceItem, TagModel targetItem)
         {
             if (sourceItem.Id == targetItem.Id)
@@ -206,43 +218,80 @@ namespace TagsGrooveControls.View
             return true;
 
         }
-
-
+        */
+        /*
         static TObject FindVisualParent<TObject>(UIElement child) where TObject : UIElement
         {
-            if (child == null)
+            try
+            {
+                if (child == null)
+                {
+                    return null;
+                }
+
+                UIElement parent = VisualTreeHelper.GetParent(child) as UIElement;
+
+                while (parent != null)
+                {
+                    TObject found = parent as TObject;
+                    if (found != null)
+                    {
+                        return found;
+                    }
+                    else
+                    {
+                        parent = VisualTreeHelper.GetParent(parent) as UIElement;
+                    }
+                }
+            }
+            catch (Exception)
             {
                 return null;
             }
 
-            UIElement parent = VisualTreeHelper.GetParent(child) as UIElement;
-
-            while (parent != null)
-            {
-                TObject found = parent as TObject;
-                if (found != null)
-                {
-                    return found;
-                }
-                else
-                {
-                    parent = VisualTreeHelper.GetParent(parent) as UIElement;
-                }
-            }
-
             return null;
-        }
+        }*/
+        /*
         private TagModel GetNearestContainer(UIElement element)
         {
-            // Walk up the element tree to the nearest tree view item.
-            TreeViewItem container = element as TreeViewItem;
-            while ((container == null) && (element != null))
+            try
             {
-                element = VisualTreeHelper.GetParent(element) as UIElement;
-                container = element as TreeViewItem;
+                if (element == null)
+                {
+                    return null;
+                }
+                // Walk up the element tree to the nearest tree view item.
+                TreeViewItem container = element as TreeViewItem;
+                while ((container == null) && (element != null))
+                {
+                    var tmpElement = VisualTreeHelper.GetParent(element);
+                    if (tmpElement == null)
+                    {
+                        return null;
+                    }
+
+                    element = tmpElement as UIElement;
+
+                    if (element == null)
+                    {
+                        return null;
+                    }
+
+                    container = element as TreeViewItem;
+                }
+
+                if (container == null)
+                {
+                    return null;
+                }
+
+                return container.DataContext as TagModel;
             }
-            return container.DataContext as TagModel;
-        }
+            catch(Exception )
+            {
+                return null;
+            }
+        }*/
 
         #endregion
 
