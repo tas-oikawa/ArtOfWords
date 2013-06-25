@@ -16,53 +16,59 @@
         Closing="Window_Closing_1" Activated="Window_Activated_1"  
         >
     <Window.Resources>
-        <my5:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
-        <Style x:Key="CommonTabItemStyle" TargetType="{x:Type TabItem}">
-            <Setter Property="Background" Value="Black"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Border Name="Border" Padding="0" Margin="0" BorderBrush="AliceBlue" BorderThickness="1">
-                                <ContentPresenter ContentSource="Header"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="Yellow" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="Black" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="FromKienaiProjectStyle" TargetType="{x:Type TabItem}">
-            <Setter Property="Background" Value="Black"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Border Name="Border" Background="Black" Padding="0" Margin="0" BorderBrush="AliceBlue" BorderThickness="1">
-                                <Label Padding="0" Margin="0" Name="textBlock" Content="{TemplateBinding Header}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="textBlock" Property="Background" Value="White" />
-                                <Setter TargetName="textBlock" Property="Foreground" Value="Black" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="textBlock" Property="Background" Value="Black" />
-                                <Setter TargetName="textBlock" Property="Foreground" Value="AliceBlue" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CommonControls;component/Util/TabControlStyleResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <my5:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+            <Style x:Key="CommonTabItemStyle" TargetType="{x:Type TabItem}">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Grid>
+                                <Border Name="Border" Padding="0" Margin="0" BorderBrush="AliceBlue" BorderThickness="1">
+                                    <ContentPresenter ContentSource="Header"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Yellow" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="False">
+                                    <Setter TargetName="Border" Property="Background" Value="Black" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="FromKienaiProjectStyle" TargetType="{x:Type TabItem}">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Grid>
+                                <Border Name="Border" Background="Black" Padding="0" Margin="0" BorderBrush="AliceBlue" BorderThickness="1">
+                                    <Label Padding="0" Margin="0" Name="textBlock" Content="{TemplateBinding Header}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="textBlock" Property="Background" Value="White" />
+                                    <Setter TargetName="textBlock" Property="Foreground" Value="Black" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="False">
+                                    <Setter TargetName="textBlock" Property="Background" Value="Black" />
+                                    <Setter TargetName="textBlock" Property="Foreground" Value="AliceBlue" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Save" Executed="ExecuteSave" />
@@ -138,7 +144,7 @@
                 <my6:EnvironmentSettingView x:Name="EnvironmentSettingControl" Background="Black"/>
             </TabItem>
             <TabItem Name="tabItem6" Style="{StaticResource FromKienaiProjectStyle}" Header="このソフトについて">
-                <ScrollViewer>
+                <ScrollViewer Margin="1,48,-1,-48">
                     <StackPanel Orientation="Vertical">
                         <StackPanel.Resources>
                             <Style TargetType="Label">
@@ -203,6 +209,14 @@
                         <Frame HorizontalContentAlignment="Center">
                             <Frame.Content>
                                 <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_3">David's Playgroundさん</Hyperlink></TextBlock>
+                            </Frame.Content>
+                        </Frame>
+                        <Label Content="のを使用させていただきました。" Foreground="White"/>
+                        <Label Content="" Foreground="White"/>
+                        <Label Content="TreeViewのドラッグアンドドロップの機能は" Foreground="White"/>
+                        <Frame HorizontalContentAlignment="Center">
+                            <Frame.Content>
+                                <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_4">gong-wpf-dragdropさん</Hyperlink></TextBlock>
                             </Frame.Content>
                         </Frame>
                         <Label Content="のを使用させていただきました。" Foreground="White"/>

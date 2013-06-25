@@ -245,5 +245,14 @@ namespace ArtOfWords
         {
             _model.OnWindowActivated();
         }
+
+        private void Hyperlink_Click_4(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://code.google.com/p/gong-wpf-dragdrop/");
+            }
+            catch { }
+        }
     }
 }

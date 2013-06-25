@@ -72,6 +72,8 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Tag
                 RemoveFromDictonary(child);
                 RemoveChildren(child);
                 OnTagRemoved(child);
+
+                DoPostRemove(child);
             }
 
             tag.Children.Clear();

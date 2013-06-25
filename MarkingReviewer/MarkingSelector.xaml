@@ -11,42 +11,26 @@
              Width="Auto"
              Height="Auto" Background="#FF040509">
     <UserControl.Resources>
-        <DataTemplate x:Key="TalkingListTemplate" DataType="{x:Type ch:CharacterModel}">
-            <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}} }"/>
-        </DataTemplate>
-        <DataTemplate x:Key="ItemListTemplate" DataType="{x:Type item:ItemModel}">
-            <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}} }"/>
-        </DataTemplate>
-        <DataTemplate x:Key="StoryFrameListTemplate" DataType="{x:Type story:StoryFrameModel}">
-            <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}} }"/>
-        </DataTemplate>
-        <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF040509" Offset="0.500" />
-            <GradientStop Color="White" Offset="1" />
-        </LinearGradientBrush>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
 
-        <Style x:Key="MarkingSelecterTabStyle" TargetType="{x:Type TabItem}">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Border Name="Border" Background="Black">
-                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="4,2,4,2"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectingTabBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="#FF040509" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                <ResourceDictionary Source="/CommonControls;component/Util/TabControlStyleResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="TalkingListTemplate" DataType="{x:Type ch:CharacterModel}">
+                <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}} }"/>
+            </DataTemplate>
+            <DataTemplate x:Key="ItemListTemplate" DataType="{x:Type item:ItemModel}">
+                <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}} }"/>
+            </DataTemplate>
+            <DataTemplate x:Key="StoryFrameListTemplate" DataType="{x:Type story:StoryFrameModel}">
+                <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}} }"/>
+            </DataTemplate>
+            <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF040509" Offset="0.500" />
+                <GradientStop Color="White" Offset="1" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -58,7 +42,7 @@
             <Image Stretch="None" HorizontalAlignment="Center" Source="Images/mitsuAtsu.png" />
         </Border>
         <TabControl Name="tabControl1" TabStripPlacement="Top" Grid.Row="1" SelectedIndex="{Binding Path=SelectTab}">
-            <TabItem Header="キーワード" Name="keywordTabItem" Style="{StaticResource MarkingSelecterTabStyle}">
+            <TabItem Header="キーワード" Name="keywordTabItem" Style="{StaticResource FlatTabItemStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -68,7 +52,7 @@
                     <Button  Grid.Row="1" Content="抽出" Padding="10,0,10,0" Click="Button_Click" />
                 </Grid>
             </TabItem>
-            <TabItem Header="置換" Name="replaceTabItem" Style="{StaticResource MarkingSelecterTabStyle}">
+            <TabItem Header="置換" Name="replaceTabItem" Style="{StaticResource FlatTabItemStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -120,7 +104,7 @@
                     
                 </Grid>
             </TabItem>
-            <TabItem Header="会話" Name="talkingTabItem" Style="{StaticResource MarkingSelecterTabStyle}">
+            <TabItem Header="会話" Name="talkingTabItem" Style="{StaticResource FlatTabItemStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -133,7 +117,7 @@
                     <Button  Grid.Row="2" Content="抽出" Name="TalkExtractButton" Click="TalkExtractButton_Click" />
                 </Grid>
             </TabItem>
-            <TabItem Header="アイテム" Name="itemTabItem" Style="{StaticResource MarkingSelecterTabStyle}">
+            <TabItem Header="アイテム" Name="itemTabItem" Style="{StaticResource FlatTabItemStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -147,7 +131,7 @@
                     <Button  Grid.Row="2" Content="抽出" Name="ItemExtractButton" Click="ItemExtractButton_Click" />
                 </Grid>
             </TabItem>
-            <TabItem Header="展開" Name="storyTabItem" Style="{StaticResource MarkingSelecterTabStyle}">
+            <TabItem Header="展開" Name="storyTabItem" Style="{StaticResource FlatTabItemStyle}">
             </TabItem>
         </TabControl>
         <ScrollViewer Grid.Row="2"  Background="White" Margin="2,10,2,10">

@@ -79,7 +79,9 @@ namespace Editor4ArtOfWords.Model
                 return visualLine.StartOffset + visualLine.TextLines[0].Length - 1;
             }
 
-            return visualLine.StartOffset + Math.Min(visualLine.TextLines[0].Length - 1, lineBreak - index);
+            int minStartOffset = Math.Max(index, visualLine.StartOffset);
+
+            return minStartOffset + Math.Min(visualLine.TextLines[0].Length - 1, lineBreak - index);
         }
 
         public int GetLineIndexFromCharacterIndex(int index)
