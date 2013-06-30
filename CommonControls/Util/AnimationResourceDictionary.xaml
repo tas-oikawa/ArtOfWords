@@ -4,4 +4,16 @@
         <DoubleAnimation Storyboard.TargetProperty="Opacity"
                          From="0.0" To="1.0" Duration="0:0:0.300"/>
     </Storyboard>
+    <Storyboard x:Key="FadeOutAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="1.0" To="0.0" Duration="0:0:0.300"/>
+    </Storyboard>
+    <Trigger x:Key="VisibilityChangedAnimationTrigger" Property="UIElement.Visibility" Value="Visible">
+        <Trigger.EnterActions>
+            <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}"/>
+        </Trigger.EnterActions>
+        <Trigger.ExitActions>
+            <BeginStoryboard Storyboard="{StaticResource FadeOutAnimation}"/>
+        </Trigger.ExitActions>
+    </Trigger>
 </ResourceDictionary>

@@ -11,6 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CommonControls;component/Util/AnimationResourceDictionary.xaml"/>
                 <ResourceDictionary Source="/CommonControls;component/Util/ButtonStyleResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
@@ -21,6 +22,14 @@
                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
                         <Setter Property="Visibility" Value="Visible"/>
                     </DataTrigger>
+                    <Trigger Property="Visibility" Value="Visible">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}"/>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard Storyboard="{StaticResource FadeOutAnimation}"/>
+                        </Trigger.ExitActions>
+                    </Trigger>
                 </Style.Triggers>
             </Style>
             <DataTemplate x:Key="selectedItemListBoxDataTemplate">
