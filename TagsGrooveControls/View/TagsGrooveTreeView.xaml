@@ -23,7 +23,9 @@
         <TreeView Name="TagTreeView" ItemsSource="{Binding Path=Tags}" ItemContainerStyle="{StaticResource TreeViewItemStyle}"
                           dd:DragDrop.IsDragSource="True"
                           dd:DragDrop.IsDropTarget="True"
-                     dd:DragDrop.DropHandler="{Binding}">
+                     dd:DragDrop.DropHandler="{Binding}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible">
             <TreeView.Resources>
                 <Style x:Key="treeChildButtonStyle" TargetType="{x:Type Button}">
                     <Setter Property="Visibility" Value="Collapsed"/>

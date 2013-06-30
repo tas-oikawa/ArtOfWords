@@ -86,7 +86,7 @@
             <TextBlock Name="LowerBorderTextBlock" Style="{StaticResource SaveTextBlockStyle}" VerticalAlignment="Bottom"/>
         </Border>
         <Grid Grid.Row="1" Grid.Column="1" Name="TargetGrid">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer Name="ScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Name="TargetPanel"  Background="White"/>
             </ScrollViewer>
         </Grid>

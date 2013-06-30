@@ -39,11 +39,18 @@ namespace TagsGrooveControls.Model
         public void Init(TagManager tagManager)
         {
             _manager = TagManagerConverter.Convert(tagManager);
+            _manager.TagRemoved += _manager_TagRemoved;
             var baseTag = _manager.GetBaseTag();
 
             _tags = new ObservableCollection<TagTreeViewItemModel>();
 
             _tags.Add(baseTag as TagTreeViewItemModel);
+        }
+
+        void _manager_TagRemoved(object sender, TagModel tag)
+        {
+            OnPropertyChanged("Tags");
+            OnTagRemoved(tag);
         }
 
         public void AddChild(TagTreeViewItemModel addTarget)
@@ -63,9 +70,6 @@ namespace TagsGrooveControls.Model
         public void Remove(TagModel deleteTarget)
         {
             _manager.Remove(deleteTarget);
-
-            OnPropertyChanged("Tags");
-            OnTagRemoved(deleteTarget);
         }
 
         public TagModel GetSelectingTag()

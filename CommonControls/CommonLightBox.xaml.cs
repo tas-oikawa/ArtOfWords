@@ -42,6 +42,30 @@ namespace CommonControls
             }
         }
 
+        private bool _isStretchable = true;
+
+        public bool IsStretchable
+        {
+            get { return _isStretchable; }
+            set { _isStretchable = value; }
+        }
+
+
+        private ScrollBarVisibility _horizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+
+        public ScrollBarVisibility HorizontalScrollBarVisibility
+        {
+            get { return _horizontalScrollBarVisibility; }
+            set { _horizontalScrollBarVisibility = value; }
+        }
+        private ScrollBarVisibility _verticalScrollBarVisibility = ScrollBarVisibility.Auto;
+
+        public ScrollBarVisibility VerticalScrollBarVisibility
+        {
+            get { return _verticalScrollBarVisibility; }
+            set { _verticalScrollBarVisibility = value; }
+        }
+
         public delegate void SaveAndQuitHandler(object sender, SaveAndQuitEventArgs e);
         public event SaveAndQuitHandler OnSaveAndQuit;
 
@@ -140,6 +164,16 @@ namespace CommonControls
                 this.Left = Owner.Left;
                 this.Top = Owner.Top;
             }
+
+            if (!_isStretchable)
+            {
+                BaseGrid.RowDefinitions[0].Height = new GridLength(20);
+                BaseGrid.RowDefinitions[1].Height = new GridLength(1.0, GridUnitType.Star);
+                BaseGrid.RowDefinitions[2].Height = new GridLength(20);
+            }
+
+            this.ScrollViewer.HorizontalScrollBarVisibility = this.HorizontalScrollBarVisibility;
+            this.ScrollViewer.VerticalScrollBarVisibility = this.VerticalScrollBarVisibility;
 
             this.Width = Owner.ActualWidth;
             this.Height = Owner.ActualHeight;

@@ -41,6 +41,11 @@ namespace TagsGrooveControls.Strategy
             dialog.BindUIElement(selectorView);
             dialog.LightBoxKind = CommonLightBox.CommonLightBoxKind.SaveCancel;
 
+            dialog.IsStretchable = false;
+
+            selectorView.Height = Application.Current.MainWindow.ActualHeight - 80;
+            selectorView.Width = Application.Current.MainWindow.ActualWidth - 80;
+
             selectorView.DataContext = tagSelectorViewModel;
 
             

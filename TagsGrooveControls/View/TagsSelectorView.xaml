@@ -55,7 +55,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="タグツリー"/>
-        <TagsGrooveControls:TagsGrooveTreeView x:Name="_treeView" Grid.Column="0" Grid.Row="1"/>
+        <TagsGrooveControls:TagsGrooveTreeView Grid.Column="0" Grid.Row="1" x:Name="_treeView" />
         <Button x:Name="addSelectButton" Grid.Column="1"  Grid.Row="1" Content="→" Click="addSelectButton_Click"
                 ToolTipService.ShowOnDisabled="True" 
                 IsEnabled="{Binding Path=IsSelectable}" ToolTip="{Binding Path=SelectButtonToolTip}"/>
