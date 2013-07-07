@@ -17,6 +17,11 @@ namespace WritersBattleField.ViewModel
             get { return _novelSettingModel.CharactersPerLineCount; }
             set
             {
+                if (value < 1)
+                {
+                    value = 1;
+                }
+
                 if (_novelSettingModel.CharactersPerLineCount != value)
                 {
                     _novelSettingModel.CharactersPerLineCount = value;
@@ -30,6 +35,11 @@ namespace WritersBattleField.ViewModel
             get { return _novelSettingModel.LineCountPerPage; }
             set
             {
+                if (value < 1)
+                {
+                    value = 1;
+                }
+
                 if (_novelSettingModel.LineCountPerPage != value)
                 {
                     _novelSettingModel.LineCountPerPage = value;

@@ -8,6 +8,7 @@ using System.Text;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model
 {
+    [Serializable()]
     public class NovelSettingModel : INotifyPropertyChanged
     {
         private int _charactersPerLineCount = 40;
