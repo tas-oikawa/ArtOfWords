@@ -153,7 +153,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
 
                 File.Copy(path, GetBackupFilePath(path), true);
 
-                //Directory.Delete(tempFolder, true);
+                Directory.Delete(tempFolder, true);
             }
             catch (Exception e)
             {
