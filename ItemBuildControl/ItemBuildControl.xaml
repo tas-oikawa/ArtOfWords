@@ -35,7 +35,7 @@
         <Style TargetType="{x:Type Border}">
             <Setter Property="Margin" Value="5,5,1,5"/>
             <Setter Property="CornerRadius" Value="3"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="#FAFAFA"/>
         </Style>
 
         <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
@@ -137,7 +137,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" Background="White">
+                <Border Grid.Row="0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -173,7 +173,7 @@
                         </Grid>
                     </Grid>
                 </Border>
-                <Border Grid.Row="1" Background="White">
+                <Border Grid.Row="1">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -222,7 +222,7 @@
                         </TabControl>
                     </Grid>
                 </Border>
-                <Border Grid.Row="2" Background="White">
+                <Border Grid.Row="2">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

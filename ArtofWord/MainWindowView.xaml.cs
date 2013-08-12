@@ -161,9 +161,18 @@ namespace ArtOfWords
 
         public WritersBattleFieldView GetWritersBattleFieldView()
         {
-            return writersBattlefield;
+            return writersBattlefield.Content as WritersBattleFieldView;
         }
 
+        public TimelineControl.Timeline GetTimelineControl()
+        {
+            return TimelineControll.Content as TimelineControl.Timeline;
+        }
+
+        public WebBrowser GetAdsWebBrowser()
+        {
+            return AdsWebBrowser.Content as WebBrowser;
+        }
         #endregion
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

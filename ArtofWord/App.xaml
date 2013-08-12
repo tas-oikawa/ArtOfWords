@@ -23,10 +23,12 @@
             </Style>
             <Style TargetType="{x:Type Window}">
                 <Setter Property="Window.Icon" Value="artofwarIcon.ico" />
+                <Setter Property="Foreground" Value="#030303"/>
             </Style>
             <Style TargetType="{x:Type ListBox}">
                 <Setter Property="MinWidth" Value="120"/>
                 <Setter Property="MaxWidth" Value="200"/>
+                <Setter Property="Foreground" Value="#030303"/>
             </Style>
             <Style x:Key="DataViewerListBoxStyle" TargetType="{x:Type ListBox}">
                 <Setter Property="MinWidth" Value="120"/>
@@ -42,6 +44,7 @@
                 <Setter Property="BorderThickness" Value="2"/>
                 <Setter Property="Margin" Value="0,2"/>
                 <Setter Property="LabelText" Value="名称・属性などで検索"/>
+                <Setter Property="Foreground" Value="#030303"/>
             </Style>
 
             <Style TargetType="{x:Type TextBox}">
@@ -50,6 +53,7 @@
                 <Setter Property="FontFamily" Value="{DynamicResource CommonFontFamily}"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="Foreground" Value="#030303"/>
             </Style>
 
             <Style x:Key="WrappableTextBox" TargetType="{x:Type TextBox}">
@@ -70,6 +74,7 @@
                 <Setter Property="FontSize" Value="11"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="#030303"/>
             </Style>
 
             <Style x:Key="AddButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ResourceKey={x:Type Button}}">

@@ -5,6 +5,7 @@
         MinWidth="100"
         Title="{Binding Path=Title, Mode=OneWay}" Height="800" Width="1000" Background="Black" 
         xmlns:local="clr-namespace:ArtOfWords" 
+        xmlns:commonCtrl="clr-namespace:CommonControls;assembly=CommonControls"
         xmlns:my="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" 
         xmlns:my1="clr-namespace:WritersBattleField.View;assembly=WritersBattleField" 
         Loaded="Window_Loaded" 
@@ -67,7 +68,16 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
+            <Style TargetType="commonCtrl:FadeInOutBorder" x:Key="CommonFadeInFadeOutBorder">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" Value="True">
+                        <Setter Property="IsInvisible" Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" Value="False">
+                        <Setter Property="IsInvisible" Value="True"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -89,7 +99,9 @@
                         <Image Source="/ArtofWords;component/Images/writingButton.png" Width="132" Height="81" Margin="2"/>
                     </StackPanel>
                 </TabItem.Header>
-                <my1:WritersBattleFieldView Name="writersBattlefield" />
+                <commonCtrl:FadeInOutBorder Style="{StaticResource CommonFadeInFadeOutBorder}" x:Name="writersBattlefield" >
+                    <my1:WritersBattleFieldView/>
+                </commonCtrl:FadeInOutBorder>
             </TabItem>
             <TabItem Name="tabItem2" Style="{StaticResource CommonTabItemStyle}">
                 <TabItem.Header>
@@ -97,9 +109,9 @@
                         <Image Source="/ArtofWords;component/Images/CharactersButton.png" Width="132" Height="81" Margin="2"/>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid>
-                    <my2:CharacterBuildControll Name="characterBuildControl1" />
-                </Grid>
+                <commonCtrl:FadeInOutBorder Style="{StaticResource CommonFadeInFadeOutBorder}" Name="characterBuildControl1">
+                    <my2:CharacterBuildControll />
+                </commonCtrl:FadeInOutBorder>
             </TabItem>
             <TabItem Name="tabItem3" Style="{StaticResource CommonTabItemStyle}">
                 <TabItem.Header>
@@ -107,7 +119,9 @@
                         <Image Source="/ArtofWords;component/Images/ItemButton.png" Width="132" Height="81" Margin="2"/>
                     </StackPanel>
                 </TabItem.Header>
-                <my4:ItemBuildControl Name="itemBuildControl" />
+                <commonCtrl:FadeInOutBorder Style="{StaticResource CommonFadeInFadeOutBorder}" Name="itemBuildControl">
+                    <my4:ItemBuildControl />
+                </commonCtrl:FadeInOutBorder>
             </TabItem>
             <TabItem Name="tabItem4" Style="{StaticResource CommonTabItemStyle}">
                 <TabItem.Header>
@@ -115,7 +129,9 @@
                         <Image Source="/ArtofWords;component/Images/FukusenButton.png" Width="132" Height="81" Margin="2"/>
                     </StackPanel>
                 </TabItem.Header>
-                <my3:StoryFrameBuildControll Name="storyFrameBuildControll" />
+                <commonCtrl:FadeInOutBorder Style="{StaticResource CommonFadeInFadeOutBorder}" Name="storyFrameBuildControll" >
+                    <my3:StoryFrameBuildControll/>
+                </commonCtrl:FadeInOutBorder>
             </TabItem>
             <TabItem Style="{StaticResource CommonTabItemStyle}">
                 <TabItem.Header>
@@ -123,7 +139,9 @@
                         <Image Source="/ArtofWords;component/Images/TimelineButton.png" Width="132" Height="81" Margin="2"/>
                     </StackPanel>
                 </TabItem.Header>
-                <TimelineControl:Timeline Name="TimelineControll"/>
+                <commonCtrl:FadeInOutBorder Style="{StaticResource CommonFadeInFadeOutBorder}" Name="TimelineControll">
+                    <TimelineControl:Timeline />
+                </commonCtrl:FadeInOutBorder>
             </TabItem>
             <TabItem Style="{StaticResource CommonTabItemStyle}">
                 <TabItem.Header>
@@ -138,98 +156,103 @@
                         <Image Source="{Binding Path=AdsTabImage}" Visibility="{Binding Path=IsAdsVisibility, Converter={StaticResource BoolVisibilityConverter}}" Width="132" Height="81" Margin="2"/>
                     </StackPanel>
                 </TabItem.Header>
-                <WebBrowser Name="AdsWebBrowser" Visibility="{Binding Path=IsAdsVisibility, Converter={StaticResource BoolVisibilityConverter}}" Navigating="WebBrowser_Navigating_1" />
+                <commonCtrl:FadeInOutBorder Style="{StaticResource CommonFadeInFadeOutBorder}" Name="AdsWebBrowser">
+                    <WebBrowser Visibility="{Binding Path=IsAdsVisibility, Converter={StaticResource BoolVisibilityConverter}}" Navigating="WebBrowser_Navigating_1" />
+                </commonCtrl:FadeInOutBorder>
             </TabItem>
             <TabItem Style="{StaticResource FromKienaiProjectStyle}" Header="環境設定">
                 <my6:EnvironmentSettingView x:Name="EnvironmentSettingControl" Background="Black"/>
             </TabItem>
             <TabItem Name="tabItem6" Style="{StaticResource FromKienaiProjectStyle}" Header="このソフトについて">
-                <ScrollViewer Margin="1,48,-1,-48">
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel.Resources>
-                            <Style TargetType="Label">
-                                <Setter Property="FontSize" Value="14"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            </Style>
-                        </StackPanel.Resources>
-                        <Label Content="{Binding Path=MyFileVersion,Mode=OneWay}" Foreground="White" FontSize="20" FontWeight="Bold"/>
-                        <Label Content="きえないプロジェクト　から。" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="こんにちは。" Foreground="White"/>
-                        <Label Content="Art Of Wordsは小説家のためのツールです。" Foreground="White"/>
-                        <Label Content="プロ・アマ・ワナビを問わず。" Foreground="White"/>
-                        <Label Content="物語を作ってもらうために" Foreground="White"/>
-                        <Label Content="最低限必要な機能を揃えました。" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="「もっとこうだったら使いやすいのに」" Foreground="White"/>
-                        <Label Content="「というか今のままじゃ使えない」" Foreground="White"/>
-                        <Label Content="などなど。。。" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="いろいろ歯がゆく感じられることはあるかもしれません" Foreground="White"/>
-                        <Label Content="かゆいところにてが届かないというか・・・" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="ごめんなさい。" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="下のメルアドに送ればプロジェクト宛にメールが届きます。" Foreground="White"/>
-                        <Frame HorizontalContentAlignment="Center">
-                            <Frame.Content>
-                                <TextBlock HorizontalAlignment="Center"><Hyperlink NavigateUri="mailto://do_not_reply@kienai.com">do_not_reply@kienai.com</Hyperlink></TextBlock>
-                            </Frame.Content>
-                        </Frame>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="法に反しない限りガンガンメルメル送ってもらってかまいません。" Foreground="White"/>
-                        <Label Content="こわれたよ！　とか　小説かいたよ！　とか。" Foreground="White"/>
-                        <Label Content="こんな機能が欲しいよ！　とか　絵描いたよ！　とか" Foreground="White"/>
-                        <Label Content="おもしろいこと思いついたよ！　とか　好きな人にふられたよ！　とか" Foreground="White"/>
-                        <Label Content="なにかつくってよ！　とか　なにかやろうよ！　とか" Foreground="White"/>
-                        <Label Content="おかしあげるよ！　とか　シェールガス田あげるよ！　とか" Foreground="White"/>
-                        <Label Content="でもひょっとすると対応出来ないかもしれません。" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="ごめんなさい。" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="Thanks" Foreground="White"/>
-                        <Label Content="カラーピッカー・フォント選択ダイアログは" Foreground="White"/>
-                        <Frame HorizontalContentAlignment="Center">
-                            <Frame.Content>
-                                <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_1">e-manualさん</Hyperlink></TextBlock>
-                            </Frame.Content>
-                        </Frame>
-                        <Label Content="のを使用させていただきました。" Foreground="White"/>
-                        <Label Content="リストボックスは" Foreground="White"/>
-                        <Frame HorizontalContentAlignment="Center">
-                            <Frame.Content>
-                                <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_2">tinyjoker.netさん</Hyperlink></TextBlock>
-                            </Frame.Content>
-                        </Frame>
-                        <Label Content="のを使用させていただきました。" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="検索テキストボックスは" Foreground="White"/>
-                        <Frame HorizontalContentAlignment="Center">
-                            <Frame.Content>
-                                <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_3">David's Playgroundさん</Hyperlink></TextBlock>
-                            </Frame.Content>
-                        </Frame>
-                        <Label Content="のを使用させていただきました。" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="TreeViewのドラッグアンドドロップの機能は" Foreground="White"/>
-                        <Frame HorizontalContentAlignment="Center">
-                            <Frame.Content>
-                                <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_4">gong-wpf-dragdropさん</Hyperlink></TextBlock>
-                            </Frame.Content>
-                        </Frame>
-                        <Label Content="のを使用させていただきました。" Foreground="White"/>
-                        <Label Content="ありがとうございます。" Foreground="White"/>
-                        <Label Content="" Foreground="White"/>
-                        <Label Content="About" Foreground="White"/>
-                        <Label Content="きえないプロジェクトは" Foreground="White"/>
-                        <Label Content="じゆうにかつどうする地下系秘密組織です。" Foreground="White"/>
-                        <Label Content="だからソフトもじゆうに使ってください。" Foreground="White"/>
-                        <Label Content="私たちもじゆうにうごきます。" Foreground="White"/>
+                <commonCtrl:FadeInOutBorder Style="{StaticResource CommonFadeInFadeOutBorder}">
 
-                    </StackPanel>
-                </ScrollViewer>
+                    <ScrollViewer Margin="1,48,-1,-48">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Label Content="{Binding Path=MyFileVersion,Mode=OneWay}" Foreground="White" FontSize="20" FontWeight="Bold"/>
+                            <Label Content="きえないプロジェクト　から。" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="こんにちは。" Foreground="White"/>
+                            <Label Content="Art Of Wordsは小説家のためのツールです。" Foreground="White"/>
+                            <Label Content="プロ・アマ・ワナビを問わず。" Foreground="White"/>
+                            <Label Content="物語を作ってもらうために" Foreground="White"/>
+                            <Label Content="最低限必要な機能を揃えました。" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="「もっとこうだったら使いやすいのに」" Foreground="White"/>
+                            <Label Content="「というか今のままじゃ使えない」" Foreground="White"/>
+                            <Label Content="などなど。。。" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="いろいろ歯がゆく感じられることはあるかもしれません" Foreground="White"/>
+                            <Label Content="かゆいところにてが届かないというか・・・" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="ごめんなさい。" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="下のメルアドに送ればプロジェクト宛にメールが届きます。" Foreground="White"/>
+                            <Frame HorizontalContentAlignment="Center">
+                                <Frame.Content>
+                                    <TextBlock HorizontalAlignment="Center"><Hyperlink NavigateUri="mailto://do_not_reply@kienai.com">do_not_reply@kienai.com</Hyperlink></TextBlock>
+                                </Frame.Content>
+                            </Frame>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="法に反しない限りガンガンメルメル送ってもらってかまいません。" Foreground="White"/>
+                            <Label Content="こわれたよ！　とか　小説かいたよ！　とか。" Foreground="White"/>
+                            <Label Content="こんな機能が欲しいよ！　とか　絵描いたよ！　とか" Foreground="White"/>
+                            <Label Content="おもしろいこと思いついたよ！　とか　好きな人にふられたよ！　とか" Foreground="White"/>
+                            <Label Content="なにかつくってよ！　とか　なにかやろうよ！　とか" Foreground="White"/>
+                            <Label Content="おかしあげるよ！　とか　シェールガス田あげるよ！　とか" Foreground="White"/>
+                            <Label Content="でもひょっとすると対応出来ないかもしれません。" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="ごめんなさい。" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="Thanks" Foreground="White"/>
+                            <Label Content="カラーピッカー・フォント選択ダイアログは" Foreground="White"/>
+                            <Frame HorizontalContentAlignment="Center">
+                                <Frame.Content>
+                                    <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_1">e-manualさん</Hyperlink></TextBlock>
+                                </Frame.Content>
+                            </Frame>
+                            <Label Content="のを使用させていただきました。" Foreground="White"/>
+                            <Label Content="リストボックスは" Foreground="White"/>
+                            <Frame HorizontalContentAlignment="Center">
+                                <Frame.Content>
+                                    <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_2">tinyjoker.netさん</Hyperlink></TextBlock>
+                                </Frame.Content>
+                            </Frame>
+                            <Label Content="のを使用させていただきました。" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="検索テキストボックスは" Foreground="White"/>
+                            <Frame HorizontalContentAlignment="Center">
+                                <Frame.Content>
+                                    <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_3">David's Playgroundさん</Hyperlink></TextBlock>
+                                </Frame.Content>
+                            </Frame>
+                            <Label Content="のを使用させていただきました。" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="TreeViewのドラッグアンドドロップの機能は" Foreground="White"/>
+                            <Frame HorizontalContentAlignment="Center">
+                                <Frame.Content>
+                                    <TextBlock HorizontalAlignment="Center"><Hyperlink Click="Hyperlink_Click_4">gong-wpf-dragdropさん</Hyperlink></TextBlock>
+                                </Frame.Content>
+                            </Frame>
+                            <Label Content="のを使用させていただきました。" Foreground="White"/>
+                            <Label Content="ありがとうございます。" Foreground="White"/>
+                            <Label Content="" Foreground="White"/>
+                            <Label Content="About" Foreground="White"/>
+                            <Label Content="きえないプロジェクトは" Foreground="White"/>
+                            <Label Content="じゆうにかつどうする地下系秘密組織です。" Foreground="White"/>
+                            <Label Content="だからソフトもじゆうに使ってください。" Foreground="White"/>
+                            <Label Content="私たちもじゆうにうごきます。" Foreground="White"/>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </commonCtrl:FadeInOutBorder>
             </TabItem>
         </TabControl>
     </Grid>

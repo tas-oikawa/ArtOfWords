@@ -27,12 +27,12 @@
             <Style TargetType="{x:Type Border}">
                 <Setter Property="Margin" Value="5,5,1,5"/>
                 <Setter Property="CornerRadius" Value="3"/>
-                <Setter Property="Background" Value="White"/>
+                <Setter Property="Background" Value="#FAFAFA"/>
             </Style>
 
             <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black" Offset="0.500" />
-                <GradientStop Color="White" Offset="1" />
+                <GradientStop Color="#FAFAFA" Offset="1" />
             </LinearGradientBrush>
 
             <Style TargetType="{x:Type TabItem}">
@@ -129,7 +129,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Border Background="White">
+                <Border>
                     <GroupBox Header="名前">
                         <Grid >
                             <Grid.ColumnDefinitions>
@@ -159,7 +159,7 @@
                             <TextBox Grid.Column="3"  Grid.Row="2" Text="{Binding Path=SelectingModel.MiddleNameRuby, Mode=TwoWay}"/>
                             <Grid Grid.Row="3" Grid.ColumnSpan="4">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
@@ -207,7 +207,7 @@
                     </GroupBox>
                 </Border>
 
-                <Border Grid.Row="1" Background="White">
+                <Border Grid.Row="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -252,12 +252,12 @@
                         </Grid>
                     </Grid>
                 </Border>
-                <Border Grid.Row="2" Background="White">
+                <Border Grid.Row="2">
                     <GroupBox Header="タグ">
                         <CommonControls:DeletableLabelStackPanel Name="TagDeletableStackPanel"/>
                     </GroupBox>
                 </Border>
-                <Border Grid.Row="3" Background="White">
+                <Border Grid.Row="3">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

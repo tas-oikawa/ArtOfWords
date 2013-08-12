@@ -38,7 +38,7 @@
                 <Setter Property="Margin" Value="2,5"/>
                 <Setter Property="Padding" Value="20,5"/>
             </Style>
-            <Style TargetType="Border" x:Key="FadeInOutBorder">
+            <Style TargetType="commonCtrl:FadeInOutBorder" x:Key="FadeInOutBorder">
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="Margin" Value="3,2"/>
             </Style>

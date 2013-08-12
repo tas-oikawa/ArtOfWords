@@ -120,7 +120,7 @@ namespace ArtOfWords.ViewModel
                 if (_adsPage != value)
                 {
                     _adsPage = value;
-                    _view.AdsWebBrowser.Source = new Uri(_adsPage);
+                    _view.GetAdsWebBrowser().Source = new Uri(_adsPage);
                     OnPropertyChanged("AdsPage");
                 }
             }
@@ -205,7 +205,7 @@ namespace ArtOfWords.ViewModel
             EventAggregator.ChangeTabOccuredHandler += OnChangeTabOccured;
             EventAggregator.FontSettingChangedHandler += EventAggregator_FontSettingChangedHandler;
 
-            _view.TimelineControll.EventChangedRised += OnTimelineEventChanged;
+            _view.GetTimelineControl().EventChangedRised += OnTimelineEventChanged;
             
         }
 
@@ -242,9 +242,9 @@ namespace ArtOfWords.ViewModel
         {
             _view.BindData(this);
             _writersBattleFieldViewModel.Initialize(_view.GetWritersBattleFieldView());
-            _characterBuildControlViewModel.Initialize(_view.characterBuildControl1);
-            _storyFrameBuildControlViewModel.Initialize(_view.storyFrameBuildControll);
-            _itemBuildControlViewModel.Initialize(_view.itemBuildControl);
+            _characterBuildControlViewModel.Initialize(_view.characterBuildControl1.Content as CharacterBuildControll.CharacterBuildControll);
+            _storyFrameBuildControlViewModel.Initialize(_view.storyFrameBuildControll.Content as StoryFrameBuildControl.StoryFrameBuildControll);
+            _itemBuildControlViewModel.Initialize(_view.itemBuildControl.Content as ItemBuildControl.ItemBuildControl);
 
             LoadAdOfWorld words = new LoadAdOfWorld();
             words.Load(GetVersion());
@@ -455,15 +455,15 @@ namespace ArtOfWords.ViewModel
                     break;
 
                 case MainTabKind.CharacterTab:
-                    _characterBuildControlViewModel.Initialize(_view.characterBuildControl1);
+                    _characterBuildControlViewModel.Initialize(_view.characterBuildControl1.Content as CharacterBuildControll.CharacterBuildControll);
                     break;
 
                 case MainTabKind.ItemTab:
-                    _itemBuildControlViewModel.Initialize(_view.itemBuildControl);
+                    _itemBuildControlViewModel.Initialize(_view.itemBuildControl.Content as ItemBuildControl.ItemBuildControl);
                     break;
 
                 case MainTabKind.StoryFrameTab:
-                    _storyFrameBuildControlViewModel.Initialize(_view.storyFrameBuildControll);
+                    _storyFrameBuildControlViewModel.Initialize(_view.storyFrameBuildControll.Content as StoryFrameBuildControl.StoryFrameBuildControll);
                     break;
 
                 case MainTabKind.TimelineTab:
@@ -495,15 +495,15 @@ namespace ArtOfWords.ViewModel
         public void ShowTimelineViewer()
         {
             // Axisを作る
-            _view.TimelineControll.DataSource = TimeAxisGenerator.Generate();
+            _view.GetTimelineControl().DataSource = TimeAxisGenerator.Generate();
             if (isFirstTime2ShowTimeline)
             {
-                _view.TimelineControll.TimespanEnum = TimelineControl.Model.TimespanEnum.Hour3;
-                _view.TimelineControll.StartDateTime = GetStartDateTime();
+                _view.GetTimelineControl().TimespanEnum = TimelineControl.Model.TimespanEnum.Hour3;
+                _view.GetTimelineControl().StartDateTime = GetStartDateTime();
 
                 isFirstTime2ShowTimeline = false;
             }
-            _view.TimelineControll.EventModelManager = EventModelManagerGenerator.Generate();
+            _view.GetTimelineControl().EventModelManager = EventModelManagerGenerator.Generate();
             
         }
 

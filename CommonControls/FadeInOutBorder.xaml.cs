@@ -18,7 +18,7 @@ namespace CommonControls
     /// <summary>
     /// FadeInOutBorder.xaml の相互作用ロジック
     /// </summary>
-    public partial class FadeInOutBorder : Border
+    public partial class FadeInOutBorder : ContentControl
     {
         public bool IsInvisible
         {
