@@ -98,6 +98,64 @@ namespace FileSelector.Model
             }
         }
 
+        private bool _isOpeningRecentlyOpenedFile = true;
+
+        public bool IsOpeningRecentlyOpenedFile
+        {
+            get { return _isOpeningRecentlyOpenedFile; }
+            set 
+            {
+                if (value != _isOpeningRecentlyOpenedFile) 
+                {
+                    if (value)
+                    {
+                        IsOpeningSemiAutoBackupFile = false;
+                        IsOpeningNovelsBoxFile = false;
+                    }
+                    _isOpeningRecentlyOpenedFile = value;
+                    OnPropertyChanged("IsOpeningRecentlyOpenedFile");
+                }
+            }
+        }
+        private bool _isOpeningSemiAutoBackupFile = false;
+
+        public bool IsOpeningSemiAutoBackupFile
+        {
+            get { return _isOpeningSemiAutoBackupFile; }
+            set
+            {
+                if (value != _isOpeningSemiAutoBackupFile)
+                {
+                    if (value)
+                    {
+                        IsOpeningRecentlyOpenedFile = false;
+                        IsOpeningNovelsBoxFile = false;
+                    }
+                    _isOpeningSemiAutoBackupFile = value;
+                    OnPropertyChanged("IsOpeningSemiAutoBackupFile");
+                }
+            }
+        }
+        private bool _isOpeningNovelsBoxFile = false;
+
+        public bool IsOpeningNovelsBoxFile
+        {
+            get { return _isOpeningNovelsBoxFile; }
+            set
+            {
+                if (value != _isOpeningNovelsBoxFile)
+                {
+                    if (value)
+                    {
+                        IsOpeningRecentlyOpenedFile = false;
+                        IsOpeningSemiAutoBackupFile = false;
+                    }
+                    _isOpeningNovelsBoxFile = value;
+                    OnPropertyChanged("IsOpeningNovelsBoxFile");
+                }
+            }
+        }
+
         private string _openFilePath;
         public string OpenFilePath
         {

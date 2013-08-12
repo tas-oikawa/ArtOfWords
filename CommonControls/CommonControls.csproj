@@ -55,6 +55,9 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Converter\TagIdToTagNameConverter.cs" />
+    <Compile Include="FadeInOutBorder.xaml.cs">
+      <DependentUpon>FadeInOutBorder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GeneralColorPicker.xaml.cs">
       <DependentUpon>GeneralColorPicker.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DeletableLabelStackPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FadeInOutBorder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

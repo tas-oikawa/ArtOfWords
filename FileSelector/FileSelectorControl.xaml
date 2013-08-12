@@ -3,60 +3,91 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:bizCommon="clr-namespace:ModernizedAlice.ArtOfWords.BizCommon.Model.Converter;assembly=ModernizedAlice.ArtOfWords.BizCommon"
              xmlns:util="clr-namespace:Wpf.Util"
+             xmlns:commonCtrl="clr-namespace:CommonControls;assembly=CommonControls"
+             xmlns:commonConverter="clr-namespace:CommonControls.Converter;assembly=CommonControls"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="400" ScrollViewer.VerticalScrollBarVisibility="Auto" Title="ファイルを開く" ShowInTaskbar="False">
+             Height="500"
+             Width="620"
+             WindowStartupLocation="CenterOwner"
+             d:DesignHeight="400" d:DesignWidth="400" Title="ファイルを開く" ShowInTaskbar="False">
     <Window.Resources>
-        <DataTemplate x:Key="NameCellTemplate">
-            <Label Content="{Binding Path=FileName}" Width="160" ToolTip="{Binding Path=FileName}"/>
-        </DataTemplate>
-        <DataTemplate x:Key="UpdateDateTimeTemplate">
-            <Label Content="{Binding Path=UpdateDateTimeString}" Width="160" ToolTip="{Binding Path=UpdateDateTimeString}"/>
-        </DataTemplate>
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-        <Style TargetType="{x:Type ListViewItem}">
-            <!-- セル内の余白部分をクックしても行選択になるようにする -->
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListViewItem}">
-                        <Grid Name="background">
-                            <ContentControl Name="foreground">
-                                <GridViewRowPresenter Name="rowPresenter"/>
-                            </ContentControl>
-                            <ItemsControl ItemsSource="{Binding ElementName=rowPresenter, Path=Columns}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CommonControls;component/Util/AnimationResourceDictionary.xaml"/>
+                <ResourceDictionary Source="/CommonControls;component/Util/ButtonStyleResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border Margin="1,0,0,0"
+            <DataTemplate x:Key="NameCellTemplate">
+                <Label Content="{Binding Path=FileName}" Width="160" ToolTip="{Binding Path=FileName}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="UpdateDateTimeTemplate">
+                <Label Content="{Binding Path=UpdateDateTimeString}" Width="160" ToolTip="{Binding Path=UpdateDateTimeString}"/>
+            </DataTemplate>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <Style TargetType="ToggleButton" x:Key="CommonToggleStyle" BasedOn="{StaticResource FlatToggleButtonStyle}">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Margin" Value="2,5"/>
+                <Setter Property="Padding" Value="3"/>
+            </Style>
+            <Style TargetType="Button" x:Key="CommonButtonStyle" BasedOn="{StaticResource FlatButtonStyle}">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Margin" Value="2,5"/>
+                <Setter Property="Padding" Value="20,5"/>
+            </Style>
+            <Style TargetType="Border" x:Key="FadeInOutBorder">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Margin" Value="3,2"/>
+            </Style>
+            
+            <Style TargetType="{x:Type ListViewItem}">
+                <!-- セル内の余白部分をクックしても行選択になるようにする -->
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                            <Grid Name="background">
+                                <ContentControl Name="foreground">
+                                    <GridViewRowPresenter Name="rowPresenter"/>
+                                </ContentControl>
+                                <ItemsControl ItemsSource="{Binding ElementName=rowPresenter, Path=Columns}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Margin="1,0,0,0"
                                         BorderBrush="Gray"
                                         BorderThickness="0,0,1,1" 
                                         Width="{Binding ActualWidth}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="background"
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="background"
                                 Property="Background"
                                 Value="{x:Static SystemColors.HighlightBrush}" />
-                                <Setter TargetName="foreground" 
+                                    <Setter TargetName="foreground" 
                                 Property="Foreground"
                                 Value="{x:Static SystemColors.HighlightTextBrush}" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <bizCommon:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+            <commonConverter:BoolReverseConverter x:Key="ReverseConverter"/>
+        </ResourceDictionary>
     </Window.Resources>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -66,92 +97,91 @@
     </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Border Grid.Column="0" Margin="10" Background="White">
-                <GroupBox Header="最近開いた小説">
-                    <ListView ItemsSource="{Binding Path=RecentlyUsedFiles}" SelectedItem="{Binding Path=SelectedRecentlyUsed,Mode=TwoWay}" util:GridViewSort.AutoSort="True" MouseDoubleClick="ListView_MouseDoubleClick_1">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn CellTemplate="{StaticResource NameCellTemplate}" util:GridViewSort.PropertyName="FileName">
-                                    <GridViewColumnHeader Content="名前"/>
-                                </GridViewColumn>
-                                <GridViewColumn CellTemplate="{StaticResource UpdateDateTimeTemplate}" util:GridViewSort.PropertyName="UpdateDateTimeString">
-                                    <GridViewColumnHeader Content="更新日時"/>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </GroupBox>
-            </Border>
-
-            <Border Grid.Column="1" Margin="10" Background="White">
-                <GroupBox Header="セミオートバックアップ">
-                    <ListView  ItemsSource="{Binding Path=SemiautoSavedFiles}" SelectedItem="{Binding Path=SelectedSemiAutoSaved,Mode=TwoWay}" util:GridViewSort.AutoSort="True" MouseDoubleClick="ListView_MouseDoubleClick_2">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn CellTemplate="{StaticResource NameCellTemplate}" util:GridViewSort.PropertyName="FileName">
-                                    <GridViewColumnHeader Content="名前" Click="GridViewColumnHeader_Click_1" />
-                                </GridViewColumn>
-                                <GridViewColumn CellTemplate="{StaticResource UpdateDateTimeTemplate}" util:GridViewSort.PropertyName="UpdateDateTimeString">
-                                    <GridViewColumnHeader Content="更新日時" Click="GridViewColumnHeader_Click_1" />
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </GroupBox>
-
-            </Border>
-        </Grid>
-        <Border Grid.Row="1" Margin="10" Background="White">
-            <GroupBox Header="ノベルズボックス" Name="NovelsBoxGroup">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                    <ListBox ItemsSource="{Binding Path=NovelsBoxFiles}" SelectedItem="{Binding Path=SelectedNovelsBox,Mode=TwoWay}" MaxWidth="Infinity" MouseDoubleClick="ListBox_MouseDoubleClick_1">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderThickness="1" BorderBrush="White" Margin="5,5">
-                                    <TextBlock Width="100" Background="Black" Foreground="White" TextWrapping="Wrap" Text="{Binding Path=FileName}"/>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </ScrollViewer>
-            </GroupBox>
-        </Border>
-        <Border Grid.Row="2" Margin="10" Background="White">
+        <Border Grid.Row="0" Background="White">
             <GroupBox  Header="ファイル名">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding Path=OpenFilePath,Mode=TwoWay}"/>
-                    <Button Padding="30,0" Grid.Column="1" Content="参照" Click="Button_Click_1"/>
+                    <TextBox Text="{Binding Path=OpenFilePath,Mode=TwoWay}" VerticalAlignment="Center" Margin="5" Padding="5"/>
+                    <Button Grid.Column="1" Content="参照" Click="Button_Click_1" Style="{StaticResource CommonButtonStyle}" Padding="10,10"/>
+                    <Button x:Name="OpenButton" Grid.Column="2" Content="開く" Click="OpenButton_Click" Style="{StaticResource CommonButtonStyle}" Background="#FF510089"/>
                 </Grid>
             </GroupBox>
         </Border>
-        <Grid Grid.Row="3" Margin="10">
-            <Button x:Name="OpenButton" Content="開く" Click="OpenButton_Click">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF6AFFD6" Offset="1"/>
-                        <GradientStop Color="White"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+        <Grid Grid.Row="1" Margin="10" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="機能">
+                <StackPanel Orientation="Vertical">
+                    <ToggleButton Content="最近開いた小説" IsChecked="{Binding Path=IsOpeningRecentlyOpenedFile, Mode=TwoWay}" Style="{StaticResource CommonToggleStyle}"/>
+                    <ToggleButton Content="セミオートバックアップ" IsChecked="{Binding Path=IsOpeningSemiAutoBackupFile, Mode=TwoWay}" Style="{StaticResource CommonToggleStyle}"/>
+                    <ToggleButton Content="ノベルズボックス" IsChecked="{Binding Path=IsOpeningNovelsBoxFile, Mode=TwoWay}" Style="{StaticResource CommonToggleStyle}"/>
+                </StackPanel>
+            </GroupBox>
+            <Grid Grid.Column="1">
+                <commonCtrl:FadeInOutBorder IsInvisible="{Binding Path=IsOpeningRecentlyOpenedFile, Mode=OneWay, Converter={StaticResource ReverseConverter}}" Style="{StaticResource FadeInOutBorder}">
+                    <GroupBox Header="最近開いた小説">
+                        <ListView ItemsSource="{Binding Path=RecentlyUsedFiles}" SelectedItem="{Binding Path=SelectedRecentlyUsed,Mode=TwoWay}" util:GridViewSort.AutoSort="True" MouseDoubleClick="ListView_MouseDoubleClick_1">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn CellTemplate="{StaticResource NameCellTemplate}" util:GridViewSort.PropertyName="FileName">
+                                        <GridViewColumnHeader Content="名前"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn CellTemplate="{StaticResource UpdateDateTimeTemplate}" util:GridViewSort.PropertyName="UpdateDateTimeString">
+                                        <GridViewColumnHeader Content="更新日時"/>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </GroupBox>
+                </commonCtrl:FadeInOutBorder>
+
+                <commonCtrl:FadeInOutBorder IsInvisible="{Binding Path=IsOpeningSemiAutoBackupFile, Mode=OneWay, Converter={StaticResource ReverseConverter}}" Style="{StaticResource FadeInOutBorder}">
+                    <GroupBox Header="セミオートバックアップ">
+                        <ListView  ItemsSource="{Binding Path=SemiautoSavedFiles}" SelectedItem="{Binding Path=SelectedSemiAutoSaved,Mode=TwoWay}" util:GridViewSort.AutoSort="True" MouseDoubleClick="ListView_MouseDoubleClick_2">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn CellTemplate="{StaticResource NameCellTemplate}" util:GridViewSort.PropertyName="FileName">
+                                        <GridViewColumnHeader Content="名前" Click="GridViewColumnHeader_Click_1" />
+                                    </GridViewColumn>
+                                    <GridViewColumn CellTemplate="{StaticResource UpdateDateTimeTemplate}" util:GridViewSort.PropertyName="UpdateDateTimeString">
+                                        <GridViewColumnHeader Content="更新日時" Click="GridViewColumnHeader_Click_1" />
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </GroupBox>
+
+                </commonCtrl:FadeInOutBorder>
+                <commonCtrl:FadeInOutBorder IsInvisible="{Binding Path=IsOpeningNovelsBoxFile, Mode=OneWay, Converter={StaticResource ReverseConverter}}" Style="{StaticResource FadeInOutBorder}">
+                    <GroupBox Header="ノベルズボックス">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ListBox ItemsSource="{Binding Path=NovelsBoxFiles}" SelectedItem="{Binding Path=SelectedNovelsBox,Mode=TwoWay}" MouseDoubleClick="ListBox_MouseDoubleClick_1">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel IsItemsHost="True" Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderThickness="1" BorderBrush="White" Margin="5,5">
+                                            <TextBlock Width="100" Background="Black" Foreground="White" TextWrapping="Wrap" Text="{Binding Path=FileName}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </ScrollViewer>
+                    </GroupBox>
+                </commonCtrl:FadeInOutBorder>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

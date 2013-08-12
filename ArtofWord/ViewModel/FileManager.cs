@@ -110,6 +110,7 @@ namespace ArtOfWords.ViewModel
         public bool OpenFile(IEditor editor)
         {
             FileSelectorControl control = new FileSelectorControl();
+            control.Owner = Application.Current.MainWindow;
             var viewModel = new FileSelectorViewModel(control);
 
             viewModel.Initialize(NovelsCollectorGenerator.GetRecentlyNovelsCollector(),
