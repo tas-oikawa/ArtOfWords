@@ -26,11 +26,11 @@ namespace CharacterBuildControll
     /// <summary>
     /// CharacterBuildControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class CharacterBuildControll : UserControl
+    public partial class CharacterBuilder : UserControl
     {
         private CharacterBuildViewModel _model;
 
-        public CharacterBuildControll()
+        public CharacterBuilder()
         {
             InitializeComponent();
         }

@@ -45,6 +45,7 @@ namespace CommonControls
                 }
                 else
                 {
+                    userControl.Visibility = Visibility.Visible;
                     userControl.BeginStoryboard(userControl.GetFadeInStoryboard());
                 }
             }
@@ -72,12 +73,21 @@ namespace CommonControls
             {
                 this.Opacity = 0;
                 this.RenderTransform = new TranslateTransform(-20.0, 0);
+                this.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
                 this.Opacity = 1;
                 this.RenderTransform = new TranslateTransform(0, 0);
+                this.Visibility = System.Windows.Visibility.Visible;
             }
+
+            GetFadeOutStoryboard().Completed += FadeOutBorder_Completed;
+        }
+
+        void FadeOutBorder_Completed(object sender, EventArgs e)
+        {
+            this.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }

@@ -60,13 +60,17 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ControlUtil\MainTabKind.cs" />
+    <Compile Include="Model\Character\DeepPsycheModel.cs" />
     <Compile Include="Model\Event\TagModelModifiedEventArgs.cs" />
     <Compile Include="Model\ITagStickable.cs" />
     <Compile Include="Model\NovelSettingModel.cs" />
+    <Compile Include="Model\ObjectUtil\NotifyPropertyChangedBase.cs" />
     <Compile Include="Model\SaveAndLoad\SaveTagModel.cs" />
     <Compile Include="Model\SaveAndLoad\TagExpander.cs" />
     <Compile Include="Model\SaveAndLoad\XmlSaveObjectVer3_0_0.cs" />
     <Compile Include="Model\SaveAndLoad\FileExpanderVer3_0_0.cs" />
+    <Compile Include="Model\SaveAndLoad\FileExpanderVer4_0_0.cs" />
+    <Compile Include="Model\SaveAndLoad\XmlSaveObjectVer4_0_0.cs" />
     <Compile Include="Model\Tag\BaseTag.cs" />
     <Compile Include="Model\Tag\TagModel.cs" />
     <Compile Include="Model\Tag\TagManager.cs" />

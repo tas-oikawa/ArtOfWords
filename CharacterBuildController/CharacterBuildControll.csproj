@@ -57,8 +57,14 @@
     <Compile Include="..\ArtofWord\Properties\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CharacterBuildControll.xaml.cs">
-      <DependentUpon>CharacterBuildControll.xaml</DependentUpon>
+    <Compile Include="BaseControl.xaml.cs">
+      <DependentUpon>BaseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterBuilder.xaml.cs">
+      <DependentUpon>CharacterBuilder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeepPsyche.xaml.cs">
+      <DependentUpon>DeepPsyche.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\CharacterBuilderViewModel.cs" />
     <Compile Include="Model\ColorToBrushConverter.cs" />
@@ -68,7 +74,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CharacterBuildControll.xaml">
+    <Page Include="BaseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CharacterBuilder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeepPsyche.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

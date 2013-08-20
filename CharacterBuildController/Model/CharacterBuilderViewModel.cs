@@ -14,12 +14,31 @@ using System.Windows.Media;
 using TagsGrooveControls.Strategy;
 using TagsGrooveControls.Util;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
+using CommonControls;
+using System.Linq.Expressions;
+using ModernizedAlice.ArtOfWords.BizCommon.Model.ObjectUtil;
 
 namespace CharacterBuildControll.Model
 {
-    public class CharacterBuildViewModel : INotifyPropertyChanged
+    /// <summary>
+    /// 入力中のページタイプを示す
+    /// </summary>
+    public enum PageType
     {
-        private CharacterBuildControll _view;
+        /// <summary>
+        /// 基本情報
+        /// </summary>
+        Base,
+
+        /// <summary>
+        /// 深層心理
+        /// </summary>
+        DeepPsyche,
+    }
+
+    public class CharacterBuildViewModel : NotifyPropertyChangedBase
+    {
+        private CharacterBuilder _view;
 
         private ObservableCollection<IMarkable> _characterModelCollection;
         public ObservableCollection<IMarkable> CharacterModelCollection
@@ -29,6 +48,7 @@ namespace CharacterBuildControll.Model
                 return _characterModelCollection;
             }
         }
+
 
         private int _selectingIndex;
         public int SelectingIndex
@@ -41,9 +61,8 @@ namespace CharacterBuildControll.Model
 
                     GenerateTagPanel();
 
-                    OnPropertyChanged("SelectingIndex");
-
-                    OnPropertyChanged("SelectingModel");
+                    this.OnPropertyChanged(o => SelectingIndex);
+                    this.OnPropertyChanged(o => SelectingModel);
                 }
             }
             get
@@ -79,6 +98,56 @@ namespace CharacterBuildControll.Model
                     _searchWord = value;
                     GetFilteredCollection();
                 }
+            }
+        }
+
+        private PageType _pageType = PageType.Base;
+
+        /// <summary>
+        /// 基本情報のページが開かれているかどうか
+        /// </summary>
+        public bool IsBasePageOpening
+        {
+            set
+            {
+                if (_pageType != PageType.Base)
+                {
+                    _pageType = PageType.Base;
+                    OnPagePropertyChanged();
+                }
+            }
+            get
+            {
+                return _pageType == PageType.Base;
+            }
+        }
+
+        /// <summary>
+        /// 人物分析のページが開かれているかどうか
+        /// </summary>
+        public bool IsDeepPsychePageOpening
+        {
+            set
+            {
+                if (_pageType != PageType.DeepPsyche)
+                {
+                    _pageType = PageType.DeepPsyche;
+                    OnPagePropertyChanged();
+                }
+            }
+            get
+            {
+                return _pageType == PageType.DeepPsyche;
+            }
+        }
+
+       
+
+        public DeletableLabelStackPanel DeletableLabelStackPanel
+        {
+            get
+            {
+                return (_view._baseControl.Content as BaseControl).TagDeletableStackPanel;
             }
         }
 
@@ -146,7 +215,7 @@ namespace CharacterBuildControll.Model
             }
         }
 
-        public void Initialize(CharacterBuildControll view)
+        public void Initialize(CharacterBuilder view)
         {
             _view = view;
 
@@ -215,14 +284,14 @@ namespace CharacterBuildControll.Model
                 return;
             }
 
-            _view.TagDeletableStackPanel.NoItemMessage = "ここには貼り付けたタグが表示されます";
-            _view.TagDeletableStackPanel.DoNotShowAddButtonIfCountZero = false;
-            _view.TagDeletableStackPanel.DoShowNoItemErrorMessageIfCountZero = false;
-            _view.TagDeletableStackPanel.DataList = 
+            DeletableLabelStackPanel.NoItemMessage = "ここには貼り付けたタグが表示されます";
+            DeletableLabelStackPanel.DoNotShowAddButtonIfCountZero = false;
+            DeletableLabelStackPanel.DoShowNoItemErrorMessageIfCountZero = false;
+            DeletableLabelStackPanel.DataList = 
                 TagToAppearListViewModelConverter.ToAppearListViewItemModel(SelectingModel.Tags,ModelsComposite.TagManager);
-            _view.TagDeletableStackPanel.AddButtonStrategy = new TagStickerAddButtonStrategy(SelectingModel, ModelsComposite.TagManager);
-            _view.TagDeletableStackPanel.OnModelIsAppearedChangedEvent += TagDeletableStackPanel_OnModelIsAppearedChangedEvent;
-            _view.TagDeletableStackPanel.Initialize();
+            DeletableLabelStackPanel.AddButtonStrategy = new TagStickerAddButtonStrategy(SelectingModel, ModelsComposite.TagManager);
+            DeletableLabelStackPanel.OnModelIsAppearedChangedEvent += TagDeletableStackPanel_OnModelIsAppearedChangedEvent;
+            DeletableLabelStackPanel.Initialize();
         }
 
         void TagDeletableStackPanel_OnModelIsAppearedChangedEvent(object sender, CommonControls.OnModelIsAppearedChangedEventArgs e)
@@ -256,12 +325,10 @@ namespace CharacterBuildControll.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string name)
+        protected void OnPagePropertyChanged()
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            this.OnPropertyChanged(o => IsBasePageOpening);
+            this.OnPropertyChanged(o => IsDeepPsychePageOpening);
         }
 
         #endregion

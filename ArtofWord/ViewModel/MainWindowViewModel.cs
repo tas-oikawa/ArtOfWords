@@ -242,7 +242,7 @@ namespace ArtOfWords.ViewModel
         {
             _view.BindData(this);
             _writersBattleFieldViewModel.Initialize(_view.GetWritersBattleFieldView());
-            _characterBuildControlViewModel.Initialize(_view.characterBuildControl1.Content as CharacterBuildControll.CharacterBuildControll);
+            _characterBuildControlViewModel.Initialize(_view.characterBuildControl1.Content as CharacterBuildControll.CharacterBuilder);
             _storyFrameBuildControlViewModel.Initialize(_view.storyFrameBuildControll.Content as StoryFrameBuildControl.StoryFrameBuildControll);
             _itemBuildControlViewModel.Initialize(_view.itemBuildControl.Content as ItemBuildControl.ItemBuildControl);
 
@@ -455,7 +455,7 @@ namespace ArtOfWords.ViewModel
                     break;
 
                 case MainTabKind.CharacterTab:
-                    _characterBuildControlViewModel.Initialize(_view.characterBuildControl1.Content as CharacterBuildControll.CharacterBuildControll);
+                    _characterBuildControlViewModel.Initialize(_view.characterBuildControl1.Content as CharacterBuildControll.CharacterBuilder);
                     break;
 
                 case MainTabKind.ItemTab:

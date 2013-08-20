@@ -13,6 +13,15 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
 {
     public class CharacterModel : IMarkable, INotifyPropertyChanged, ISearchable, ITagStickable
     {
+        private DeepPsycheModel _deepPhycheModel = new DeepPsycheModel();
+
+        public DeepPsycheModel DeepPhycheModel
+        {
+            get { return _deepPhycheModel; }
+            set { _deepPhycheModel = value; }
+        }
+        
+
         private int _id;
         public int Id
         {
@@ -598,6 +607,8 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Character
             {
                 this.Tags.Add(tagId);
             }
+
+            this._deepPhycheModel.Copy(src.DeepPhycheModel);
         }        
 
         public string ToSearchString()

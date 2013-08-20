@@ -110,7 +110,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <commonCtrl:FadeInOutBorder Style="{StaticResource CommonFadeInFadeOutBorder}" Name="characterBuildControl1">
-                    <my2:CharacterBuildControll />
+                    <my2:CharacterBuilder />
                 </commonCtrl:FadeInOutBorder>
             </TabItem>
             <TabItem Name="tabItem3" Style="{StaticResource CommonTabItemStyle}">
