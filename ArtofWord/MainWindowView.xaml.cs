@@ -94,8 +94,6 @@ namespace ArtOfWords
             }
 
             SetDefaultFont();
-
-            _model = new MainWindowViewModel(this);
         }
 
         private void SetDefaultFont()
@@ -177,7 +175,7 @@ namespace ArtOfWords
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            _model = new MainWindowViewModel(this);
             InitializeViews();
         }
 
@@ -252,6 +250,10 @@ namespace ArtOfWords
 
         private void Window_Activated_1(object sender, EventArgs e)
         {
+            if (_model == null)
+            {
+                return;
+            }
             _model.OnWindowActivated();
         }
 

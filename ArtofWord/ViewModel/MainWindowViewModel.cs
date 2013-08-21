@@ -187,8 +187,8 @@ namespace ArtOfWords.ViewModel
 
             _fileManager = new FileManager();
 
-            _view.BindData(this);
             PluginLoad();
+            InitializeViews();
 
             //TestBizModel.PrepareForTest();
 
@@ -240,20 +240,21 @@ namespace ArtOfWords.ViewModel
         private bool Initialized = false;
         public void InitializeViews()
         {
-            _view.BindData(this);
-            _writersBattleFieldViewModel.Initialize(_view.GetWritersBattleFieldView());
-            _characterBuildControlViewModel.Initialize(_view.characterBuildControl1.Content as CharacterBuildControll.CharacterBuilder);
-            _storyFrameBuildControlViewModel.Initialize(_view.storyFrameBuildControll.Content as StoryFrameBuildControl.StoryFrameBuildControll);
-            _itemBuildControlViewModel.Initialize(_view.itemBuildControl.Content as ItemBuildControl.ItemBuildControl);
-
-            LoadAdOfWorld words = new LoadAdOfWorld();
-            words.Load(GetVersion());
-
             if (!Initialized)
             {
                 Initialized = true;
                 OnFirstInitialized();
             }
+
+            _writersBattleFieldViewModel.Initialize(_view.GetWritersBattleFieldView());
+            _characterBuildControlViewModel.Initialize(_view.characterBuildControl1.Content as CharacterBuildControll.CharacterBuilder);
+            _storyFrameBuildControlViewModel.Initialize(_view.storyFrameBuildControll.Content as StoryFrameBuildControl.StoryFrameBuildControll);
+            _itemBuildControlViewModel.Initialize(_view.itemBuildControl.Content as ItemBuildControl.ItemBuildControl);
+
+            _view.BindData(this);
+
+            LoadAdOfWorld words = new LoadAdOfWorld();
+            words.Load(GetVersion());
         }
 
         #region Events
