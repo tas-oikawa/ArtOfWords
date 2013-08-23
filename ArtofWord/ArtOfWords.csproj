@@ -114,6 +114,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClosingScreen.xaml.cs">
+      <DependentUpon>ClosingScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converter\ColorToSolidColorBrushConverter.cs" />
     <Compile Include="DataGenerator\CommonDefinitions.cs" />
     <Compile Include="DataGenerator\EventModelManagerGenerator.cs" />
@@ -181,6 +184,10 @@
     <Compile Include="ViewModel\FileSelector\NovelsCollectorGenerator.cs" />
     <Compile Include="ViewModel\FileSelector\RecentlyFileBoxModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Page Include="ClosingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EnvironmentSettings\EnvironmentSettingControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -395,6 +402,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\splashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\seeyou.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

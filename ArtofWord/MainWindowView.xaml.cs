@@ -21,6 +21,7 @@ using System.IO;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad;
 using CommonControls.Util;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Event;
+using System.Threading;
 
 namespace ArtOfWords
 {
@@ -186,7 +187,16 @@ namespace ArtOfWords
 
             if (e.Cancel != true)
             {
+                ClosingScreen closing = new ClosingScreen();
+                closing.Owner = this;
+                closing.Width = this.ActualWidth;
+                closing.Height = this.ActualHeight;
+                closing.Show();
+
                 SaveState();
+
+                Thread.Sleep(1000);
+                closing.Close();
             }
         }
 
