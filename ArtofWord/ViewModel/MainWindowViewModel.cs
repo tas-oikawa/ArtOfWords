@@ -55,7 +55,7 @@ namespace ArtOfWords.ViewModel
             get
             {
                 StringBuilder builder = new StringBuilder();
-                builder.Append("Art Of Words");
+                builder.Append("ArtOfWords");
                 if (_fileManager != null)
                 {
                     if (_fileManager.CurrentFile.Count() > 1)

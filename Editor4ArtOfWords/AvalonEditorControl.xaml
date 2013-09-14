@@ -14,7 +14,7 @@
                            FontFamily="{Binding Path=TextStyle.FontFamily}"
                            FontSize="{Binding Path=TextStyle.FontSize}" 
                            WordWrap="True"
-                           
+                           Padding="5"
                            PreviewGotKeyboardFocus="Editor_PreviewGotKeyboardFocus"
                            >
             <avalon:TextEditor.ContextMenu>

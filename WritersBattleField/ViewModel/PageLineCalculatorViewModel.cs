@@ -62,6 +62,12 @@ namespace WritersBattleField.ViewModel
             get { return _pageCount; }
         }
 
+        private string _byteCount;
+        public string ByteCount
+        {
+            get { return _byteCount; }
+        }
+
         public string AllCharactersCount
         {
             get
@@ -126,6 +132,7 @@ namespace WritersBattleField.ViewModel
                     currentCharacterNum = 0;
                     _lineCount++;
                 }
+                
             }
 
             if (LineCountPerPage > 0)
@@ -133,10 +140,23 @@ namespace WritersBattleField.ViewModel
                 _pageCount = (_lineCount / LineCountPerPage) + 1;
             }
 
+            CalculateByteCount();
+
             IsCalculated = true;
 
             OnPropertyChanged("LineCount");
             OnPropertyChanged("PageCount");
+        }
+
+        /// <summary>
+        /// バイトサイズを計算する
+        /// </summary>
+        private void CalculateByteCount()
+        {
+            int byteSize = System.Text.Encoding.GetEncoding("Shift_JIS").GetByteCount(_documentModel.Text);
+
+            _byteCount = (byteSize / 1024) + "KB(" + byteSize + "バイト)";
+            OnPropertyChanged("ByteCount");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

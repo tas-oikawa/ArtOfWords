@@ -81,6 +81,11 @@
                     </StackPanel>
                     <TextBlock Text="分ぐらいの量です。" Style="{StaticResource TextBlockStyle}"/>
                     <TextBlock Text="一応改行も考慮してますがざっくりです。目安にして下さい。" Style="{StaticResource TextBlockStyle}"/>
+                    <TextBlock Text="バイト数でいうと"  Style="{StaticResource TextBlockStyle}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=ByteCount,Mode=OneWay}" Style="{StaticResource TextBlockStyle}"/>
+                    </StackPanel>
+                    <TextBlock Text="ぐらいの量です。" Style="{StaticResource TextBlockStyle}"/>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
