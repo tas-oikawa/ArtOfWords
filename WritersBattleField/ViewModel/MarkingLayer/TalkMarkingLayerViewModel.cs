@@ -161,7 +161,7 @@ namespace WritersBattleField.ViewModel.MarkingLayer
 
         public override void OnCanvasMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Point curPos = e.GetPosition(_view);
+            Point curPos = e.GetPosition(_view.canvas);
 
             if (Mode == MarkLayerMode.None)
             {

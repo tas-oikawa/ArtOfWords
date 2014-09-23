@@ -107,6 +107,8 @@ namespace Editor4ArtOfWords.Model
                 EndOffset = tailIndex + 1,
             };
 
+            _view.Editor.TextArea.TextView.EnsureVisualLines();
+
             var list = new List<Rect>();
             foreach (Rect r in BackgroundGeometryBuilder.GetRectsForSegment(_view.Editor.TextArea.TextView, seg))
             {

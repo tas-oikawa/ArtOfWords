@@ -29,12 +29,12 @@
                 <Setter Property="FontSize" Value="14"/>
             </Style>
             <Style TargetType="ToggleButton" x:Key="CommonToggleStyle" BasedOn="{StaticResource FlatToggleButtonStyle}">
-                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Background" Value="#121317"/>
                 <Setter Property="Margin" Value="2,5"/>
                 <Setter Property="Padding" Value="3"/>
             </Style>
             <Style TargetType="Button" x:Key="CommonButtonStyle" BasedOn="{StaticResource FlatButtonStyle}">
-                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Background" Value="#121317"/>
                 <Setter Property="Margin" Value="2,5"/>
                 <Setter Property="Padding" Value="20,5"/>
             </Style>
@@ -91,7 +91,7 @@
     </Window.Resources>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="#121317" Offset="0"/>
             <GradientStop Color="#FF00183C" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
@@ -173,7 +173,7 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Border BorderThickness="1" BorderBrush="White" Margin="5,5">
-                                            <TextBlock Width="100" Background="Black" Foreground="White" TextWrapping="Wrap" Text="{Binding Path=FileName}"/>
+                                            <TextBlock Width="100" Background="#121317" Foreground="White" TextWrapping="Wrap" Text="{Binding Path=FileName}"/>
                                         </Border>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

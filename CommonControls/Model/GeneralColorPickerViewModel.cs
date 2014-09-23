@@ -10,10 +10,6 @@ namespace CommonControls.Model
     public class GeneralColorPickerViewModel : INotifyPropertyChanged
     {
         private Color _selectingColor;
-        private Color _selectingFontColor;
-        private Color _selectingBackgroundColor;
-        private FontFamily _selectingFontFamily;
-        private double _selectingFontSize;
 
         public GeneralColorPickerViewModel()
         {

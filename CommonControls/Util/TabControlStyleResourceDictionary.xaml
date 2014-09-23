@@ -7,7 +7,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid>
-                        <Border Name="Border" Background="Black">
+                        <Border Name="Border" Background="#121317">
                             <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
                         </Border>
                     </Grid>
@@ -17,7 +17,7 @@
                             <Setter Property="Foreground" Value="#ecf0f1"/> 
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="Black" />
+                            <Setter TargetName="Border" Property="Background" Value="#121317" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

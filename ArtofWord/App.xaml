@@ -4,7 +4,7 @@
              xmlns:Properties="clr-namespace:ArtOfWords.Properties"
              xmlns:searchBox="clr-namespace:SearchControl;assembly=SearchControl"
              xmlns:media="clr-namespace:System.Windows.Media;assembly=presentationcore"
-             xmlns:converter="clr-namespace:ArtOfWords.Converter"
+             xmlns:converter="clr-namespace:ArtOfWords.Util.Converter"
              StartupUri="MainWindowView.xaml"
              DispatcherUnhandledException="Application_DispatcherUnhandledException" Startup="Application_Startup_1">
     <Application.Resources>
@@ -16,6 +16,53 @@
             <media:FontFamily x:Key="CommonFontFamily">メイリオ</media:FontFamily>
             <converter:ColorToSolidColorBrushConverter x:Key="Color2BrushConverter"/>
             
+            <!-- コントロールテンプレート -->
+            <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+                <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="#ccc"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
+                    <ScrollViewer x:Name="PART_ContentHost"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    </Trigger>
+                    <Trigger Property="Width" Value="Auto">
+                        <Setter Property="MinWidth" Value="100"/>
+                    </Trigger>
+                    <Trigger Property="Height" Value="Auto">
+                        <Setter Property="MinHeight" Value="20"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+           <ControlTemplate x:Key="GroupBoxBaseControlTemplate"  TargetType="GroupBox">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+              BorderThickness="1"
+              BorderBrush="#cdcdd6"
+              Background="#cdcdd6">
+                        <Label Foreground="#030303">
+                            <ContentPresenter Margin="4"
+                          ContentSource="Header"
+                          RecognizesAccessKey="True" />
+                        </Label>
+                    </Border>
+
+                    <Border Grid.Row="1"
+              BorderThickness="1,0,1,1"
+              BorderBrush="#cdcdd6">
+                        <ContentPresenter Margin="4" />
+                    </Border>
+
+                </Grid>
+            </ControlTemplate>
+
             <Style TargetType="{x:Type Button}">
                 <Setter Property="Margin" Value="5"/>
                 <Setter Property="Padding" Value="5"/>
@@ -54,6 +101,7 @@
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                 <Setter Property="Foreground" Value="#030303"/>
+                <Setter Property="Template" Value="{StaticResource TextBoxBaseControlTemplate}"/>
             </Style>
 
             <Style x:Key="WrappableTextBox" TargetType="{x:Type TextBox}">
@@ -67,7 +115,9 @@
                 <Setter Property="AcceptsReturn" Value="True"/>
                 <Setter Property="Margin" Value="0"/>
             </Style>
-
+            <Style TargetType="{x:Type GroupBox}">
+                <Setter Property="Template" Value="{StaticResource GroupBoxBaseControlTemplate}"/>
+            </Style>
             <Style TargetType="{x:Type Label}">
                 <Setter Property="Margin" Value="5,0,5,0"/>
                 <Setter Property="Padding" Value="1,1,1,1"/>

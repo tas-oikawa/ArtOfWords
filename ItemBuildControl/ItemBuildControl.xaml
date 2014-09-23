@@ -39,7 +39,7 @@
         </Style>
 
         <LinearGradientBrush x:Key="SelectingTabBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="0.500" />
+                <GradientStop Color="#121317" Offset="0.500" />
             <GradientStop Color="White" Offset="1" />
         </LinearGradientBrush>
 
@@ -49,7 +49,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
                         <Grid>
-                            <Border Name="Border" Background="Black">
+                                <Border Name="Border" Background="#121317">
                                 <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
                             </Border>
                         </Grid>
@@ -58,7 +58,7 @@
                                 <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectingTabBrush}" />
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="Black" />
+                                    <Setter TargetName="Border" Property="Background" Value="#121317" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -77,7 +77,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <TabControl Grid.Row="0" Height="100" HorizontalAlignment="Stretch" Name="tabControl2" VerticalAlignment="Stretch" TabStripPlacement="Bottom" Background="Black" SelectedIndex="{Binding Path=Mode,Mode=TwoWay, Converter={StaticResource ViewModeIntConverter}}">
+            <TabControl Grid.Row="0" Height="100" HorizontalAlignment="Stretch" Name="tabControl2" VerticalAlignment="Stretch" TabStripPlacement="Bottom" Background="#121317" SelectedIndex="{Binding Path=Mode,Mode=TwoWay, Converter={StaticResource ViewModeIntConverter}}">
                 <TabItem Header="アイテム管理" Name="tabItem5">
                     <StackPanel Orientation="Horizontal">
                         <Button Name="addButton" Click="addButton_Click" Style="{StaticResource AddButtonStyle}"/>

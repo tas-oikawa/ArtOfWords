@@ -4,33 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ShosenColorPicker="clr-namespace:ModernizedAlice.ShosenColorPicker;assembly=ModernizedAlice.ShosenColorPicker" 
-             mc:Ignorable="d"  Background="Black" Loaded="UserControl_Loaded_1">
+             mc:Ignorable="d"  Background="#121317" Loaded="UserControl_Loaded_1">
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
             <ShosenColorPicker:ColorPicker Name="_colorPicker"/>
             <StackPanel Orientation="Vertical">
-                <GroupBox Header="直接設定" Foreground="white">
-                    <StackPanel Orientation="Vertical">
-                        <Rectangle Height="20" Margin="3,5" Fill="{Binding SelectingColorBrush}"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Content="R" Foreground="Red" Margin="0"/>
-                            <TextBox Grid.Row="0" Grid.Column="1" Width="40" Text="{Binding RValue, Mode=TwoWay}" Margin="4"/>
-                            <Label Grid.Row="1" Content="G" Foreground="Green"/>
-                            <TextBox Grid.Row="1" Grid.Column="1" Width="40"  Text="{Binding GValue, Mode=TwoWay}" Margin="4"/>
-                            <Label Grid.Row="2" Content="B" Foreground="Blue"/>
-                            <TextBox Grid.Row="2" Grid.Column="1" Width="40" Text="{Binding BValue, Mode=TwoWay}" Margin="4"/>
-                        </Grid>
-                    </StackPanel>
-                </GroupBox>
+                <StackPanel Orientation="Vertical">
+                    <Rectangle Height="20" Margin="3,5" Fill="{Binding SelectingColorBrush}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="R" Foreground="Red" Margin="0"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="40" Text="{Binding RValue, Mode=TwoWay}" Margin="4"/>
+                        <Label Grid.Row="1" Content="G" Foreground="Green"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Width="40"  Text="{Binding GValue, Mode=TwoWay}" Margin="4"/>
+                        <Label Grid.Row="2" Content="B" Foreground="Blue"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Width="40" Text="{Binding BValue, Mode=TwoWay}" Margin="4"/>
+                    </Grid>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </StackPanel>

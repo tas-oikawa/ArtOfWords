@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="ArtOfWords.Models.EnvironmentSettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded_1">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="Margin" Value="5,5,1,5"/>
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="#FFA9CDA1">
+        <StackPanel Orientation="Vertical">
+            <Button Content="フォントを設定(テキスト入力領域のみ）" Click="FontButton_Click_1"/>
+            <Button Content="テキストの色とか背景を設定" Click="TextStyleButton_Click_1"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="emanual.Wpf.Controls.FontDialogEx"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:local="clr-namespace:ArtOfWords.ViewModels.EnvironmentSettings"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Loaded="UserControl_Loaded_1">
+
+    <Border CornerRadius="6" BorderThickness="1">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="330">
+                    <Label Height="25" Target="{Binding ElementName=txtFamilyName}" Content="フォント(_F)" />
+                    <TextBox x:Name="txtFamilyName" Height="25" />
+                    <ListBox x:Name="lstFamilyName" Height="290" MaxWidth="330" SelectionChanged="lstFamilyName_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:ListedFontViewModel}">
+                                <Border BorderBrush="#121317" BorderThickness="2" CornerRadius="6" Margin="2,5" Width="290" Padding="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Text="{Binding SampleString}" FontFamily="{Binding FontFamily}" FontSize="20" TextAlignment="Left" Margin="0,5"/>
+                                        <TextBlock Grid.Row="1" Text="{Binding FontName}" FontFamily="{Binding FontFamily}" FontSize="12" TextAlignment="Right" Margin="0,5"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="6,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                            <Label Height="25" Target="{Binding ElementName=txtTypeface}" Content="タイプフェース(_Y)" />
+                            <TextBox x:Name="txtTypeface" Height="25" />
+                            <ListBox x:Name="lstTypeface" Height="100" SelectionChanged="lstTypeface_SelectionChanged">
+                            </ListBox>
+                            <CheckBox x:Name="chkBold" Margin="0,20,0,0" Checked="chkBold_Checked" Unchecked="chkBold_Unchecked" Content="ボールド体 (_Bold)" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="6,0,0,0">
+                            <Label Height="25" Target="{Binding ElementName=txtFontSize}" Content="サイズ(_S)" />
+                            <TextBox x:Name="txtFontSize" Width="90" Height="25" HorizontalAlignment="Left" />
+                            <ListBox x:Name="lstFontSize" Width="90" Height="160" HorizontalAlignment="Left" SelectionChanged="lstFontSize_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="PART_SamplePanel" Orientation="Vertical">
+                        <Label Content="サンプル(_M)" Target="{Binding ElementName=txtSample}" Margin="0,4,0,0" />
+                        <TextBox x:Name="txtSample" Height="50" Style="{StaticResource WrappableTextBox}"/>
+                        <Label Height="25" Content="言語(_L)" Target="{Binding ElementName=cmbLanguage}" />
+                        <ComboBox x:Name="cmbLanguage" Height="25" Margin="0,0,0,4" SelectionChanged="cmbLanguage_SelectionChanged" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

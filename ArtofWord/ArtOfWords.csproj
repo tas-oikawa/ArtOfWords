@@ -114,89 +114,95 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ClosingScreen.xaml.cs">
+    <Compile Include="Views\Main\AboutBoxWindow.xaml.cs">
+      <DependentUpon>AboutBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\ClosingScreen.xaml.cs">
       <DependentUpon>ClosingScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converter\ColorToSolidColorBrushConverter.cs" />
-    <Compile Include="DataGenerator\CommonDefinitions.cs" />
-    <Compile Include="DataGenerator\EventModelManagerGenerator.cs" />
-    <Compile Include="DataGenerator\Model\StoryFrameAxisModel.cs" />
-    <Compile Include="DataGenerator\TimeAxisGenerator.cs" />
-    <Compile Include="DataGenerator\TimelineModelConverter.cs" />
-    <Compile Include="EnvironmentSettings\EnvironmentSettingControl.xaml.cs">
+    <Compile Include="Util\Converter\ColorToSolidColorBrushConverter.cs" />
+    <Compile Include="Models\DataGenerator\EventModelManagerGenerator.cs" />
+    <Compile Include="Models\DataGenerator\StoryFrameAxisModel.cs" />
+    <Compile Include="Models\DataGenerator\TimeAxisGenerator.cs" />
+    <Compile Include="Models\DataGenerator\TimelineModelConverter.cs" />
+    <Compile Include="Views\EnvironmentSettings\EnvironmentSettingControl.xaml.cs">
       <DependentUpon>EnvironmentSettingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EnvironmentSettings\ListedFont.cs" />
-    <Compile Include="EnvironmentSettings\FontDialogEx.xaml.cs">
+    <Compile Include="ViewModels\EnvironmentSettings\ListedFontViewModel.cs" />
+    <Compile Include="Views\EnvironmentSettings\FontDialogEx.xaml.cs">
       <DependentUpon>FontDialogEx.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="Salesman\AdsDownloader.cs" />
-    <Compile Include="Salesman\AdsXmlFormat.cs" />
-    <Compile Include="Salesman\AdsXmlFormatManager.cs" />
-    <Compile Include="Salesman\LoadAdOfWorld.cs" />
-    <Compile Include="Satelite\CharacterSatelite\CharacterSateliteGenerator.cs" />
-    <Compile Include="Satelite\CharacterSatelite\CharacterSateliteViewModel.cs" />
-    <Compile Include="Satelite\CharacterSatelite\NameGrid.xaml.cs">
+    <Compile Include="Models\Salesman\AdsDownloader.cs" />
+    <Compile Include="Models\Salesman\AdsXmlFormat.cs" />
+    <Compile Include="Models\Salesman\AdsXmlFormatManager.cs" />
+    <Compile Include="Models\Salesman\LoadAdOfWorld.cs" />
+    <Compile Include="Models\Satelite\CharacterSateliteGenerator.cs" />
+    <Compile Include="ViewModels\Satelite\CharacterSateliteViewModel.cs" />
+    <Compile Include="Views\Satelite\CharacterSatelite\NameGrid.xaml.cs">
       <DependentUpon>NameGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\CharacterSatelite\NotUsedGrid.xaml.cs">
+    <Compile Include="Views\Satelite\CharacterSatelite\NotUsedGrid.xaml.cs">
       <DependentUpon>NotUsedGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\CharacterSatelite\RemarkGrid.xaml.cs">
+    <Compile Include="Views\Satelite\CharacterSatelite\RemarkGrid.xaml.cs">
       <DependentUpon>RemarkGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\CharacterSatelite\StatusGrid.xaml.cs">
+    <Compile Include="Views\Satelite\CharacterSatelite\StatusGrid.xaml.cs">
       <DependentUpon>StatusGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\ItemSatelite\ItemSateliteViewModel.cs" />
-    <Compile Include="Satelite\ItemSatelite\NotUsedGrid.xaml.cs">
+    <Compile Include="ViewModels\Satelite\ItemSateliteViewModel.cs" />
+    <Compile Include="Views\Satelite\ItemSatelite\NotUsedGrid.xaml.cs">
       <DependentUpon>NotUsedGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\ItemSatelite\RemarkGrid.xaml.cs">
+    <Compile Include="Views\Satelite\ItemSatelite\RemarkGrid.xaml.cs">
       <DependentUpon>RemarkGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\ItemSatelite\StatusGrid.xaml.cs">
+    <Compile Include="Views\Satelite\ItemSatelite\StatusGrid.xaml.cs">
       <DependentUpon>StatusGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\ItemSatelite\ItemSateliteGenerator.cs" />
-    <Compile Include="Satelite\SateliteSelector.xaml.cs">
+    <Compile Include="Models\Satelite\ItemSateliteGenerator.cs" />
+    <Compile Include="Views\Satelite\SateliteSelector.xaml.cs">
       <DependentUpon>SateliteSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\StoryFrameSatelite\CharactersGrid.xaml.cs">
+    <Compile Include="Views\Satelite\StoryFrameSatelite\CharactersGrid.xaml.cs">
       <DependentUpon>CharactersGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\StoryFrameSatelite\ItemsGrid.xaml.cs">
+    <Compile Include="Views\Satelite\StoryFrameSatelite\ItemsGrid.xaml.cs">
       <DependentUpon>ItemsGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\StoryFrameSatelite\RemarkGrid.xaml.cs">
+    <Compile Include="Views\Satelite\StoryFrameSatelite\RemarkGrid.xaml.cs">
       <DependentUpon>RemarkGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\StoryFrameSatelite\StatusGrid.xaml.cs">
+    <Compile Include="Views\Satelite\StoryFrameSatelite\StatusGrid.xaml.cs">
       <DependentUpon>StatusGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Satelite\StoryFrameSatelite\StoryFrameSateliteGenerator.cs" />
-    <Compile Include="Satelite\StoryFrameSatelite\StoryFrameSateliteViewModel.cs" />
-    <Compile Include="ViewModel\FileManager.cs" />
-    <Compile Include="ViewModel\FileSelector\BackupFilesManager.cs" />
-    <Compile Include="ViewModel\FileSelector\FileBoxModelManager.cs" />
-    <Compile Include="ViewModel\FileSelector\CommonNovelsCollector.cs" />
-    <Compile Include="ViewModel\FileSelector\NovelsCollectorGenerator.cs" />
-    <Compile Include="ViewModel\FileSelector\RecentlyFileBoxModel.cs" />
-    <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Page Include="ClosingScreen.xaml">
+    <Compile Include="Models\Satelite\StoryFrameSateliteGenerator.cs" />
+    <Compile Include="ViewModels\Satelite\StoryFrameSateliteViewModel.cs" />
+    <Compile Include="ViewModels\FileManager.cs" />
+    <Compile Include="Models\FileSelector\BackupFilesManager.cs" />
+    <Compile Include="Models\FileSelector\FileBoxModelManager.cs" />
+    <Compile Include="Models\FileSelector\CommonNovelsCollector.cs" />
+    <Compile Include="Models\FileSelector\NovelsCollectorGenerator.cs" />
+    <Compile Include="Models\FileSelector\RecentlyFileBoxModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Page Include="Views\Main\AboutBoxWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EnvironmentSettings\EnvironmentSettingControl.xaml">
+    <Page Include="Views\Main\ClosingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EnvironmentSettings\EnvironmentSettingControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EnvironmentSettings\FontDialogEx.xaml">
+    <Page Include="Views\EnvironmentSettings\FontDialogEx.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindowView.xaml">
+    <Page Include="Views\Main\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -204,59 +210,59 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindowView.xaml.cs">
+    <Compile Include="Views\Main\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Satelite\CharacterSatelite\NameGrid.xaml">
+    <Page Include="Views\Satelite\CharacterSatelite\NameGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\CharacterSatelite\NotUsedGrid.xaml">
+    <Page Include="Views\Satelite\CharacterSatelite\NotUsedGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\CharacterSatelite\RemarkGrid.xaml">
+    <Page Include="Views\Satelite\CharacterSatelite\RemarkGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\CharacterSatelite\StatusGrid.xaml">
+    <Page Include="Views\Satelite\CharacterSatelite\StatusGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\ItemSatelite\NotUsedGrid.xaml">
+    <Page Include="Views\Satelite\ItemSatelite\NotUsedGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\ItemSatelite\RemarkGrid.xaml">
+    <Page Include="Views\Satelite\ItemSatelite\RemarkGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\ItemSatelite\StatusGrid.xaml">
+    <Page Include="Views\Satelite\ItemSatelite\StatusGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\SateliteResourceDictionary.xaml">
+    <Page Include="Views\Satelite\SateliteResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\SateliteSelector.xaml">
+    <Page Include="Views\Satelite\SateliteSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\StoryFrameSatelite\CharactersGrid.xaml">
+    <Page Include="Views\Satelite\StoryFrameSatelite\CharactersGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\StoryFrameSatelite\ItemsGrid.xaml">
+    <Page Include="Views\Satelite\StoryFrameSatelite\ItemsGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\StoryFrameSatelite\RemarkGrid.xaml">
+    <Page Include="Views\Satelite\StoryFrameSatelite\RemarkGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Satelite\StoryFrameSatelite\StatusGrid.xaml">
+    <Page Include="Views\Satelite\StoryFrameSatelite\StatusGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -405,6 +411,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\seeyou.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SupportBin\DirectoryAuthorizationsRepairer.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

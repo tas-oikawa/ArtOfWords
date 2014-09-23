@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernizedAlice.ArtOfWords.BizCommon.Util;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,22 +9,58 @@ using System.Xml.Serialization;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
 {
+    /// <summary>
+    /// 保存の結果
+    /// </summary>
     public enum SaveResult
     {
+        /// <summary>
+        /// 成功
+        /// </summary>
         Succeed,
+        /// <summary>
+        /// 失敗したがテキストだけは一時保存できた
+        /// </summary>
         FailedButTextFile,
+        /// <summary>
+        /// 全部失敗　T(;_;)Tオテアゲェー
+        /// </summary>
         CompletelyFailed,
     }
 
+    /// <summary>
+    /// 緊急保存モード
+    /// </summary>
+    /// <remarks>
+    /// 保存に失敗したとき、とりあえず保存できそうなところに向かって保存をかける
+    /// ProgramData -> ドキュメント -> デスクトップ
+    /// </remarks>
     public enum SaveEmergencyMode
     {
+        /// <summary>
+        /// ProgramDataに保存
+        /// </summary>
         AssemblyTemp,
+        /// <summary>
+        /// ドキュメントフォルダーに保存
+        /// </summary>
         DocumentTemp,
+        /// <summary>
+        /// デスクトップに保存
+        /// </summary>
         FinalTemp,
     }
 
+    /// <summary>
+    /// セーブを司るクラス
+    /// </summary>
     public class SaveManager
     {
+        /// <summary>
+        /// 一時ファイルの名前を取得する
+        /// </summary>
+        /// <param name="path">本保存用ファイルのパス</param>
+        /// <returns>一時ファイルの名前</returns>
         private String GetTempFileName(String path)
         {
             String fileName = Path.GetFileName(path);
@@ -51,7 +88,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
             {
                 case SaveEmergencyMode.AssemblyTemp:
                     {
-                        string assemblyLocation = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\KienaiProject\\ArtOfWords\\";
+                        string assemblyLocation = CommonDirectoryUtil.GetCommonProgramDataAppliPath();
 
                         String dirPath = Path.GetDirectoryName(assemblyLocation);
                         return dirPath + "\\temp";
@@ -155,7 +192,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
 
                 Directory.Delete(tempFolder, true);
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return SaveResult.FailedButTextFile;
             }
@@ -177,7 +214,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
                 zip.UseZip64WhenSaving = Ionic.Zip.Zip64Option.AsNecessary;
                 //エラーが出てもスキップする。デフォルトはThrow。
                 zip.ZipErrorAction = Ionic.Zip.ZipErrorAction.Throw;
-                zip.Comment = "あけないでよ";
+                zip.Comment = "donotopen";
 
                 zip.Password = "ohaDNelson";
                 zip.Encryption = Ionic.Zip.EncryptionAlgorithm.WinZipAes256;

@@ -323,8 +323,6 @@ namespace CharacterBuildControll.Model
 
         #region INotifyPropertyChanged
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected void OnPagePropertyChanged()
         {
             this.OnPropertyChanged(o => IsBasePageOpening);

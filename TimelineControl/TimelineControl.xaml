@@ -18,7 +18,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
-            <StackPanel Orientation="Horizontal" Background="Black">
+            <StackPanel Orientation="Horizontal" Background="#121317">
                 <StackPanel.Resources>
                     <Style x:Key="ControlBorderStyle" TargetType="Border">
                         <Setter Property="Background" Value="White"/>
@@ -45,11 +45,11 @@
                             <StackPanel.Resources>
                                 <Style TargetType="ToggleButton">
                                     <Setter Property="Margin" Value="5,5,5,5"/>
-                                    <Setter Property="Background" Value="Black"/>
+                                    <Setter Property="Background" Value="#121317"/>
                                     <Setter Property="Foreground" Value="White"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsChecked" Value="True">
-                                            <Setter Property="Background" Value="Black"/>
+                                            <Setter Property="Background" Value="#121317"/>
                                             <Setter Property="Foreground" Value="White"/>
                                         </Trigger>
                                     </Style.Triggers>
@@ -85,7 +85,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Margin="0" Padding="0" Name="UpperButton" Background="Black" Foreground="White" Content="{Binding UpperButtonText}" Grid.Row="0" Grid.Column="0" Click="UpperButton_Click"/>
+            <Button Margin="0" Padding="0" Name="UpperButton" Background="#121317" Foreground="White" Content="{Binding UpperButtonText}" Grid.Row="0" Grid.Column="0" Click="UpperButton_Click"/>
 
             <ScrollViewer Name="TimelineHeaderPanelScroller" Grid.Column="1" VerticalScrollBarVisibility="Hidden" Grid.Row="0" HorizontalScrollBarVisibility="Hidden" ScrollChanged="ScrollViewer_ScrollChanged_2" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Canvas Name="TimelineHeaderPanel" Height="25" Width="{Binding Path=DataCanvasWidth, Mode=OneWay}" ClipToBounds="True">
@@ -109,7 +109,7 @@
                 <Canvas Name="TimescalePanel" Width="{Binding Path=ScaleWidth, Mode=OneWay}" Height="{Binding Path=CanvasHeight, Mode=OneWay}" ClipToBounds="True">
                     <Canvas.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="Background" Value="Black"/>
+                            <Setter Property="Background" Value="#121317"/>
                             <Setter Property="BorderBrush" Value="White"/>
                             <Setter Property="BorderThickness" Value="0.5"/>
                             <Setter Property="Padding" Value="3,0.5,3,3"/>
@@ -173,7 +173,7 @@
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="False">
                                     <Setter Property="Background" Value="Transparent"/>
-                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Foreground" Value="#121317"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -222,7 +222,7 @@
             <ScrollViewer Grid.Row="2" Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" ScrollChanged="ScrollViewer_ScrollChanged_2" HorizontalAlignment="Left">
                 <Grid Width="{Binding Path=DataCanvasWidth, Mode=OneWay}"/>
             </ScrollViewer>
-            <Button Margin="0" Padding="0" Name="LowerButton" Grid.Row="2" Grid.Column="0"  Background="Black" Foreground="White" Content="{Binding LowerButtonText}" Click="LowerButton_Click" />
+            <Button Margin="0" Padding="0" Name="LowerButton" Grid.Row="2" Grid.Column="0"  Background="#121317" Foreground="White" Content="{Binding LowerButtonText}" Click="LowerButton_Click" />
         </Grid>
     </Grid>
 </UserControl>

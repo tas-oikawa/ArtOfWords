@@ -1,6 +1,6 @@
 ﻿<UserControl x:Class="ModernizedAlice.ShosenColorPicker.ColorPicker"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Black">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="black">
     <StackPanel Orientation="Horizontal" Margin="10">
         <Canvas Name="DrawCanvas" Height="300" Width="300" ClipToBounds="True"/>
         <Grid>
@@ -15,7 +15,7 @@
             <Slider Grid.Row="1" Orientation="Vertical" Minimum="0" Maximum="1" Value="{Binding Brightness}" SmallChange="0.01" LargeChange="0.1" HorizontalAlignment="Center"/>
 
             <Border Width="30" Height="30" Grid.Row="2" BorderBrush="Gray" BorderThickness="2" Margin="5" >
-                <Rectangle Fill="Black"/>
+                <Rectangle Fill="#1F061E"/>
             </Border>
         </Grid>
     </StackPanel>

@@ -1,0 +1,41 @@
+﻿<Window x:Class="ArtOfWords.About.AboutBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="About" Width="400" Height="540" Background="#F3F3F3" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <StackPanel Orientation="Vertical" Margin="10" Background="#F9F9F9">
+        <StackPanel.Resources>
+            <Style TargetType="Label">
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="5,0"/>
+                <Setter Property="Padding" Value="0,7"/>
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="5,0"/>
+                <Setter Property="Padding" Value="0,7"/>
+            </Style>
+        </StackPanel.Resources>
+        <TextBlock>このソフトは次の皆様のお知恵をお借りしてつくられました。</TextBlock>
+        <Label Content="カラーピッカー・フォント選択ダイアログは"/>
+        <TextBlock><Hyperlink Click="Hyperlink_Click_1">e-manualさん</Hyperlink></TextBlock>
+        <Label Content="リストボックスは"/>
+        <TextBlock><Hyperlink Click="Hyperlink_Click_2">tinyjoker.netさん</Hyperlink></TextBlock>
+        <Label Content="のを使用させていただきました。"/>
+        <Label Content=""/>
+        <Label Content="検索テキストボックスは"/>
+        <TextBlock><Hyperlink Click="Hyperlink_Click_3">David's Playgroundさん</Hyperlink></TextBlock>
+        <Label Content="のを使用させていただきました。"/>
+        <Label Content="ありがとうございます。"/>
+        <Label Content=""/>
+
+
+        <TextBlock HorizontalAlignment="Right">ArtOfWords by きえないプロジェクト</TextBlock>
+        <TextBlock HorizontalAlignment="Right"><Hyperlink NavigateUri="mailto://do_not_reply@kienai.com">do_not_reply@kienai.com</Hyperlink></TextBlock>
+
+        <TextBlock HorizontalAlignment="Right">返信は気分次第で。</TextBlock>
+
+        <Button IsCancel="True">
+            閉じる。
+        </Button>
+    </StackPanel>
+</Window>

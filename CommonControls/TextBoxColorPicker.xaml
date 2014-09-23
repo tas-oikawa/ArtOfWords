@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               xmlns:ShosenColorPicker="clr-namespace:ModernizedAlice.ShosenColorPicker;assembly=ModernizedAlice.ShosenColorPicker" 
-             mc:Ignorable="d" Loaded="UserControl_Loaded_1" Background="Black">
+             mc:Ignorable="d" Loaded="UserControl_Loaded_1" Background="#121317">
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
             <ShosenColorPicker:ColorPicker Name="_colorPicker"/>

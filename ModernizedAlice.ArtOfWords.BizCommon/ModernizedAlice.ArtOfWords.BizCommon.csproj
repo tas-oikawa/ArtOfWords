@@ -59,6 +59,7 @@
     <Compile Include="..\ArtofWord\Properties\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CommonConstants.cs" />
     <Compile Include="ControlUtil\MainTabKind.cs" />
     <Compile Include="Model\Character\DeepPsycheModel.cs" />
     <Compile Include="Model\Event\TagModelModifiedEventArgs.cs" />
@@ -157,6 +158,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TestModel\TestBizModel.cs" />
+    <Compile Include="Util\FileAuthorizeChecker.cs" />
+    <Compile Include="Util\CommonDirectoryUtil.cs" />
     <Compile Include="Util\WpfUtil.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
