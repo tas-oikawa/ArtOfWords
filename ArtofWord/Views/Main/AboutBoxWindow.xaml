@@ -1,4 +1,4 @@
-﻿<Window x:Class="ArtOfWords.About.AboutBoxWindow"
+﻿<Window x:Class="ArtOfWords.Views.Main.AboutBoxWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="About" Width="400" Height="540" Background="#F3F3F3" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">

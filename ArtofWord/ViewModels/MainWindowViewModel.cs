@@ -25,9 +25,11 @@ using System.Windows.Media;
 using ArtOfWords.Models.DataGenerator;
 using ArtOfWords.Models.Salesman;
 using ArtOfWords.Models.FileSelector;
+using ArtOfWords.Models;
+using ArtOfWords.Views.Main;
 
 
-namespace ArtOfWords.ViewModel
+namespace ArtOfWords.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
@@ -202,6 +204,7 @@ namespace ArtOfWords.ViewModel
             EventAggregator.TrySave += OnTrySave;
             EventAggregator.TryOpen += OnTryOpen;
             EventAggregator.TryCreateNew += OnTryCreateNew;
+            EventAggregator.TryCreateNewPlus += OnTryCreateNewPlus;
             EventAggregator.ChangeTabOccuredHandler += OnChangeTabOccured;
             EventAggregator.FontSettingChangedHandler += EventAggregator_FontSettingChangedHandler;
 
@@ -238,6 +241,9 @@ namespace ArtOfWords.ViewModel
         }
 
         private bool Initialized = false;
+        /// <summary>
+        /// 各種ビューを初期化する
+        /// </summary>
         public void InitializeViews()
         {
             if (!Initialized)
@@ -256,6 +262,7 @@ namespace ArtOfWords.ViewModel
             LoadAdOfWorld words = new LoadAdOfWorld();
             words.Load(GetVersion());
         }
+
 
         #region Events
         public void OnFirstInitialized()
@@ -328,6 +335,23 @@ namespace ArtOfWords.ViewModel
                 }
             }
             _fileManager.CreateNew(arg.iEditor);
+        }
+
+        /// <summary>
+        /// 引き継いで新規作成
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="arg"></param>
+        private void OnTryCreateNewPlus(object sender, TryCreateEventArgs arg)
+        {
+            if (IsDirty)
+            {
+                if (AskSaving() == AskSaveResult.Cancel)
+                {
+                    return;
+                }
+            }
+            _fileManager.CreateNewPlus(arg.iEditor);
         }
 
         public void OnWindowActivated()

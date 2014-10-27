@@ -5,7 +5,7 @@
              xmlns:searchBox="clr-namespace:SearchControl;assembly=SearchControl"
              xmlns:media="clr-namespace:System.Windows.Media;assembly=presentationcore"
              xmlns:converter="clr-namespace:ArtOfWords.Util.Converter"
-             StartupUri="MainWindowView.xaml"
+             StartupUri="Views/Main/MainWindowView.xaml"
              DispatcherUnhandledException="Application_DispatcherUnhandledException" Startup="Application_Startup_1">
     <Application.Resources>
         <ResourceDictionary>

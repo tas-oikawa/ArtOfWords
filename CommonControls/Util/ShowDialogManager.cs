@@ -15,7 +15,7 @@ namespace CommonControls.Util
         public static bool? ShowDialog(Window window)
         {
             ShowingDialogCount++;
-            var result = window.ShowDialog();
+             var result = window.ShowDialog();
             ShowingDialogCount--;
 
             return result;

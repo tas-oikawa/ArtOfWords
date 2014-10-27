@@ -6,7 +6,7 @@ using System.Windows;
 
 [assembly: AssemblyCompany("きえないプロジェクト")]
 [assembly: AssemblyProduct("ArtOfWords")]
-[assembly: AssemblyCopyright("Copyright ©  2013 KienaiProject")]
+[assembly: AssemblyCopyright("Copyright ©  2014 KienaiProject")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 // アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
@@ -19,5 +19,5 @@ using System.Windows;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyVersion("4.1.0.0")]
+[assembly: AssemblyFileVersion("4.1.0.0")]

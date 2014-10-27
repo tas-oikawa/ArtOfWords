@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ArtOfWords.Models
+namespace ArtOfWords.Views.EnvironmentSettings
 {
     /// <summary>
     /// UserControl1.xaml の相互作用ロジック

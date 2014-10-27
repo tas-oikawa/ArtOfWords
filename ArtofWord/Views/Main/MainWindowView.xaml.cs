@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WritersBattleField;
-using ArtOfWords.ViewModel;
+using ArtOfWords.ViewModels;
 using WritersBattleField.View;
 using ModernizedAlice.ArtOfWords.BizCommon.Event;
 using CommonControls;
@@ -21,11 +21,10 @@ using ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad;
 using CommonControls.Util;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Event;
 using System.Threading;
-using ArtOfWords.About;
 using ModernizedAlice.ArtOfWords.BizCommon.Util;
 using ArtOfWords.Views.Satelite;
 
-namespace ArtOfWords
+namespace ArtOfWords.Views.Main
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック

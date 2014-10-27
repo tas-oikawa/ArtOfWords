@@ -50,12 +50,12 @@ namespace WritersBattleField.View
 
             _editor.ScrollOffsetChanged += (e) =>
             {
-                _model.OnTextRegionChanged();
+                _model.OnTextRegionScrolled();
             };
 
             control.SizeChanged += (me, evt) =>
             {
-                _model.OnTextRegionChanged();
+                _model.OnTextRegionScrolled();
             };
         }
 
@@ -209,6 +209,12 @@ namespace WritersBattleField.View
         private void _pageCalculation_Click(object sender, RoutedEventArgs e)
         {
             _model.CalculatePageNumber();
+        }
+
+        private void createNewPlusButton_Click(object sender, RoutedEventArgs e)
+        {
+            _model.SetTextToModelsComposite();
+            EventAggregator.OnTryCreateNewPlus(this, new TryCreateEventArgs() { iEditor = _editor });
         }
 
 

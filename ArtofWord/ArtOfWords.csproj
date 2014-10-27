@@ -179,7 +179,7 @@
     </Compile>
     <Compile Include="Models\Satelite\StoryFrameSateliteGenerator.cs" />
     <Compile Include="ViewModels\Satelite\StoryFrameSateliteViewModel.cs" />
-    <Compile Include="ViewModels\FileManager.cs" />
+    <Compile Include="Models\FileManager.cs" />
     <Compile Include="Models\FileSelector\BackupFilesManager.cs" />
     <Compile Include="Models\FileSelector\FileBoxModelManager.cs" />
     <Compile Include="Models\FileSelector\CommonNovelsCollector.cs" />

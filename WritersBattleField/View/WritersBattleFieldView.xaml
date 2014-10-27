@@ -77,7 +77,15 @@
                         <ToggleButton Grid.Row="1" Margin="0,5,0,5" Padding="0" IsChecked="{Binding Path=DoShowMarkReviewer, Mode=TwoWay}" Content="調べる" VerticalAlignment="Stretch" Style="{StaticResource OperationToggleButtonStyle}"/>
                     </Grid>
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <Button Name="createNewButton" Grid.Column="1" Margin="10" Content="新規作成" Style="{StaticResource OperationButtonStyle}" Background="#e67e22" Click="createNewButton_Click" />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="40px"/>
+                            </Grid.RowDefinitions>
+                            <Button Name="createNewButton" Grid.Row="0" Margin="10, 10, 10, 0" Content="新規作成" Style="{StaticResource OperationButtonStyle}" Background="#e67e22" Click="createNewButton_Click" />
+                            <Button Name="createNewPlusButton" Grid.Row="1" Margin="10, 10, 10, 10" Content="引き継いで作成" Style="{StaticResource OperationButtonStyle}" Background="#e29e1d" Click="createNewPlusButton_Click" />
+                        </Grid>
+                        
                         <Button Name="openButton" Grid.Column="2" Margin="10" Content="ファイルを開く" Style="{StaticResource OperationButtonStyle}" Background="#9b59b6" Click="openButton_Click" />
                         <Button Name="saveButton" Grid.Column="3" Margin="10" Content="保存する" Style="{StaticResource OperationButtonStyle}" Background="#34495e" Click="saveButton_Click"/>
                         <Button Name="saveWithNameButton" Grid.Column="4" Margin="10" Style="{StaticResource OperationButtonStyle}" Background="#2980b9" Click="saveWithNameButton_Click" >

@@ -191,6 +191,9 @@ namespace CharacterBuildControll.Model
             Select(chara);
         }
 
+        /// <summary>
+        /// フィルターされたCollectionをクリアする
+        /// </summary>
         public void GetFilteredCollection()
         {
             var prevModel = SelectingModel;
@@ -215,6 +218,10 @@ namespace CharacterBuildControll.Model
             }
         }
 
+        /// <summary>
+        /// 登場人物Viewを初期化する
+        /// </summary>
+        /// <param name="view">View</param>
         public void Initialize(CharacterBuilder view)
         {
             _view = view;

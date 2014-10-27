@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ArtOfWords.About
+namespace ArtOfWords.Views.Main
 {
     /// <summary>
     /// AboutBoxWindow.xaml の相互作用ロジック

@@ -168,6 +168,10 @@ namespace StoryFrameBuildControl.Model
             }
         }
 
+        /// <summary>
+        /// 展開Viewを初期化する
+        /// </summary>
+        /// <param name="view">展開View</param>
         public void Initialize(StoryFrameBuildControll view)
         {
             if (_view == null)
@@ -194,6 +198,7 @@ namespace StoryFrameBuildControl.Model
                 SelectingIndex = -1;
             }
         }
+
         public void Select(int index)
         {
             int selectIndex;

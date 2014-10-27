@@ -1,0 +1,71 @@
+﻿<Window x:Class="FileSelector.Views.NewFilePlusControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FileSelector.ViewModels.NewFilePlus"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400" Background="#F3F3F3" Width="400" Height="400">
+    <Window.Resources>
+        <!--　登場人物　-->
+        <DataTemplate x:Key="TransferTemplate">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=IsSelected}" Content="{Binding Path=Name}"/>
+            </StackPanel>
+        </DataTemplate>
+        <Style TargetType="Expander">
+            <Setter Property="Margin" Value="0,10,0,5"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="20" Background="#FFFFFF">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <Expander Header="登場人物の引き継ぎ">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="すべて選択" Name="_allCharacterSelectBtn" Click="_allCharacterSelectBtn_Click"/>
+                            <Button Content="すべて解除" Name="_allCharacterUnselectBtn" Click="_allCharacterUnselectBtn_Click"/>
+                        </StackPanel>
+                        <ListBox HorizontalAlignment="Left" ItemsSource="{Binding Path=Characters}" ItemTemplate="{StaticResource TransferTemplate}"/>
+                    </StackPanel>
+                </Expander>
+
+                <Expander Header="アイテムの引き継ぎ">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="すべて選択" Name="_allItemSelectBtn" Click="_allItemSelectBtn_Click"/>
+                            <Button Content="すべて解除" Name="_allItemUnselectBtn" Click="_allItemUnselectBtn_Click"/>
+                        </StackPanel>
+                        <ListBox HorizontalAlignment="Left" ItemsSource="{Binding Path=Items}" ItemTemplate="{StaticResource TransferTemplate}"/>
+                    </StackPanel>
+                </Expander>
+
+                <Expander Header="展開の引き継ぎ">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="すべて選択" Name="_allStoryFrameSelectBtn" Click="_allStoryFrameSelectBtn_Click"/>
+                            <Button Content="すべて解除" Name="_allStoryFrameUnselectBtn" Click="_allStoryFrameUnselectBtn_Click"/>
+                        </StackPanel>
+                        <ListBox HorizontalAlignment="Left" ItemsSource="{Binding Path=StoryFrames}" ItemTemplate="{StaticResource TransferTemplate}"/>
+                    </StackPanel>
+                </Expander>
+
+                <Expander Header="イベントの引き継ぎ">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="すべて選択" Name="_allEventSelectBtn" Click="_allEventSelectBtn_Click"/>
+                            <Button Content="すべて解除" Name="_allEventUnselectBtn" Click="_allEventUnselectBtn_Click"/>
+                        </StackPanel>
+                        <ListBox HorizontalAlignment="Left" ItemsSource="{Binding Path=Events}" ItemTemplate="{StaticResource TransferTemplate}"/>
+                    </StackPanel>
+                </Expander>
+
+                <CheckBox Content="タグも引き継ぐ" IsChecked="{Binding Path=DoTransferTags}" Margin="0,10"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                    <Button Content="引き継いで作成" Name="_createNewPlusBtn" Click="_createNewPlusBtn_Click"/>
+                    <Button Content="キャンセル" IsCancel="True"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

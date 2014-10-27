@@ -148,6 +148,19 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Event
             }
         }
 
+        public delegate void TryCreateNewPlusOccured(object sender, TryCreateEventArgs e);
+
+        public static event TryCreateNewPlusOccured TryCreateNewPlus;
+
+        public static void OnTryCreateNewPlus(object sender, TryCreateEventArgs e)
+        {
+            if (TryCreateNewPlus != null)
+            {
+                TryCreateNewPlus(sender, e);
+            }
+        }
+
+
         public delegate void AddIMarkableOcccured(object sender, AddIMarkableModelEventArgs e);
 
         public static event AddIMarkableOcccured AddIMarkableHandler;

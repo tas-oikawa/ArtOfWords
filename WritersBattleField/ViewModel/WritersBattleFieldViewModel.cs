@@ -25,18 +25,48 @@ using CommonControls.Util;
 
 namespace WritersBattleField.ViewModel
 {
+    /// <summary>
+    /// 執筆空間のViewModel
+    /// </summary>
     public class WritersBattleFieldViewModel : INotifyPropertyChanged
     {
+        #region Variables
         private bool _hadFirstInitialize = false;
 
+        /// <summary>
+        /// 執筆View
+        /// </summary>
         private WritersBattleFieldView _writersBFView;
+
+        /// <summary>
+        /// マーキング用View
+        /// </summary>
         private MarkingLayerView _markingLayerView;
+
+        /// <summary>
+        /// みつけるあつめる用ViewModel
+        /// </summary>
         private MarkingSelectorViewModel _markingReviewerViewModel;
+
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// マーキングレイヤーのViewModel
+        /// </summary>
         public  MarkingLayerViewModelBase CurrentMarkingLayerViewModel;
 
+
+        /// <summary>
+        /// マーカーのViewModel(ユーザーが選択しているマーカーを示す-ある登場人物とか）
+        /// </summary>
         public MarkerViewModel MarkerModel { set; get; }
 
         private bool _doShowMarkReviewer;
+
+        /// <summary>
+        /// みつけるあつめる画面を表示するかどうか
+        /// </summary>
         public bool DoShowMarkReviewer
         {
             set
@@ -56,6 +86,9 @@ namespace WritersBattleField.ViewModel
 
 
         private Mark _currentSelectingMark;
+        /// <summary>
+        /// 現在選択中のマーク
+        /// </summary>
         public Mark CurrentSelectingMark
         {
             set
@@ -72,16 +105,92 @@ namespace WritersBattleField.ViewModel
             }
         }
 
+        private ViewMode _mode;
+        /// <summary>
+        /// 執筆画面の表示モード
+        /// </summary>
+        public ViewMode Mode
+        {
+            set
+            {
+                if (_mode == value)
+                {
+                    return;
+                }
+
+                _writersBFView.Editor.OnModeChanged();
+
+                _mode = value;
+                CurrentMarkingLayerViewModel.ResetStatus();
+                if (DoUseMarkingLayer())
+                {
+                    _writersBFView.ResetMarkTab();
+                    switch (_mode)
+                    {
+                        case ViewMode.Character:
+                            CurrentMarkingLayerViewModel = new TalkMarkingLayerViewModel();
+                            break;
+                        case ViewMode.StoryFrame:
+                            CurrentMarkingLayerViewModel = new StoryFrameMarkingLayerViewModel();
+                            break;
+                        default:
+                            break;
+                    }
+
+                    CurrentMarkingLayerViewModel.WritersModel = this;
+                    CurrentMarkingLayerViewModel.SetView(_markingLayerView);
+                    CurrentMarkingLayerViewModel.SetRedrawTimer();
+
+                    DoShowMarkReviewer = false;
+                }
+                OnPropertyChanged("Mode");
+            }
+
+            get
+            {
+                return _mode;
+            }
+        }
+
+        /// <summary>
+        /// 執筆しているTEXT。ModelsCompositeへのアクセスを提供しているだけ
+        /// </summary>
+        public String Text
+        {
+            get
+            {
+                return ModelsComposite.DocumentModel.Text;
+            }
+            set
+            {
+                ModelsComposite.DocumentModel.Text = Text;
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 執筆TextBoxに書かれたTextをModelsCompositeに設定する
+        /// </summary>
+        /// <remarks>
+        /// このようにBindingせずに明示的にModelと分離しているのは、
+        /// パフォーマンスの理由による
+        /// </remarks>
         public void SetTextToModelsComposite()
         {
             ModelsComposite.DocumentModel.Text = _writersBFView.Editor.GetText();            
         }
 
+        /// <summary>
+        /// 執筆Viewを初期化する
+        /// </summary>
+        /// <param name="view">対応するビュー</param>
         public void Initialize(WritersBattleFieldView view)
         {
             _doShowMarkReviewer = false;
             _mode = ViewMode.Writing;
 
+            // 一度Initializeしていたらここまでの処理だけでOK
             if (_hadFirstInitialize)
             {
                 return;
@@ -112,6 +221,10 @@ namespace WritersBattleField.ViewModel
             _hadFirstInitialize = true;
         }
 
+        /// <summary>
+        /// マーキングレイヤーを表示するモードかどうか判定する
+        /// </summary>
+        /// <returns>true:マーキングレイヤーを表示。false:表示しない</returns>
         private bool DoUseMarkingLayer()
         {
             if (_mode == ViewMode.Character)
@@ -127,60 +240,11 @@ namespace WritersBattleField.ViewModel
                 return false;
             }
         }
-        private ViewMode _mode;
-        public ViewMode Mode
-        {
-            set
-            {
-                if (_mode != value)
-                {
-                    _writersBFView.Editor.OnModeChanged();
 
-                    _mode = value;
-                    CurrentMarkingLayerViewModel.ResetStatus();
-                    if (DoUseMarkingLayer())
-                    {
-                        _writersBFView.ResetMarkTab();
-                        switch (_mode)
-                        {
-                            case ViewMode.Character:
-                                CurrentMarkingLayerViewModel = new TalkMarkingLayerViewModel();
-                                break;
-                            case ViewMode.StoryFrame:
-                                CurrentMarkingLayerViewModel = new StoryFrameMarkingLayerViewModel();
-                                break;
-                            default:
-                                break;
-                        }
-
-                        CurrentMarkingLayerViewModel.WritersModel = this;
-                        CurrentMarkingLayerViewModel.SetView(_markingLayerView);
-                        CurrentMarkingLayerViewModel.SetRedrawTimer();
-
-                        DoShowMarkReviewer = false;
-                    }
-                    OnPropertyChanged("Mode");
-                }
-            }
-
-            get
-            {
-                return _mode;
-            }
-        }
-
-        public String Text
-        {
-            get
-            {
-                return ModelsComposite.DocumentModel.Text;
-            }
-            set
-            {
-                ModelsComposite.DocumentModel.Text = Text;
-            }
-        }
-
+        /// <summary>
+        /// マーキング可能なオブジェクトのコレクションを返す
+        /// </summary>
+        /// <returns>マーキング可能なオブジェクトのコレクション</returns>
         public ICollection<IMarkable> GetMarkablesOnMode()
         {
             if (Mode == ViewMode.Character)
@@ -205,6 +269,9 @@ namespace WritersBattleField.ViewModel
             return null;
         }
 
+        /// <summary>
+        /// マークを描画するための準備をします（高速化のためのキャッシュ化）
+        /// </summary>
         public void PrepareForMark()
         {
             var head = GetHeadIndexOfVisibleText();
@@ -221,11 +288,17 @@ namespace WritersBattleField.ViewModel
                 GetMarkKindEnum());
         }
 
-        public void OnTextRegionChanged()
+        /// <summary>
+        /// テキスト領域がスクロールされたときのイベント
+        /// </summary>
+        public void OnTextRegionScrolled()
         {
             CurrentMarkingLayerViewModel.SetRedrawTimer();
         }
 
+        /// <summary>
+        /// テキストサーチが始まったときのイベント
+        /// </summary>
         public void OnEditor_TextSearchOccured(object sender, TextSearchEventArgs arg)
         {
             if (Mode != ViewMode.Writing)
@@ -238,6 +311,10 @@ namespace WritersBattleField.ViewModel
             _markingReviewerViewModel.SetKeyword(arg.SearchWord);
         }
 
+        /// <summary>
+        /// 行を移動する
+        /// </summary>
+        /// <param name="line">移動先の行番号</param>
         public void MoveLineAt(int line)
         {
             int headCharIdx = GetHeadIndexOfVisibleText();
@@ -275,6 +352,9 @@ namespace WritersBattleField.ViewModel
             }
         }
 
+        /// <summary>
+        /// ページ数を計算する
+        /// </summary>
         public void CalculatePageNumber()
         {
             SetTextToModelsComposite();
@@ -292,6 +372,9 @@ namespace WritersBattleField.ViewModel
             ShowDialogManager.ShowDialog(dialog);
         }
 
+        /// <summary>
+        /// 検索とか置換でドキュメントが変化したときのイベント
+        /// </summary>
         private void OnMoveDocumentIndex(object obj, MoveDocumentIndexEventArgs args)
         {
             if(_writersBFView.Editor.GetText().Length < args.headIndex)
@@ -315,6 +398,12 @@ namespace WritersBattleField.ViewModel
             
         }
 
+        /// <summary>
+        /// テキストを置換する
+        /// </summary>
+        /// <param name="from">置換するワード</param>
+        /// <param name="index">置換開始位置</param>
+        /// <param name="doDelete">削除か貼り付けか</param>
         private void ReplaceOneWord(string from, int index, bool doDelete)
         {
             _writersBFView.Editor.Select(index, from.Length);
@@ -328,7 +417,9 @@ namespace WritersBattleField.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// 置換が発生した時のイベント
+        /// </summary>
         private void OnReplaceWordEvent(object sender, ReplaceWordEventArgs arg)
         {
             if(arg.fromStr.Length == 0)
@@ -387,6 +478,10 @@ namespace WritersBattleField.ViewModel
 
         #region util
 
+        /// <summary>
+        /// ModeからMarkKindを取得する
+        /// </summary>
+        /// <returns>MarkKind</returns>
         private MarkKindEnums GetMarkKindEnum()
         {
             switch(_mode)
@@ -403,36 +498,71 @@ namespace WritersBattleField.ViewModel
             }
         }
 
+        /// <summary>
+        /// 表示されている領域の中で先頭の文字Indexを取得する
+        /// </summary>
+        /// <returns>先頭の文字Index</returns>
         public int GetHeadIndexOfVisibleText()
         {
             return _writersBFView.GetHeadIndexOfVisibleText();
         }
 
+        /// <summary>
+        /// 表示されている領域の中で末尾の文字Indexを取得する
+        /// </summary>
+        /// <returns>末尾の文字Index</returns>
         public int GetTailIndexOfVisibleText()
         {
             return _writersBFView.GetTailIndexOfVisibleText();
         }
 
+        /// <summary>
+        /// 文字Indexの範囲を含むRectを取得する
+        /// </summary>
+        /// <param name="headIndex">先頭Index</param>
+        /// <param name="tailIndex">末尾Index</param>
+        /// <returns>RectのList</returns>
+        /// <remarks>文字の途中で改行されることもあるのでList型。二行に渡る場合は二個のRectが入る</remarks>
         public List<Rect> GetRectOfCharIndex(int headIndex, int tailIndex)
         {
             return _writersBFView.GetRectByCharIndex(headIndex, tailIndex);
         }
 
+        /// <summary>
+        /// ある文字が存在する行の末尾の文字Indexを取得する
+        /// </summary>
+        /// <param name="index">文字Index</param>
+        /// <returns>行の末尾の文字Index</returns>
         public int GetTailIndexOfLineByIndex(int index)
         {
             return _writersBFView.GetTailIndexOfLineByIndex(index);
         }
 
+        /// <summary>
+        /// 文字Indexからそれに対応するMarkを取得する
+        /// </summary>
+        /// <param name="index">文字Index</param>
+        /// <returns>Mark</returns>
         public Mark GetMarkFromIndex(int index)
         {
             return ModelsComposite.MarkManager.GetPriorityMark(index);
         }
 
+        /// <summary>
+        /// X、Y座標から文字Indexを取得する
+        /// </summary>
+        /// <param name="pos">X、Y座標</param>
+        /// <returns>文字Index</returns>
         public int GetIndexFromPosition(Point pos)
         {
             return _writersBFView.GetIndexFromPosition(pos);
         }
 
+        /// <summary>
+        /// X,Y座標からMarkを取得する
+        /// </summary>
+        /// <param name="point">X、Y座標</param>
+        /// <returns>Mark</returns>
         public Mark GetMarkFromPosition(Point point)
         {
             var index = _writersBFView.GetIndexFromPosition(point);
@@ -445,6 +575,11 @@ namespace WritersBattleField.ViewModel
             return GetMarkFromIndex(index);
         }
 
+        /// <summary>
+        /// X,Y座標にMarkを追加する
+        /// </summary>
+        /// <param name="pos">X,Y座標</param>
+        /// <returns>処理の正否</returns>
         public bool AddMarkAt(Point pos)
         {
             // 現在選択中のマーカーを取得する
@@ -469,25 +604,18 @@ namespace WritersBattleField.ViewModel
             return MarkFactory.AddMark(_writersBFView.Editor.GetText(), GetIndexFromPosition(pos), mark);
         }
 
+        /// <summary>
+        /// Markを削除する
+        /// </summary>
+        /// <param name="mark">削除するMark</param>
         public void DeleteMark(Mark mark)
         {
             ModelsComposite.MarkManager.DeleteMark(mark);
         }
 
-        private IEnumerable<Mark> GetSelectingMarks()
-        {
-            List<Mark> marklist = new List<Mark>();
-
-            IMarkable markable = MarkerModel.GetSelectingMark();
-
-            if (markable == null)
-            {
-                return marklist;
-            }
-
-            return ModelsComposite.MarkManager.GetMarks(markable);
-        }
-
+        /// <summary>
+        /// WindowがActivateしたときのイベント
+        /// </summary>
         public void OnWindowActivated()
         {
             if (_writersBFView == null)

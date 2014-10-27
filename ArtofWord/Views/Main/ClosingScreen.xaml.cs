@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ArtOfWords
+namespace ArtOfWords.Views.Main
 {
     /// <summary>
     /// ClosingScreen.xaml の相互作用ロジック
