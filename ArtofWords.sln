@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOfWords", "ArtofWord\ArtOfWords.csproj", "{9E6FEDC9-AA23-48B3-90FA-8A391E169CBA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritersBattleField", "WritersBattleField\WritersBattleField.csproj", "{D62B7212-773D-4679-860F-4EC85FB286C1}"
@@ -34,6 +36,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernizedAlice.ShosenColorPicker", "ModernizedAlice.ShosenColorPicker\ModernizedAlice.ShosenColorPicker.csproj", "{82071FA1-068F-42A1-AA93-C5CDA184CEE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagsGrooveControls", "TagsGrooveControls\TagsGrooveControls.csproj", "{E04FA12A-2B1B-4AE4-894C-D47A4C2A35D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernizedAlice.ArtOfWords.Services", "ModernizedAlice.ArtOfWords.Services\ModernizedAlice.ArtOfWords.Services.csproj", "{EC0C6669-AFFF-43A9-B89B-D004EE8EB5CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,11 +113,12 @@ Global
 		{E04FA12A-2B1B-4AE4-894C-D47A4C2A35D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E04FA12A-2B1B-4AE4-894C-D47A4C2A35D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E04FA12A-2B1B-4AE4-894C-D47A4C2A35D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC0C6669-AFFF-43A9-B89B-D004EE8EB5CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC0C6669-AFFF-43A9-B89B-D004EE8EB5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC0C6669-AFFF-43A9-B89B-D004EE8EB5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC0C6669-AFFF-43A9-B89B-D004EE8EB5CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

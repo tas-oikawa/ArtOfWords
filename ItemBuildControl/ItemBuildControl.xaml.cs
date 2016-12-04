@@ -17,6 +17,7 @@ using ModernizedAlice.ArtOfWords.BizCommon;
 using ModernizedAlice.ArtOfWords.BizCommon.Model;
 using CommonControls.Util;
 using CommonControls;
+using ModernizedAlice.ArtOfWords.Services.ModelService;
 
 namespace ItemBuildControl
 {
@@ -43,10 +44,9 @@ namespace ItemBuildControl
         {
             this.SearchWordBox.Text = "";
 
-            var manager = ModelsComposite.ItemModelManager;
+            var service = new ItemModelService();
+            var newModel = service.AddNewItem();
 
-            var newModel = manager.GetNewModel();
-            manager.AddModel(newModel);
             _model.Select(newModel);
         }
 

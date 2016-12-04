@@ -20,6 +20,7 @@ using CommonControls.Util;
 using CommonControls;
 using TagsGrooveControls.View;
 using TagsGrooveControls.Model;
+using ModernizedAlice.ArtOfWords.Services.ModelService;
 
 namespace CharacterBuildControll
 {
@@ -46,11 +47,9 @@ namespace CharacterBuildControll
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
             this.SearchWordBox.Text = "";
+            var characterService = new CharacterModelService();
 
-            var manager = ModelsComposite.CharacterManager;
-
-            var newModel = manager.GetNewModel();
-            manager.AddModel(newModel);
+            var newModel = characterService.AddNewCharacter();
             _model.Select(newModel);
         }
 

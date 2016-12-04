@@ -96,22 +96,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.Relation
         {
             _oneStoryItemStoryMgrDictionary = new Dictionary<int, OneStoryFrameItemStoryRelationModelManager>();
             _modelCollection = new ObservableCollection<OneStoryFrameItemStoryRelationModelManager>();
-
-            EventAggregator.AddIMarkableHandler += OnIMarkableAdded;
+            
             EventAggregator.DeleteIMarkableHandler += OnIMarkableDeleted;
 
-        }
-
-
-        private void OnIMarkableAdded(object sender, AddIMarkableModelEventArgs arg)
-        {
-            var storyFrameModel = arg.Markable as StoryFrameModel;
-            if (storyFrameModel == null)
-            {
-                return ;
-            }
-
-            AddStoryFrameModel(storyFrameModel.Id);
         }
 
         private void OnIMarkableDeleted(object sender, DeleteIMarkableModelEventArgs arg)

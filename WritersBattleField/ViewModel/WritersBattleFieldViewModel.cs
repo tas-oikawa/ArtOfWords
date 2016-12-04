@@ -166,7 +166,6 @@ namespace WritersBattleField.ViewModel
                 ModelsComposite.DocumentModel.Text = Text;
             }
         }
-
         #endregion
 
         /// <summary>
@@ -371,7 +370,7 @@ namespace WritersBattleField.ViewModel
 
             ShowDialogManager.ShowDialog(dialog);
         }
-
+        
         /// <summary>
         /// 検索とか置換でドキュメントが変化したときのイベント
         /// </summary>
@@ -590,7 +589,7 @@ namespace WritersBattleField.ViewModel
                 return false;
             }
             int selectingIndex = GetIndexFromPosition(pos);
-            
+
             if (selectingIndex == -1)
             {
                 return false;

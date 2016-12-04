@@ -17,6 +17,7 @@ using StoryFrameBuildControl.Model;
 using ModernizedAlice.ArtOfWords.BizCommon.Model;
 using CommonControls.Util;
 using CommonControls;
+using ModernizedAlice.ArtOfWords.Services.ModelService;
 
 namespace StoryFrameBuildControl
 {
@@ -41,10 +42,9 @@ namespace StoryFrameBuildControl
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            var manager = ModelsComposite.StoryFrameModelManager;
+            var service = new StoryFrameModelService();
 
-            var newModel = manager.GetNewModel();
-            manager.AddModel(newModel);
+            var newModel = service.AddNewStoryFrame();
             _model.Select(newModel);
         }
 

@@ -335,11 +335,15 @@ namespace StoryFrameBuildControl.Model
             var itemStories = ModelsComposite.ItemStoryModelManager.FindItemStoryRelationModels(SelectingModel.Id);
 
             var list = new ObservableCollection<AppearListViewItemModel>();
-            foreach (var item in ModelsComposite.ItemModelManager.ModelCollection)
+            if(itemStories != null)
             {
-                bool isAppeared = itemStories.Any(elem => elem.ItemId == item.Id);
-                list.Add(new AppearListViewItemModel(item.Symbol, isAppeared, "登場する", "登場しない", item) { BackgroundBrush = item.ColorBrush as SolidColorBrush });
+                foreach (var item in ModelsComposite.ItemModelManager.ModelCollection)
+                {
+                    bool isAppeared = itemStories.Any(elem => elem.ItemId == item.Id);
+                    list.Add(new AppearListViewItemModel(item.Symbol, isAppeared, "登場する", "登場しない", item) { BackgroundBrush = item.ColorBrush as SolidColorBrush });
+                }
             }
+
             _view.ItemDeletableStackPanel.DataList = list;
             _view.ItemDeletableStackPanel.Initialize();
         }
@@ -369,10 +373,14 @@ namespace StoryFrameBuildControl.Model
             var charaStories = ModelsComposite.CharacterStoryModelManager.FindCharacterStoryRelationModels(SelectingModel.Id);
 
             var list = new ObservableCollection<AppearListViewItemModel>();
-            foreach (var chara in ModelsComposite.CharacterManager.ModelCollection)
+
+            if (charaStories != null)
             {
-                bool isAppeared = charaStories.Any(item => item.CharacterId == chara.Id);
-                list.Add(new AppearListViewItemModel(chara.Symbol, isAppeared, "登場する", "登場しない", chara) { BackgroundBrush = chara.ColorBrush as SolidColorBrush });
+                foreach (var chara in ModelsComposite.CharacterManager.ModelCollection)
+                {
+                    bool isAppeared = charaStories.Any(item => item.CharacterId == chara.Id);
+                    list.Add(new AppearListViewItemModel(chara.Symbol, isAppeared, "登場する", "登場しない", chara) { BackgroundBrush = chara.ColorBrush as SolidColorBrush });
+                }
             }
 
             _view.CharacterDeletableStackPanel.NoItemMessage = "ここには登録した登場人物が表示されます";

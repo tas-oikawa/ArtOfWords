@@ -39,6 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip">
@@ -69,8 +70,6 @@
     <Compile Include="Model\SaveAndLoad\SaveTagModel.cs" />
     <Compile Include="Model\SaveAndLoad\TagExpander.cs" />
     <Compile Include="Model\SaveAndLoad\XmlSaveObjectVer3_0_0.cs" />
-    <Compile Include="Model\SaveAndLoad\FileExpanderVer3_0_0.cs" />
-    <Compile Include="Model\SaveAndLoad\FileExpanderVer4_0_0.cs" />
     <Compile Include="Model\SaveAndLoad\XmlSaveObjectVer4_0_0.cs" />
     <Compile Include="Model\Tag\BaseTag.cs" />
     <Compile Include="Model\Tag\TagModel.cs" />
@@ -126,14 +125,8 @@
     <Compile Include="Model\Relation\CharacterStoryRelationModelManager.cs" />
     <Compile Include="Model\Relation\ItemStoryRelationModel.cs" />
     <Compile Include="Model\Relation\ItemStoryRelationModelManager.cs" />
-    <Compile Include="Model\SaveAndLoad\FileExpanderInterface.cs" />
-    <Compile Include="Model\SaveAndLoad\FileExpanderFactory.cs" />
-    <Compile Include="Model\SaveAndLoad\FileExpanderVer1_0_0.cs" />
-    <Compile Include="Model\SaveAndLoad\FileExpanderVer2_0_0.cs" />
     <Compile Include="Model\SaveAndLoad\FileVersion.cs" />
     <Compile Include="Model\SaveAndLoad\LoadFileInfo.cs" />
-    <Compile Include="Model\SaveAndLoad\LoadManager.cs" />
-    <Compile Include="Model\SaveAndLoad\SaveManager.cs" />
     <Compile Include="Model\SaveAndLoad\SaveUtil.cs" />
     <Compile Include="Model\SaveAndLoad\XmlSaveObjectVer1_0_0.cs" />
     <Compile Include="Model\SaveAndLoad\XmlSaveObjectVer2_0_0.cs" />

@@ -14,7 +14,6 @@ using System.Windows.Input;
 
 namespace Editor4ArtOfWords.Model
 {
-    [Export(typeof(IEditor))]
     public class AvalonEditorViewModel : IEditor, INotifyPropertyChanged
     {
         private AvalonEditorControl _view;

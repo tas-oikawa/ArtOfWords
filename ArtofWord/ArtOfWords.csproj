@@ -61,6 +61,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -114,6 +115,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainService\SaveFileService.cs" />
+    <Compile Include="ViewModels\FileService.cs" />
     <Compile Include="Views\Main\AboutBoxWindow.xaml.cs">
       <DependentUpon>AboutBoxWindow.xaml</DependentUpon>
     </Compile>
@@ -179,7 +182,6 @@
     </Compile>
     <Compile Include="Models\Satelite\StoryFrameSateliteGenerator.cs" />
     <Compile Include="ViewModels\Satelite\StoryFrameSateliteViewModel.cs" />
-    <Compile Include="Models\FileManager.cs" />
     <Compile Include="Models\FileSelector\BackupFilesManager.cs" />
     <Compile Include="Models\FileSelector\FileBoxModelManager.cs" />
     <Compile Include="Models\FileSelector\CommonNovelsCollector.cs" />
@@ -336,6 +338,10 @@
     <ProjectReference Include="..\ModernizedAlice.ArtOfWords.BizCommon\ModernizedAlice.ArtOfWords.BizCommon.csproj">
       <Project>{F6E53B1B-C86B-460D-8353-0303ECAED766}</Project>
       <Name>ModernizedAlice.ArtOfWords.BizCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModernizedAlice.ArtOfWords.Services\ModernizedAlice.ArtOfWords.Services.csproj">
+      <Project>{ec0c6669-afff-43a9-b89b-d004ee8eb5cd}</Project>
+      <Name>ModernizedAlice.ArtOfWords.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\ModernizedAlice.IPlugin\ModernizedAlice.IPlugin.csproj">
       <Project>{e5df0ef3-7d43-479a-9f59-99a9ca2181cc}</Project>

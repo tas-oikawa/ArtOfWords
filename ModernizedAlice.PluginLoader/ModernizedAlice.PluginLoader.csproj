@@ -26,12 +26,13 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -81,6 +82,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Editor4ArtOfWords\Editor4ArtOfWords.csproj">
+      <Project>{13f8303a-1846-4a6b-8185-480cf4685e7f}</Project>
+      <Name>Editor4ArtOfWords</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModernizedAlice.IPlugin\ModernizedAlice.IPlugin.csproj">
       <Project>{e5df0ef3-7d43-479a-9f59-99a9ca2181cc}</Project>
       <Name>ModernizedAlice.IPlugin</Name>

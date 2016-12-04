@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Editor4ArtOfWords.Model;
+using ModernizedAlice.IPlugin.ModuleInterface;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
@@ -11,37 +13,20 @@ namespace ModernizedAlice.PluginLoader
 {
     public class PluginLoader
     {
-        private CompositionContainer _container;
-        private string _pluginPath;
+        private IEditor _editor;
 
         public PluginLoader()
         {
-            var assembly = Assembly.GetEntryAssembly();
-            var dirPath = Path.GetDirectoryName(assembly.Location);
-
-            _pluginPath = dirPath += "\\Plugin";
         }
 
-        public PluginLoader(string path)
+        public IEditor GetEditor()
         {
-            _pluginPath = path;
-        }
-
-        public CompositionContainer GetContainer()
-        {
-            return _container;
+            return _editor;
         }
 
         public void Load()
         {
-            // 現在のアセンブリのカタログ
-            var assm = new AssemblyCatalog(Assembly.GetExecutingAssembly());
-            // Extensionsフォルダにあるアセンブリのカタログ
-            var extensions = new DirectoryCatalog(_pluginPath);
-            // 2つのカタログを束ねる
-            var agg = new AggregateCatalog(assm, extensions);
-            // カタログをもとにコンテナを作る
-            _container = new CompositionContainer(agg);
+            _editor = new AvalonEditorViewModel();
         }
     }
 }

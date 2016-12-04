@@ -7,6 +7,7 @@ using ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.StoryFrame;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.TimelineEvent;
+using ModernizedAlice.ArtOfWords.Services.ModelService;
 using ModernizedAlice.IPlugin.ModuleInterface;
 using System;
 using System.Collections.Generic;
@@ -44,9 +45,10 @@ namespace FileSelector.Biz
         /// <param name="characters">登場人物</param>
         private static void TransferCharacters(List<CharacterModel> characters)
         {
+            var service = new CharacterModelService();
             foreach (var model in characters)
             {
-                ModelsComposite.CharacterManager.AddModel(model);
+                service.AddCharacter(model);
             }
         }
 
@@ -56,9 +58,10 @@ namespace FileSelector.Biz
         /// <param name="items">アイテム</param>
         private static void TransferItems(List<ItemModel> items)
         {
+            var service = new ItemModelService();
             foreach (var model in items)
             {
-                ModelsComposite.ItemModelManager.AddModel(model);
+                service.AddItem(model);
             }
         }
 
@@ -68,11 +71,10 @@ namespace FileSelector.Biz
         /// <param name="storyFrames">展開</param>
         private static void TransferStoryFrames(List<StoryFrameModel> storyFrames)
         {
+            var service = new StoryFrameModelService();
             foreach (var model in storyFrames)
             {
-                ModelsComposite.StoryFrameModelManager.AddModel(model);
-                ModelsComposite.CharacterStoryModelManager.AddStoryFrameModel(model.Id);
-                ModelsComposite.ItemStoryModelManager.AddStoryFrameModel(model.Id);
+                service.AddStoryFrame(model);
             }
         }
 
@@ -82,9 +84,10 @@ namespace FileSelector.Biz
         /// <param name="places">場所</param>
         private static void TransferPlaces(List<PlaceModel> places)
         {
+            var service = new PlaceModelService();
             foreach (var model in places)
             {
-                ModelsComposite.PlaceModelManager.AddModel(model);
+                service.AddPlace(model);
             }
         }
 

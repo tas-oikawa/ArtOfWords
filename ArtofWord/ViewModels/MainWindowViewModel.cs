@@ -27,7 +27,7 @@ using ArtOfWords.Models.Salesman;
 using ArtOfWords.Models.FileSelector;
 using ArtOfWords.Models;
 using ArtOfWords.Views.Main;
-
+using ArtOfWords.MainService;
 
 namespace ArtOfWords.ViewModels
 {
@@ -58,11 +58,11 @@ namespace ArtOfWords.ViewModels
             {
                 StringBuilder builder = new StringBuilder();
                 builder.Append("ArtOfWords");
-                if (_fileManager != null)
+                if (_fileService != null)
                 {
-                    if (_fileManager.CurrentFile.Count() > 1)
+                    if (_fileService.CurrentFile.Count() > 1)
                     {
-                        builder.Append(" [" + _fileManager.CurrentFile + "] ");
+                        builder.Append(" [" + _fileService.CurrentFile + "] ");
                     }
                 }
                 if (IsDirty)
@@ -165,7 +165,7 @@ namespace ArtOfWords.ViewModels
 #endregion
 
         private PluginLoader _pluginLoader;
-        private FileManager _fileManager;
+        private SaveFileService _fileService;
 
 
         public MainWindowView _view;
@@ -187,7 +187,7 @@ namespace ArtOfWords.ViewModels
             _storyFrameBuildControlViewModel = new StoryFrameBuildControlViewModel();
             _itemBuildControlViewModel = new ItemBuildControlViewModel();
 
-            _fileManager = new FileManager();
+            _fileService = new SaveFileService();
 
             PluginLoad();
             InitializeViews();
@@ -219,7 +219,7 @@ namespace ArtOfWords.ViewModels
 
         private void SetTextStyle()
         {
-            var iEditor = _pluginLoader.GetContainer().GetExportedValue<IEditor>();
+            var iEditor = _pluginLoader.GetEditor();
 
             TextStyle style = new TextStyle();
             style.FontFamily = Properties.Settings.Default.TextBoxFontFamily;
@@ -237,7 +237,7 @@ namespace ArtOfWords.ViewModels
             _pluginLoader.Load();
 
             SetTextStyle();
-            _view.GetWritersBattleFieldView().SetEditor(_pluginLoader.GetContainer().GetExportedValue<IEditor>());
+            _view.GetWritersBattleFieldView().SetEditor(_pluginLoader.GetEditor());
         }
 
         private bool Initialized = false;
@@ -270,8 +270,8 @@ namespace ArtOfWords.ViewModels
             string[] args = Environment.GetCommandLineArgs();
             if (args.Count() == 2)
             {
-                var iEditor = _pluginLoader.GetContainer().GetExportedValue<IEditor>();
-                _fileManager.OpenFile(iEditor, args[1]);
+                var iEditor = _pluginLoader.GetEditor();
+                _fileService.OpenFile(iEditor, args[1]);
             }
             else
             {
@@ -289,8 +289,8 @@ namespace ArtOfWords.ViewModels
                 }
                 if (File.Exists(filePath))
                 {
-                    var iEditor = _pluginLoader.GetContainer().GetExportedValue<IEditor>();
-                    _fileManager.OpenFile(iEditor, filePath);
+                    var iEditor = _pluginLoader.GetEditor();
+                    _fileService.OpenFile(iEditor, filePath);
                 }
             }
             FileBoxModelManager.Load();
@@ -334,7 +334,7 @@ namespace ArtOfWords.ViewModels
                     return;
                 }
             }
-            _fileManager.CreateNew(arg.iEditor);
+            _fileService.CreateNew(arg.iEditor);
         }
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace ArtOfWords.ViewModels
                     return;
                 }
             }
-            _fileManager.CreateNewPlus(arg.iEditor);
+            _fileService.CreateNewPlus(arg.iEditor);
         }
 
         public void OnWindowActivated()
@@ -409,7 +409,7 @@ namespace ArtOfWords.ViewModels
 
             _writersBattleFieldViewModel.SetTextToModelsComposite();
 
-            if (_fileManager.SaveFile() == false)
+            if (_fileService.SaveFile() == false)
             {
                 return AskSaving();
             }
@@ -446,11 +446,11 @@ namespace ArtOfWords.ViewModels
             _writersBattleFieldViewModel.SetTextToModelsComposite();
             if (e.SaveKind == SaveKind.SaveWithName)
             {
-                _fileManager.SaveFileWithName();
+                _fileService.SaveFileWithName();
             }
             else
             {
-                _fileManager.SaveFile();
+                _fileService.SaveFile();
             }
 
             FocusManager.SetFocusedElement(_view, prevFocus);
@@ -465,7 +465,7 @@ namespace ArtOfWords.ViewModels
                     return;
                 }
             }
-            _fileManager.OpenFile(data.iEditor);
+            _fileService.OpenFile(data.iEditor);
         }
 
         #endregion

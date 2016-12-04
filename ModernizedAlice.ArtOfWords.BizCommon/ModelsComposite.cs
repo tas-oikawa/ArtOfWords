@@ -15,9 +15,15 @@ using ModernizedAlice.ArtOfWords.BizCommon.Model.Tag;
 
 namespace ModernizedAlice.ArtOfWords.BizCommon
 {
+    /// <summary>
+    /// アプリケーション内のModelをすべて格納するCompositeクラス
+    /// </summary>
     public class ModelsComposite
     {
         static private CharacterManager _characterManager;
+        /// <summary>
+        /// 登場人物
+        /// </summary>
         static public CharacterManager CharacterManager
         {
             get
@@ -35,6 +41,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
         }
 
         static private StoryFrameModelManager _storyFrameModelManager;
+        /// <summary>
+        /// 展開
+        /// </summary>
         static public StoryFrameModelManager StoryFrameModelManager
         {
             get
@@ -52,6 +61,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
         }
 
         static private ItemModelManager _itemModelManager;
+        /// <summary>
+        /// アイテム
+        /// </summary>
         static public ItemModelManager ItemModelManager
         {
             get
@@ -70,6 +82,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
 
 
         static private PlaceModelManager _placeModelManager;
+        /// <summary>
+        /// 場所
+        /// </summary>
         static public PlaceModelManager PlaceModelManager
         {
             get
@@ -88,6 +103,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
 
 
         static private DocumentModel _documentModel;
+        /// <summary>
+        /// 文章
+        /// </summary>
         static public DocumentModel DocumentModel
         {
             get
@@ -106,6 +124,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
         }
 
         static private MarkManager _markManager;
+        /// <summary>
+        /// テキスト上のマーク
+        /// </summary>
         static public MarkManager MarkManager
         {
             get
@@ -124,6 +145,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
         }
 
         static private CharacterStoryRelationModelManager _characterStoryModelManager;
+        /// <summary>
+        /// 登場人物と展開
+        /// </summary>
         static public CharacterStoryRelationModelManager CharacterStoryModelManager
         {
             get
@@ -142,6 +166,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
         }
 
         static private ItemStoryRelationModelManager _itemStoryModelManager;
+        /// <summary>
+        /// アイテムと展開
+        /// </summary>
         static public ItemStoryRelationModelManager ItemStoryModelManager
         {
             get
@@ -160,7 +187,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
         }
 
         private static TimelineEventModelManager _timelineEventModelManager;
-
+        /// <summary>
+        /// タイムライン
+        /// </summary>
         public static TimelineEventModelManager TimelineEventModelManager
         {
             get
@@ -177,6 +206,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
 
         private static TagManager _tagManager;
 
+        /// <summary>
+        /// タグ
+        /// </summary>
         public static TagManager TagManager
         {
             get
@@ -193,6 +225,9 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
         }
 
         private static NovelSettingModel _novelsSettingModel;
+        /// <summary>
+        /// 小説の設定
+        /// </summary>
         public static NovelSettingModel NovelSettingModel
         {
             get
@@ -207,6 +242,10 @@ namespace ModernizedAlice.ArtOfWords.BizCommon
             set { ModelsComposite._novelsSettingModel = value; }
         }
 
+        /// <summary>
+        /// 新しいデータを作成する
+        /// </summary>
+        /// <param name="iEditor">テキストエディター</param>
         static public void CreateNew(IEditor iEditor)
         {
             ModelsComposite.DocumentModel = new Model.DocumentModel();

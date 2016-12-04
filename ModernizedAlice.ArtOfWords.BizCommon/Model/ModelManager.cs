@@ -69,8 +69,6 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model
         public void AddModel(IMarkable markable)
         {
             ModelCollection.Add(markable);
-            EventAggregator.OnModelDataChanged(this, new ModelValueChangedEventArgs());
-            EventAggregator.OnAddIMarkable(this, new AddIMarkableModelEventArgs(markable));
         }
 
         public void RemoveModel(IMarkable markable)

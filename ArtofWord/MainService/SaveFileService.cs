@@ -1,6 +1,5 @@
 ﻿using ArtOfWords.Models.FileSelector;
 using CommonControls.Util;
-using FileSelector;
 using FileSelector.Biz;
 using FileSelector.Model;
 using FileSelector.Views;
@@ -8,7 +7,7 @@ using Microsoft.Win32;
 using ModernizedAlice.ArtOfWords.BizCommon;
 using ModernizedAlice.ArtOfWords.BizCommon.Event;
 using ModernizedAlice.ArtOfWords.BizCommon.Model.Event;
-using ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad;
+using ModernizedAlice.ArtOfWords.Services.Manager;
 using ModernizedAlice.IPlugin.ModuleInterface;
 using System;
 using System.Collections.Generic;
@@ -16,14 +15,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 
-namespace ArtOfWords.Models
+namespace ArtOfWords.MainService
 {
     /// <summary>
-    /// ファイル管理用のクラス
+    /// セーブファイルを扱うサービス
     /// </summary>
-    public class FileManager
+    public class SaveFileService
     {
         private String _currentFile = "";
 

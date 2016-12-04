@@ -32,6 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -77,6 +78,10 @@
     <ProjectReference Include="..\ModernizedAlice.ArtOfWords.BizCommon\ModernizedAlice.ArtOfWords.BizCommon.csproj">
       <Project>{F6E53B1B-C86B-460D-8353-0303ECAED766}</Project>
       <Name>ModernizedAlice.ArtOfWords.BizCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModernizedAlice.ArtOfWords.Services\ModernizedAlice.ArtOfWords.Services.csproj">
+      <Project>{ec0c6669-afff-43a9-b89b-d004ee8eb5cd}</Project>
+      <Name>ModernizedAlice.ArtOfWords.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\RelationDetailControlls\RelationDetailControlls.csproj">
       <Project>{cae7a136-7031-4085-b017-eb0895a856d5}</Project>

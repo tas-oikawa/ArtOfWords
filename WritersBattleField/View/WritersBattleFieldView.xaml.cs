@@ -216,7 +216,5 @@ namespace WritersBattleField.View
             _model.SetTextToModelsComposite();
             EventAggregator.OnTryCreateNewPlus(this, new TryCreateEventArgs() { iEditor = _editor });
         }
-
-
     }
 }

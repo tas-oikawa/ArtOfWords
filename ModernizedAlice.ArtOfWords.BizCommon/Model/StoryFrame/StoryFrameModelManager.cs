@@ -40,12 +40,7 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.StoryFrame
             model.Remarks = "";
             model.StartDateTime = GetNewStoryDate();
             model.EndDateTime = new DateTime(model.StartDateTime.Ticks).AddHours(1);
-
-            // 固有の場所を取得する
-            var place = ModelsComposite.PlaceModelManager.GetNewModel();
-            model.PlaceId = place.Id;
-
-            ModelsComposite.PlaceModelManager.AddModel(place);
+            
 
             return model;
         }

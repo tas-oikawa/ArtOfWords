@@ -1,13 +1,16 @@
-﻿using ModernizedAlice.IPlugin.ModuleInterface;
+﻿using ModernizedAlice.ArtOfWords.BizCommon;
+using ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad;
+using ModernizedAlice.ArtOfWords.Services.FileExpander;
+using ModernizedAlice.ArtOfWords.Services.ModelService;
+using ModernizedAlice.IPlugin.ModuleInterface;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows.Controls;
 using System.Xml.Serialization;
 
-namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
+namespace ModernizedAlice.ArtOfWords.Services.FileExpander
 {
     public class FileExpanderVer1_0_0 : FileExpanderInterface
     {
@@ -39,41 +42,46 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.SaveAndLoad
 
         private bool ExpandCharacter()
         {
+            var service = new CharacterModelService();
+
             foreach (var model in LoadComposition.CharacterModelCollection)
             {
-                ModelsComposite.CharacterManager.AddModel(model);
+                service.AddCharacter(model);
             }
 
             return true;
         }
         private bool ExpandPlaceModel()
         {
+            var service = new PlaceModelService();
+
             foreach (var model in LoadComposition.PlaceModelCollection)
             {
-                ModelsComposite.PlaceModelManager.AddModel(model);
+                service.AddPlace(model);
             }
 
             return true;
         }
         private bool ExpandStoryFrameModel()
         {
+            var service = new StoryFrameModelService();
+
             foreach (var model in LoadComposition.StoryFrameModelCollection)
             {
                 model.StartDateTime = DateTime.Today;
                 model.EndDateTime = DateTime.Today;
 
-                ModelsComposite.StoryFrameModelManager.AddModel(model);
-                ModelsComposite.CharacterStoryModelManager.AddStoryFrameModel(model.Id);
-                ModelsComposite.ItemStoryModelManager.AddStoryFrameModel(model.Id);
+                service.AddStoryFrame(model);
             }
 
             return true;
         }
         private bool ExpandItemModel()
         {
+            var service = new ItemModelService();
             foreach (var model in LoadComposition.ItemModelCollection)
             {
-                ModelsComposite.ItemModelManager.AddModel(model);
+                service.AddItem(model);
             }
 
             return true;
