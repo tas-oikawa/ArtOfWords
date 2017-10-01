@@ -276,10 +276,6 @@ namespace ArtOfWords.ViewModels
             else
             {
                 string filePath = Properties.Settings.Default.LastSavedFilePath;
-                if (filePath == "Default")
-                {
-                    filePath = "Novels\\マニュアル.kieAow";
-                }
 
                 if (!Path.IsPathRooted(filePath))
                 {
@@ -290,7 +286,14 @@ namespace ArtOfWords.ViewModels
                 if (File.Exists(filePath))
                 {
                     var iEditor = _pluginLoader.GetEditor();
-                    _fileService.OpenFile(iEditor, filePath);
+                    try
+                    {
+                        _fileService.OpenFile(iEditor, filePath);
+                    }
+                    catch(Exception)
+                    {
+
+                    }
                 }
             }
             FileBoxModelManager.Load();

@@ -56,12 +56,11 @@ namespace ItemBuildControl
             {
                 return;
             }
-
-            var manager = ModelsComposite.ItemModelManager;
-
+            
             if (ShowDialogManager.ShowMessageBox("ほんとうに削除してもいいですか？", "確認", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                manager.RemoveModel(_model.SelectingModel);
+                var service = new ItemModelService();
+                service.RemoveItem(_model.SelectingModel);
             }
         }
 

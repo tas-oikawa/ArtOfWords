@@ -45,9 +45,18 @@ namespace ArtOfWords.Models.FileSelector
             // ちゃんとしたファイルを書き出す。
             XmlSerializer serializer = new XmlSerializer(typeof(RecentlyFileBoxModel));
             FileStream outstream = new System.IO.FileStream(fileboxPath, System.IO.FileMode.Open);
-
-            _recentlyFileBoxModel = (RecentlyFileBoxModel)serializer.Deserialize(outstream);
-            outstream.Close();
+            try
+            {
+                _recentlyFileBoxModel = (RecentlyFileBoxModel)serializer.Deserialize(outstream);
+            }
+            catch(Exception)
+            {
+                
+            }
+            finally
+            {
+                outstream.Close();
+            }
         }
 
         /// <summary>

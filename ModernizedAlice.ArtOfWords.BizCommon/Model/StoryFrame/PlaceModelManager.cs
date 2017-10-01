@@ -13,7 +13,6 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.StoryFrame
     {
         public PlaceModelManager()
         {
-            EventAggregator.DeleteIMarkableHandler += OnIMarkableDeleted;
         }
 
         public PlaceModel GetNewModel()
@@ -36,20 +35,6 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.StoryFrame
             }
 
             return model as PlaceModel;
-        }
-
-        private void OnIMarkableDeleted(object sender, DeleteIMarkableModelEventArgs arg)
-        {
-            var storyFrameModel = arg.Markable as StoryFrameModel;
-            if (storyFrameModel != null)
-            {
-                var place = FindPlaceModel(storyFrameModel.PlaceId);
-                if (place != null)
-                {
-                    RemoveModel(place);
-                }
-                return;
-            }
         }
 
         #region INotifyPropertyChanged

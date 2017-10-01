@@ -105,7 +105,7 @@ namespace WritersBattleField.ViewModel
             }
         }
 
-        private ViewMode _mode;
+        private ViewMode _mode = ViewMode.Writing;
         /// <summary>
         /// 執筆画面の表示モード
         /// </summary>

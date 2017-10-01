@@ -72,7 +72,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <TabControl Grid.Row="0" Height="100" HorizontalAlignment="Stretch" Name="tabControl2" VerticalAlignment="Stretch" TabStripPlacement="Bottom" Background="#121317" SelectedIndex="{Binding Path=Mode,Mode=TwoWay, Converter={StaticResource ViewModeIntConverter}}">
+            <TabControl Grid.Row="0" Height="100" HorizontalAlignment="Stretch" Name="tabControl2" VerticalAlignment="Stretch" TabStripPlacement="Bottom" Background="#121317" >
                 <TabItem Header="キャラクター管理" Name="tabItem5">
                     <StackPanel Orientation="Horizontal">
                         <Button Name="addButton" Click="addButton_Click" Style="{StaticResource AddButtonStyle}"/>

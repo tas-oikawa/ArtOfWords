@@ -31,8 +31,6 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.TimelineEvent
         {
             _modelCollection = new ObservableCollection<TimelineEventModel>();
             _modelDictionary = new Dictionary<int, TimelineEventModel>();
-
-            EventAggregator.DeleteIMarkableHandler += OnIMarkableDeleted;
         }
 
         public TimelineEventModel FindModel(int id)
@@ -116,16 +114,6 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model.TimelineEvent
             foreach (var item in removeModels)
             {
                 ModelCollection.Remove(item);
-            }
-        }
-
-
-        private void OnIMarkableDeleted(object sender, DeleteIMarkableModelEventArgs arg)
-        {
-            var chara = arg.Markable as CharacterModel;
-            if (chara != null)
-            {
-                RemoveParticipants(chara);
             }
         }
 

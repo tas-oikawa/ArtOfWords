@@ -42,5 +42,24 @@ namespace ModernizedAlice.ArtOfWords.Services.ModelService
 
             return addModel;
         }
+
+        /// <summary>
+        /// 登場人物を削除する
+        /// </summary>
+        /// <param name="rmModel">削除するモデル</param>
+        public void RemoveCharacter(CharacterModel rmModel)
+        {
+            var chManager = ModelsComposite.CharacterManager;
+            chManager.RemoveModel(rmModel);
+
+            var csrManager = ModelsComposite.CharacterStoryModelManager;
+            csrManager.RemoveModel(rmModel);
+
+            var tlManager = ModelsComposite.TimelineEventModelManager;
+            tlManager.RemoveParticipants(rmModel);
+
+            EventAggregator.OnModelDataChanged(this, new ModelValueChangedEventArgs());
+            EventAggregator.OnDeleteIMarkable(this, new DeleteIMarkableModelEventArgs(rmModel));
+        }
     }
 }

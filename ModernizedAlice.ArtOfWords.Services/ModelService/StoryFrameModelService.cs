@@ -52,5 +52,32 @@ namespace ModernizedAlice.ArtOfWords.Services.ModelService
 
             return storyModel;
         }
+
+        /// <summary>
+        /// 展開を削除する
+        /// </summary>
+        /// <param name="rmModel">展開する展開</param>
+        public void RemoveStoryFrame(StoryFrameModel rmModel)
+        {
+            var strManager = ModelsComposite.StoryFrameModelManager;
+            strManager.RemoveModel(rmModel);
+
+            var csmManager = ModelsComposite.CharacterStoryModelManager;
+            csmManager.RemoveModel(rmModel);
+
+            var isManager = ModelsComposite.ItemStoryModelManager;
+            isManager.RemoveModel(rmModel);
+
+            var plcManager = ModelsComposite.PlaceModelManager;
+
+            var findPlace = plcManager.FindPlaceModel(rmModel.PlaceId);
+            if (findPlace != null)
+            {
+                plcManager.RemoveModel(findPlace);
+            }
+
+            EventAggregator.OnModelDataChanged(this, new ModelValueChangedEventArgs());
+            EventAggregator.OnDeleteIMarkable(this, new DeleteIMarkableModelEventArgs(rmModel));
+        }
     }
 }

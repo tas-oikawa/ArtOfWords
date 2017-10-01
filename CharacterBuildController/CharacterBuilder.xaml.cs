@@ -63,7 +63,8 @@ namespace CharacterBuildControll
 
             if (ShowDialogManager.ShowMessageBox("ほんとうに削除してもいいですか？", "確認", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                manager.RemoveModel(_model.SelectingModel);
+                var service = new CharacterModelService();
+                service.RemoveCharacter(_model.SelectingModel);
             }
         }
 

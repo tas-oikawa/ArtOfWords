@@ -84,9 +84,6 @@ namespace ModernizedAlice.ArtOfWords.BizCommon.Model
 
             _modelDictionary.Remove(markable.Id);
             ModelCollection.Remove(markable);
-
-            EventAggregator.OnModelDataChanged(this, new ModelValueChangedEventArgs());
-            EventAggregator.OnDeleteIMarkable(this, new DeleteIMarkableModelEventArgs(markable));
         }
 
         public void SwapItem(IMarkable insertItem, IMarkable targetItem)

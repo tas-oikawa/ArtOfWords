@@ -54,12 +54,11 @@ namespace StoryFrameBuildControl
             {
                 return;
             }
-
-            var manager = ModelsComposite.StoryFrameModelManager;
-
+            
             if (ShowDialogManager.ShowMessageBox("ほんとうに削除してもいいですか？", "確認", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                manager.RemoveModel(_model.SelectingModel.Model);
+                var service = new StoryFrameModelService();
+                service.RemoveStoryFrame(_model.SelectingModel.Model);
             }
         }
 
