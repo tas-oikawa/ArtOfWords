@@ -130,109 +130,111 @@
                 </Grid>
             </Border>
             <GridSplitter Grid.Column="0" VerticalAlignment="Stretch" Width="2"/>
-            <Grid Grid.Column="1" Grid.Row="1" Name="ItemDetail" Visibility="{Binding Path=SelectingIndex,Mode=OneWay, Converter={StaticResource SelectingIndexVisibilityConverter}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <Grid Name="ItemDetail" Visibility="{Binding Path=SelectingIndex,Mode=OneWay, Converter={StaticResource SelectingIndexVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <Border Grid.Row="0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Content="アイテム名"/>
-                            <TextBox Grid.Row="1" Text="{Binding Path=SelectingModel.Name, Mode=TwoWay}"/>
-                        </Grid>
-
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                    <Border Grid.Row="0">
+                        <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Content="略称(3字以内推奨)"/>
-                            <TextBox Grid.Row="1" Text="{Binding Path=SelectingModel.Symbol,Mode=TwoWay}"/>
-                            <Label Grid.Column="1" Grid.Row="0" Content="色"/>
-                            <Button Grid.Column="1" Grid.Row="1" Width="60" Margin="5,0,5,5" Content="{Binding Path=SelectingModel.Symbol}" Background="{Binding Path=SelectingModel.ColorBrush}" Name="colorbutton" Click="colorbutton_Click" />
-                            <Grid Grid.Column="2" Grid.Row="1">
-                                <Label Content="{Binding Path=SelectingModel.Symbol}"/>
-                                <Rectangle Fill="{Binding Path=SelectingModel.MarkBrush}"/>
+                            <Grid Grid.Column="0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Content="アイテム名"/>
+                                <TextBox Grid.Row="1" Text="{Binding Path=SelectingModel.Name, Mode=TwoWay}"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Content="略称(3字以内推奨)"/>
+                                <TextBox Grid.Row="1" Text="{Binding Path=SelectingModel.Symbol,Mode=TwoWay}"/>
+                                <Label Grid.Column="1" Grid.Row="0" Content="色"/>
+                                <Button Grid.Column="1" Grid.Row="1" Width="60" Margin="5,0,5,5" Content="{Binding Path=SelectingModel.Symbol}" Background="{Binding Path=SelectingModel.ColorBrush}" Name="colorbutton" Click="colorbutton_Click" />
+                                <Grid Grid.Column="2" Grid.Row="1">
+                                    <Label Content="{Binding Path=SelectingModel.Symbol}"/>
+                                    <Rectangle Fill="{Binding Path=SelectingModel.MarkBrush}"/>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </Border>
-                <Border Grid.Row="1">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Content="種別"/>
-                        <TabControl  Grid.Row="1" BorderThickness="1" BorderBrush="#c0392b">
-                            <TabItem Header="タグ" Style="{StaticResource FlatTabItemStyle}">
-                                <CommonControls:DeletableLabelStackPanel Name="TagDeletableStackPanel"/>
-                            </TabItem>
-                            <TabItem Header="択一式" Style="{StaticResource FlatTabItemStyle}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <RadioButton Content="武器・凶器" Grid.Column="0" Grid.Row="0" GroupName="Radio1" IsChecked="{Binding Path=SelectingModel.IsArms,Mode=TwoWay}"/>
-                                    <RadioButton Content="防具・衣装・服" Grid.Column="1" Grid.Row="0" GroupName="Radio2" IsChecked="{Binding Path=SelectingModel.IsGuards,Mode=TwoWay}"/>
-                                    <RadioButton Content="道具・機器・食糧" Grid.Column="2" Grid.Row="0" GroupName="Radio3" IsChecked="{Binding Path=SelectingModel.IsTool,Mode=TwoWay}"/>
-                                    <RadioButton Content="魔法・能力・技能" Grid.Column="0" Grid.Row="1" GroupName="Radio4" IsChecked="{Binding Path=SelectingModel.IsTechniques,Mode=TwoWay}"/>
-                                    <RadioButton Content="情報" Grid.Column="1" Grid.Row="1" GroupName="Radio5" IsChecked="{Binding Path=SelectingModel.IsInfo,Mode=TwoWay}"/>
-                                    <RadioButton Content="思想・価値観" Grid.Column="2" Grid.Row="1" GroupName="Radio6" IsChecked="{Binding Path=SelectingModel.IsIdeology,Mode=TwoWay}"/>
-                                    <RadioButton Content="組織" Grid.Column="0" Grid.Row="2" GroupName="Radio7" IsChecked="{Binding Path=SelectingModel.IsOrgs,Mode=TwoWay}"/>
-                                    <RadioButton Content="建物・場所" Grid.Column="1" Grid.Row="2" GroupName="Radio8" IsChecked="{Binding Path=SelectingModel.IsPlace,Mode=TwoWay}"/>
-                                    <RadioButton Content="現象・理論・法則" Grid.Column="2" Grid.Row="2" GroupName="Radio9" IsChecked="{Binding Path=SelectingModel.IsTheory,Mode=TwoWay}"/>
-                                    <RadioButton Content="タイムライン" Grid.Column="0" Grid.Row="3" GroupName="Radio10" IsChecked="{Binding Path=SelectingModel.IsTimeline,Mode=TwoWay}"/>
-                                    <RadioButton Content="罠・ミスリード" Grid.Column="1" Grid.Row="3" GroupName="Radio11" IsChecked="{Binding Path=SelectingModel.IsMislead,Mode=TwoWay}"/>
-                                    <RadioButton Content="状況・状態" Grid.Column="2" Grid.Row="3" GroupName="Radio12" IsChecked="{Binding Path=SelectingModel.IsState,Mode=TwoWay}"/>
-                                    <RadioButton Content="書物・口伝" Grid.Column="0" Grid.Row="4" GroupName="Radio13" IsChecked="{Binding Path=SelectingModel.IsOralInstruction,Mode=TwoWay}"/>
-                                    <RadioButton Content="音楽・詩歌" Grid.Column="1" Grid.Row="4" GroupName="Radio14" IsChecked="{Binding Path=SelectingModel.IsTaoYuanming,Mode=TwoWay}"/>
-                                    <RadioButton Content="映像・演劇・舞" Grid.Column="2" Grid.Row="4" GroupName="Radio15" IsChecked="{Binding Path=SelectingModel.IsJingxi,Mode=TwoWay}"/>
-                                    <RadioButton Content="メール・伝達手段" Grid.Column="0" Grid.Row="5" GroupName="Radio16" IsChecked="{Binding Path=SelectingModel.IsPocketBell,Mode=TwoWay}"/>
-                                    <RadioButton Content="経験・過去・歴史" Grid.Column="1" Grid.Row="5" GroupName="Radio17" IsChecked="{Binding Path=SelectingModel.IsRomance,Mode=TwoWay}"/>
-                                    <RadioButton Content="その他" Grid.Column="2" Grid.Row="5" GroupName="Radio18" IsChecked="{Binding Path=SelectingModel.IsEtc,Mode=TwoWay}"/>
-                                </Grid>
-                            </TabItem>
-                        </TabControl>
-                    </Grid>
-                </Border>
-                <Border Grid.Row="2">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Content="自由記入欄"/>
-                        <TextBox Grid.Row="1" VerticalContentAlignment="Top"  Style="{StaticResource WrappableTextBox}" Text="{Binding Path=SelectingModel.Remarks,Mode=TwoWay}"/>
-                    </Grid>
-                </Border>
-            </Grid>
+                    </Border>
+                    <Border Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="種別"/>
+                            <TabControl  Grid.Row="1" BorderThickness="1" BorderBrush="#c0392b">
+                                <TabItem Header="タグ" Style="{StaticResource FlatTabItemStyle}">
+                                    <CommonControls:DeletableLabelStackPanel Name="TagDeletableStackPanel"/>
+                                </TabItem>
+                                <TabItem Header="択一式" Style="{StaticResource FlatTabItemStyle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <RadioButton Content="武器・凶器" Grid.Column="0" Grid.Row="0" GroupName="Radio1" IsChecked="{Binding Path=SelectingModel.IsArms,Mode=TwoWay}"/>
+                                        <RadioButton Content="防具・衣装・服" Grid.Column="1" Grid.Row="0" GroupName="Radio2" IsChecked="{Binding Path=SelectingModel.IsGuards,Mode=TwoWay}"/>
+                                        <RadioButton Content="道具・機器・食糧" Grid.Column="2" Grid.Row="0" GroupName="Radio3" IsChecked="{Binding Path=SelectingModel.IsTool,Mode=TwoWay}"/>
+                                        <RadioButton Content="魔法・能力・技能" Grid.Column="0" Grid.Row="1" GroupName="Radio4" IsChecked="{Binding Path=SelectingModel.IsTechniques,Mode=TwoWay}"/>
+                                        <RadioButton Content="情報" Grid.Column="1" Grid.Row="1" GroupName="Radio5" IsChecked="{Binding Path=SelectingModel.IsInfo,Mode=TwoWay}"/>
+                                        <RadioButton Content="思想・価値観" Grid.Column="2" Grid.Row="1" GroupName="Radio6" IsChecked="{Binding Path=SelectingModel.IsIdeology,Mode=TwoWay}"/>
+                                        <RadioButton Content="組織" Grid.Column="0" Grid.Row="2" GroupName="Radio7" IsChecked="{Binding Path=SelectingModel.IsOrgs,Mode=TwoWay}"/>
+                                        <RadioButton Content="建物・場所" Grid.Column="1" Grid.Row="2" GroupName="Radio8" IsChecked="{Binding Path=SelectingModel.IsPlace,Mode=TwoWay}"/>
+                                        <RadioButton Content="現象・理論・法則" Grid.Column="2" Grid.Row="2" GroupName="Radio9" IsChecked="{Binding Path=SelectingModel.IsTheory,Mode=TwoWay}"/>
+                                        <RadioButton Content="タイムライン" Grid.Column="0" Grid.Row="3" GroupName="Radio10" IsChecked="{Binding Path=SelectingModel.IsTimeline,Mode=TwoWay}"/>
+                                        <RadioButton Content="罠・ミスリード" Grid.Column="1" Grid.Row="3" GroupName="Radio11" IsChecked="{Binding Path=SelectingModel.IsMislead,Mode=TwoWay}"/>
+                                        <RadioButton Content="状況・状態" Grid.Column="2" Grid.Row="3" GroupName="Radio12" IsChecked="{Binding Path=SelectingModel.IsState,Mode=TwoWay}"/>
+                                        <RadioButton Content="書物・口伝" Grid.Column="0" Grid.Row="4" GroupName="Radio13" IsChecked="{Binding Path=SelectingModel.IsOralInstruction,Mode=TwoWay}"/>
+                                        <RadioButton Content="音楽・詩歌" Grid.Column="1" Grid.Row="4" GroupName="Radio14" IsChecked="{Binding Path=SelectingModel.IsTaoYuanming,Mode=TwoWay}"/>
+                                        <RadioButton Content="映像・演劇・舞" Grid.Column="2" Grid.Row="4" GroupName="Radio15" IsChecked="{Binding Path=SelectingModel.IsJingxi,Mode=TwoWay}"/>
+                                        <RadioButton Content="メール・伝達手段" Grid.Column="0" Grid.Row="5" GroupName="Radio16" IsChecked="{Binding Path=SelectingModel.IsPocketBell,Mode=TwoWay}"/>
+                                        <RadioButton Content="経験・過去・歴史" Grid.Column="1" Grid.Row="5" GroupName="Radio17" IsChecked="{Binding Path=SelectingModel.IsRomance,Mode=TwoWay}"/>
+                                        <RadioButton Content="その他" Grid.Column="2" Grid.Row="5" GroupName="Radio18" IsChecked="{Binding Path=SelectingModel.IsEtc,Mode=TwoWay}"/>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="自由記入欄"/>
+                            <TextBox Grid.Row="1" VerticalContentAlignment="Top"  Style="{StaticResource WrappableTextBox}" Text="{Binding Path=SelectingModel.Remarks,Mode=TwoWay}"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </UserControl>
